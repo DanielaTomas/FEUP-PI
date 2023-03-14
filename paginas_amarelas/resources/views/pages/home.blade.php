@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex-grow-0 p-3 bg-dark flex-direction:column" style="width: 280px;">
+<div class ="d-flex flex-row">
+<div class="flex-grow-0 p-3 bg-dark flex-direction:column min-vh-100" id="navbarSupportedContent" style="width: 280px;">
     <a href="/" class="d-flex align-items-center pb-3 mb-3 nav-link text-decoration-none border-bottom">
       <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
       <span class="fs-5 fw-semibold text-light">Yellow Pages</span>
@@ -60,4 +61,15 @@
       </li>
     </ul>
   </div>
+  <div class="d-flex align-content-center flex-wrap">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+</div>
+</div>
+
+  
 @endsection
