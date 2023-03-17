@@ -19,6 +19,9 @@ DROP TABLE IF EXISTS service CASCADE;
 DROP TABLE IF EXISTS servicetype CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS event CASCADE;
+DROP TYPE  IF EXISTS RequestStatus;
+DROP TYPE  IF EXISTS RequestTypes;
+DROP TYPE  IF EXISTS Roles;
 ----------------------------------------
 -- Types
 -----------------------------------------
