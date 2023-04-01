@@ -100,7 +100,6 @@ CREATE TABLE formation(
 
 CREATE TABLE questions(
     questionsId SERIAL PRIMARY KEY,
-    serviceName VARCHAR NOT NULL,
     question1 VARCHAR NOT NULL, 
     question2 VARCHAR,
     question3 VARCHAR,
@@ -115,6 +114,7 @@ CREATE TABLE questions(
 
 CREATE TABLE servicetype(
     serviceTypeId SERIAL PRIMARY KEY,
+    serviceTypeName VARCHAR NOT NULL,
     atribute1 VARCHAR NOT NULL,
     atribute2 VARCHAR,
     atribute3 VARCHAR,
@@ -126,11 +126,11 @@ CREATE TABLE servicetype(
     atribute9 VARCHAR,
     atribute10 VARCHAR,
     questionsId INTEGER REFERENCES questions(questionsId)
-    --versionNumber?? aqui? porque?
 );
 
 CREATE TABLE service(
     serviceId SERIAL PRIMARY KEY,
+    serviceName VARCHAR NOT NULL,
     requestStatus RequestStatus NOT NULL,
     requestType RequestTypes NOT NULL,
     purpose VARCHAR,
