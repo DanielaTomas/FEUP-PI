@@ -17,10 +17,15 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
-Route::get('/events', function () {
+/*Route::get('/events', function () {
     return view('pages.events');
-});
+});*/
 
+Route::get('/events', 'EventController@show')->name('home');//TODO: mudar nome de funcao?? ou de controller??
+
+/*
 Route::get('/admin', function () {
-    return view('pages.admin');
-});
+    Route::get('/', 'EventController@show')->name('home');
+});*/
+
+Route::get('/admin', 'AdminController@show')->name('home');
