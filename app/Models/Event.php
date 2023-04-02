@@ -34,8 +34,16 @@ class Event extends Model
         'eventCanceled' => 'boolean',
     ];
 
-    public function category()//TODO: is this correct, someone check
-    {
+    public function category(){
         return $this->belongsTo(Category::class, 'tagId');
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'usereventrequest', 'eventId', 'userId');
+    }
+
+    public function organics(){
+        return $this->belongsToMany(OrganicUnit::class, 'usereventorganic', 'eventId', 'organicUnitId')
+            ->withPivot('userId');
     }
 }

@@ -25,8 +25,7 @@ class Question extends Model
         'question10'
     ];
 
-    public function serviceType()
-    {
+    public function serviceType(){
         return $this->hasOne(ServiceType::class);
     }
 }

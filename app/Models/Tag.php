@@ -16,4 +16,8 @@ class Tag extends Model
         'tagName',
     ];
 
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
+
 }

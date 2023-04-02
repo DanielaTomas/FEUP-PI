@@ -27,8 +27,18 @@ class Service extends Model
         'serviceTypeId'
     ];
 
-    public function serviceType()
-    {
+    public function serviceType(){
         return $this->belongsTo(ServiceType::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'userservicerequest', 'serviceId', 'userId');
+    }
+
+    public function organics(){
+        return $this->belongsToMany(OrganicUnit::class, 'userserviceorganic', 'serviceId', 'organicUnitId')
+            ->withPivot('userId');
+    }
+
+
 }

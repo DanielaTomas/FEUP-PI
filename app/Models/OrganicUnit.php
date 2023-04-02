@@ -16,4 +16,19 @@ class OrganicUnit extends Model
         'name',
     ];
 
+    public function events(){
+        return $this->belongsToMany(Event::class, 'usereventorganic', 'organicUnitId', 'eventId')
+            ->withPivot('userId');
+    }
+
+    public function services(){
+        return $this->belongsToMany(Service::class, 'userserviceorganic', 'organicUnitId', 'serviceId')
+            ->withPivot('userId');
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'usereventorganic', 'organicUnitId', 'userId')
+            ->withPivot('eventId');
+    }
+
 }

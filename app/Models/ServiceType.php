@@ -27,13 +27,11 @@ class ServiceType extends Model
         'questionsId'
     ];
 
-    public function question()
-    {
+    public function question(){
         return $this->belongsTo(Question::class, 'questionsId');
     }
 
-    public function service()
-    {
+    public function service(){
         return $this->hasMany(Service::class);
     }
 }
