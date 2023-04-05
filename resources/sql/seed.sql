@@ -70,7 +70,7 @@ CREATE TABLE event(
     endDate DATE NOT NULL,
     eventCanceled BOOLEAN NOT NULL DEFAULT FALSE,
     version INTEGER NOT NULL DEFAULT 1,
-    tagId INTEGER REFERENCES tag(tagId) NOT NULL,
+    --tagId INTEGER REFERENCES tag(tagId) NOT NULL,
     CHECK(endDate >= startDate),
     CHECK(dateCreated <= dateReviewed)
 );
@@ -174,3 +174,15 @@ CREATE TABLE  userserviceorganic(
     CONSTRAINT UEO_Servic_FK FOREIGN KEY (serviceId) REFERENCES service(serviceId) ON DELETE CASCADE ON UPDATE NO ACTION, 
     CONSTRAINT UEO_Organic_FK FOREIGN KEY (organicUnitId) REFERENCES organicunit(organicUnitId) ON DELETE CASCADE ON UPDATE NO ACTION 
 );
+
+CREATE TABLE eventtags(
+    eventId INTEGER,
+    tagId INTEGER,
+    CONSTRAINT EventTags_PK PRIMARY KEY (eventId,tagId),
+    CONSTRAINT ET_Event_FK FOREIGN KEY (eventId) REFERENCES event(eventId) ON DELETE CASCADE ON UPDATE NO ACTION, 
+    CONSTRAINT ET_Tag_FK FOREIGN KEY (tagId) REFERENCES tag(tagId) ON DELETE CASCADE ON UPDATE NO ACTION 
+);
+
+--------------------------------------------------------
+
+
