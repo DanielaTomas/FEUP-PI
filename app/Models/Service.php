@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+//use Overtrue\LaravelVersionable\Versionable;
 
 class Service extends Model
-{
+{   
+    use HasFactory;
+    //use Versionable; 
     protected $table = 'service';
 
     protected $primaryKey = 'serviceid';
@@ -23,8 +27,18 @@ class Service extends Model
         'version',
         'startdate',
         'enddate',
-        'versionnumber',
         'servicetypeid'
+    ];
+
+    protected $versionable = [
+        'servicename',
+        'purpose',
+        'email',
+        'contactperson',
+        'url',
+        'version',
+        'startdate',
+        'enddate',
     ];
 
     public function serviceType(){

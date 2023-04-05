@@ -26,7 +26,7 @@ DROP TYPE  IF EXISTS Roles;
 -- Types
 -----------------------------------------
 
-CREATE TYPE RequestStatus AS ENUM ('Accepted', 'Pending', 'Rejected', 'Old');
+CREATE TYPE RequestStatus AS ENUM ('Accepted', 'Pending', 'Rejected');
 
 CREATE TYPE RequestTypes AS ENUM ('Create', 'Edit', 'Archive');
 
@@ -69,12 +69,10 @@ CREATE TABLE event(
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
     eventCanceled BOOLEAN NOT NULL DEFAULT FALSE,
-    version INTEGER NOT NULL DEFAULT 1,
-    --tagId INTEGER REFERENCES tag(tagId) NOT NULL,
     CHECK(endDate >= startDate),
     CHECK(dateCreated <= dateReviewed)
 );
-
+/*
 CREATE TABLE eventversion(
     newestversionId INTEGER,
     oldestversionId INTEGER,
@@ -82,7 +80,7 @@ CREATE TABLE eventversion(
     CONSTRAINT newestversionFk FOREIGN KEY (newestversionId) REFERENCES event(eventId) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT oldestversionFk FOREIGN KEY (oldestversionId) REFERENCES event(eventId) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
-
+*/
 
 CREATE TABLE organicunit(
     organicUnitId SERIAL PRIMARY KEY,
@@ -140,7 +138,6 @@ CREATE TABLE service(
     version INTEGER DEFAULT 1,
     startDate DATE,--NOT NULL?
     endDate DATE,--NOT NULL?
-    versionNumber INTEGER,
     serviceTypeId INTEGER REFERENCES servicetype(serviceTypeId)
 );
 

@@ -4,17 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+//use Overtrue\LaravelVersionable\Versionable;
+
 
 class Event extends Model
 {
     use HasFactory;
+    //use Versionable;
 
     protected $table = 'event';
 
     protected $primaryKey = 'eventid';
 
     public $timestamps = false;
-
+    
     protected $fillable = [
         'requeststatus',
         'requesttype',
@@ -29,7 +32,18 @@ class Event extends Model
         'startdate',
         'enddate',
         'eventcanceled',
-        'version',
+    ];
+
+    protected $versionable = [
+        'eventname',
+        'address',
+        'url',
+        'email',
+        'contactperson',
+        'description',
+        'startdate',
+        'enddate',
+        'eventcanceled',
     ];
 
     protected $casts = [

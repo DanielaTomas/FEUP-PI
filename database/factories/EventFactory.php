@@ -17,20 +17,19 @@ class EventFactory extends Factory{
     public function definition(){
         
         return [
-            'requeststatus' => $this->faker->randomElement(['Accepted', 'Pending', 'Rejected', 'Old']),
+            'requeststatus' => $this->faker->randomElement(['Accepted', 'Pending', 'Rejected']),
             'requesttype' => $this->faker->randomElement(['Create', 'Edit', 'Archive']),
             'eventname' => $this->faker->sentence(4),
             'address' => $this->faker->address,
             'url' => $this->faker->url,
             'email' => $this->faker->email,
-            'datecreated' => $this->faker->date(),
-            'datereviewed' => $this->faker->date(),
+            'datecreated' => $this->faker->dateTimeBetween('-4 week', '-3 week', 'UTC')->format('Y-m-d'),
+            'datereviewed' => $this->faker->dateTimeBetween('-2 week', '-1 week', 'UTC')->format('Y-m-d'),
             'contactperson' => $this->faker->name,
             'description' => $this->faker->paragraph,
             'startdate' => $this->faker->dateTimeBetween('-1 week', '+1 week', 'UTC')->format('Y-m-d'),
             'enddate' => $this->faker->dateTimeBetween('+2 week', '+3 week', 'UTC')->format('Y-m-d'),
             'eventcanceled' => $this->faker->boolean(10),
-            'version' => $this->faker->numberBetween(1, 5),
         ];
     }
 }
