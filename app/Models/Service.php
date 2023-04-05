@@ -8,23 +8,23 @@ class Service extends Model
 {
     protected $table = 'service';
 
-    protected $primaryKey = 'serviceId';
+    protected $primaryKey = 'serviceid';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'serviceName',
-        'requestStatus',
-        'requestType',
+        'servicename',
+        'requeststatus',
+        'requesttype',
         'purpose',
         'email',
-        'contactPerson',
+        'contactperson',
         'url',
         'version',
-        'startDate',
-        'endDate',
-        'versionNumber',
-        'serviceTypeId'
+        'startdate',
+        'enddate',
+        'versionnumber',
+        'servicetypeid'
     ];
 
     public function serviceType(){
@@ -32,12 +32,12 @@ class Service extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class, 'userservicerequest', 'serviceId', 'userId');
+        return $this->belongsToMany(User::class, 'userservicerequest', 'serviceid', 'userid');
     }
 
     public function organics(){
-        return $this->belongsToMany(OrganicUnit::class, 'userserviceorganic', 'serviceId', 'organicUnitId')
-            ->withPivot('userId');
+        return $this->belongsToMany(OrganicUnit::class, 'userserviceorganic', 'serviceid', 'organicunitid')
+            ->withPivot('userid');
     }
 
 

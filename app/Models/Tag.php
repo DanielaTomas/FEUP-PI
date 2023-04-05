@@ -8,16 +8,23 @@ class Tag extends Model
 {
     protected $table = 'tag';
 
-    protected $primaryKey = 'tagId';
+    protected $primaryKey = 'tagid';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'tagName',
+        'tagname',
     ];
 
+    /*
     public function events(){
         return $this->hasMany(Event::class);
+    }
+    */
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'eventtags', 'tagid', 'eventid');
     }
 
 }

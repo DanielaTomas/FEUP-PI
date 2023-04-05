@@ -15,22 +15,22 @@ class EventFactory extends Factory{
     protected $model = Event::class;
 
     public function definition(){
+        
         return [
-            'requestStatus' => $this->faker->randomElement(['Accepted', 'Pending', 'Rejected', 'Old']),
-            'requestType' => $this->faker->randomElement(['Create', 'Edit', 'Archive']),
-            'eventName' => $this->faker->sentence(4),
+            'requeststatus' => $this->faker->randomElement(['Accepted', 'Pending', 'Rejected', 'Old']),
+            'requesttype' => $this->faker->randomElement(['Create', 'Edit', 'Archive']),
+            'eventname' => $this->faker->sentence(4),
             'address' => $this->faker->address,
             'url' => $this->faker->url,
             'email' => $this->faker->email,
-            'dateCreated' => $this->faker->date(),
-            'dateReviewed' => $this->faker->date(),
-            'contactPerson' => $this->faker->name,
+            'datecreated' => $this->faker->date(),
+            'datereviewed' => $this->faker->date(),
+            'contactperson' => $this->faker->name,
             'description' => $this->faker->paragraph,
-            'startDate' => $this->faker->dateTimeBetween('-1 month', '+1 month')->format('Y-m-d'),
-            'endDate' => $this->faker->dateTimeBetween('+1 month', '+2 month')->format('Y-m-d'),
-            'eventCanceled' => $this->faker->boolean(10),
+            'startdate' => $this->faker->dateTimeBetween('-1 week', '+1 week', 'UTC')->format('Y-m-d'),
+            'enddate' => $this->faker->dateTimeBetween('+2 week', '+3 week', 'UTC')->format('Y-m-d'),
+            'eventcanceled' => $this->faker->boolean(10),
             'version' => $this->faker->numberBetween(1, 5),
-            'tagId' => Tag::factory(),
         ];
     }
 }

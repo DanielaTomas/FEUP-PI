@@ -13,16 +13,16 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $primaryKey = 'userId';
+    protected $primaryKey = 'userid';
 
     public $timestamps = false;
 
     protected $fillable = [
         'username',
-        'isAdmin',
+        'isadmin',
         'email',
         'password',
-        'userPhoto'
+        'userphoto'
     ];
 
     protected $hidden = [
@@ -30,25 +30,25 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'isAdmin' => 'boolean'
+        'isadmin' => 'boolean'
     ];
 
     public function services(){
-        return $this->belongsToMany(Service::class, 'userservicerequest', 'userId', 'serviceId');
+        return $this->belongsToMany(Service::class, 'userservicerequest', 'userid', 'serviceid');
     }
 
     public function events(){
-        return $this->belongsToMany(Event::class, 'usereventrequest', 'userId', 'eventId');
+        return $this->belongsToMany(Event::class, 'usereventrequest', 'userid', 'eventid');
     }
 
     public function eventOrganics(){
-        return $this->belongsToMany(Event::class, 'usereventorganic', 'userId', 'eventId')
-            ->withPivot('organicUnitId');
+        return $this->belongsToMany(Event::class, 'usereventorganic', 'userid', 'eventid')
+            ->withPivot('organicunitid');
     }
 
     public function serviceOrganics(){
-        return $this->belongsToMany(Service::class, 'userserviceorganic', 'userId', 'serviceId')
-            ->withPivot('organicUnitId');
+        return $this->belongsToMany(Service::class, 'userserviceorganic', 'userid', 'serviceid')
+            ->withPivot('organicunitid');
     }
 
 }

@@ -8,7 +8,7 @@ class Question extends Model
 {
     protected $table = 'questions';
 
-    protected $primaryKey = 'questionsId';
+    protected $primaryKey = 'questionsid';
 
     public $timestamps = false;
     

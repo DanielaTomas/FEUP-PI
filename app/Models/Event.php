@@ -3,47 +3,50 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
+    use HasFactory;
+
     protected $table = 'event';
 
-    protected $primaryKey = 'eventId';
+    protected $primaryKey = 'eventid';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'RequestStatus',
-        'RequestType',
-        'eventName',
+        'requeststatus',
+        'requesttype',
+        'eventname',
         'address',
         'url',
         'email',
-        'dateCreated',
-        'dateReviewed',
-        'contactPerson',
+        'datecreated',
+        'datereviewed',
+        'contactperson',
         'description',
-        'startDate',
-        'endDate',
-        'eventCanceled',
+        'startdate',
+        'enddate',
+        'eventcanceled',
         'version',
-        'tagId',
     ];
 
     protected $casts = [
-        'eventCanceled' => 'boolean',
+        'eventcanceled' => 'boolean',
     ];
-
-    public function category(){
-        return $this->belongsTo(Category::class, 'tagId');
+    
+    
+    public function tags(){
+        return $this->belongsToMany(Tag::class, 'eventtags', 'eventid', 'tagid');
     }
 
     public function users(){
-        return $this->belongsToMany(User::class, 'usereventrequest', 'eventId', 'userId');
+        return $this->belongsToMany(User::class, 'usereventrequest', 'eventid', 'userid');
     }
 
     public function organics(){
-        return $this->belongsToMany(OrganicUnit::class, 'usereventorganic', 'eventId', 'organicUnitId')
-            ->withPivot('userId');
+        return $this->belongsToMany(OrganicUnit::class, 'usereventorganic', 'eventid', 'organicunitid')
+            ->withPivot('userid');
     }
 }

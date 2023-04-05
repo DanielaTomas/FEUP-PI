@@ -8,7 +8,7 @@ class OrganicUnit extends Model
 {
     protected $table = 'organicunit';
 
-    protected $primaryKey = 'organicUnitId';
+    protected $primaryKey = 'organicunitid';
 
     public $timestamps = false;
 
@@ -17,18 +17,18 @@ class OrganicUnit extends Model
     ];
 
     public function events(){
-        return $this->belongsToMany(Event::class, 'usereventorganic', 'organicUnitId', 'eventId')
-            ->withPivot('userId');
+        return $this->belongsToMany(Event::class, 'usereventorganic', 'organicunitid', 'eventid')
+            ->withPivot('userid');
     }
 
     public function services(){
-        return $this->belongsToMany(Service::class, 'userserviceorganic', 'organicUnitId', 'serviceId')
-            ->withPivot('userId');
+        return $this->belongsToMany(Service::class, 'userserviceorganic', 'organicunitid', 'serviceid')
+            ->withPivot('userid');
     }
 
     public function users(){
-        return $this->belongsToMany(User::class, 'usereventorganic', 'organicUnitId', 'userId')
-            ->withPivot('eventId');
+        return $this->belongsToMany(User::class, 'usereventorganic', 'organicunitid', 'userid')
+            ->withPivot('eventid');
     }
 
 }

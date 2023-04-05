@@ -8,12 +8,12 @@ class ServiceType extends Model
 {
     protected $table = 'servicetype';
 
-    protected $primaryKey = 'serviceTypeId';
+    protected $primaryKey = 'servicetypeid';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'serviceTypeName',
+        'servicetypename',
         'atribute1',
         'atribute2',
         'atribute3',
@@ -24,11 +24,11 @@ class ServiceType extends Model
         'atribute8',
         'atribute9',
         'atribute10',
-        'questionsId'
+        'questionsid'
     ];
 
     public function question(){
-        return $this->belongsTo(Question::class, 'questionsId');
+        return $this->belongsTo(Question::class, 'questionsid');
     }
 
     public function service(){

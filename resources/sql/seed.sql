@@ -5,7 +5,7 @@ SET search_path TO paginas_amarelas;
 ---------------------------------------
 -- Drops
 ----------------------------------------
-
+DROP TABLE IF EXISTS eventtags CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS formation CASCADE;
 DROP TABLE IF EXISTS eventversion CASCADE;
