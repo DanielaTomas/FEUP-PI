@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.home');
-});
+})->name('home');
 
 /*Route::get('/events', function () {
     return view('pages.events');
 });*/
 
-Route::get('/events', 'EventController@show')->name('home');//TODO: mudar nome de funcao?? ou de controller??
-
+Route::get('/events', 'EventController@list')->name('events');//TODO: mudar nome de funcao?? ou de controller??
+Route::get('/event/{id}', 'EventController@show')->name('event');
 /*
 Route::get('/admin', function () {
     Route::get('/', 'EventController@show')->name('home');
 });*/
 
-Route::get('/admin', 'AdminController@show')->name('home');
+Route::get('/admin', 'AdminController@show')->name('admin_home');

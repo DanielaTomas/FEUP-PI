@@ -22,7 +22,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 <nav id="header" class="navbar navbar-expand-lg navbar-light bg-dark">
-  <a class="navbar-brand text-light" href="#">UPdigital</a>
+  <a class="navbar-brand text-light" href="/">UPdigital</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
