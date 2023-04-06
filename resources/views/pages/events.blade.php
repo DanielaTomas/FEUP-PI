@@ -5,7 +5,10 @@
 
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
-       <h3> Events - Category 1 - Subcategory 1.1 (4)</h3>
+       <h3> Events 
+        @if(isset($tag))
+          - {{$tag}}
+        @endif</h3>
     </div>
     <div class="input-group py-5 px-5">
       <div class="input-group-prepend">

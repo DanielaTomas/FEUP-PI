@@ -10,7 +10,7 @@ class EventController extends Controller{
      */
     public function list(){
         $events = Event::all();
-        return view('pages.events', ['events' => $events]);
+        return view('pages.events', ['events' => $events,'tag' => "test tag"]);
     }
 
 

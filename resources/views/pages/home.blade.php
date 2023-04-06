@@ -26,7 +26,7 @@
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="nav-link rounded text-light">Overview</a></li>
+            <li><a href="events" class="nav-link rounded text-light">Overview</a></li>
             <li><a href="#" class="nav-link rounded text-light">Weekly</a></li>
             <li><a href="#" class="nav-link rounded text-light">Monthly</a></li>
             <li><a href="#" class="nav-link rounded text-light">Annually</a></li>
