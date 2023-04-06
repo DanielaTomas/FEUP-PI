@@ -87,11 +87,13 @@
       <div class="d-flex flex-row bd-highlight mb-3">
           <div>
             <h3>Events</h3>
-            <ul>
-              <li class="mt-3"><a href="#" class="text-dark">item 1</a><span class="mx-2 badge bg-secondary rounded-pill">14</span></li>
-              <li class="mt-2"><a href="#" class="text-dark">item 2</a><span class="mx-2 badge bg-secondary rounded-pill">5</span></li>
-              <li class="mt-2"><a href="#" class="text-dark">item 3</a><span class="mx-2 badge bg-secondary rounded-pill">1</span></li>
-            </ul>
+            @if(count($tags) > 0)<!--TODO: add "nothing is here if condition is false --> 
+              <ul>
+              @foreach($tags as $tag)
+                <li class="mt-3"><a href="#" class="text-dark">{{$tag->tagname}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$tag->events_count}}</span></li>
+              @endforeach
+              </ul>
+            @endif
           </div>
           <div class="mx-auto">
             <h3>Services</h3>
