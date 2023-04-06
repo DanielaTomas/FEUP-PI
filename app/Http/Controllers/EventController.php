@@ -13,13 +13,6 @@ class EventController extends Controller{
         return view('pages.events', ['events' => $events]);
     }
 
-    public function listByTag($tagId){
-        $tag = Tag::findOrFail($tagId);
-        $events = $tag->events()->get();
-        return view('pages.events', ['events' => $events,'tag' => $tag->tagname]);
-    }
-
-
     // Show the event page
     public function show($eventId){   
         $event= Event::find($eventId);

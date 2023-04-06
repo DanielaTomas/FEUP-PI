@@ -14,4 +14,11 @@ class TagController extends Controller{
                     ->get();
         return $tags;
     }
+
+    public function show($id)
+    {
+        $tag = Tag::findOrFail($id);
+        $events = $tag->events()->get();
+        return view('pages.events', ['events' => $events,'tag' => $tag->tagname]);
+    }
 }
