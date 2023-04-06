@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
+Route::get('/', 'HomeController@list')->name('home');
 
 /*Route::get('/events', function () {
     return view('pages.events');
@@ -23,6 +21,8 @@ Route::get('/', function () {
 
 Route::get('/events', 'EventController@list')->name('events');//TODO: mudar nome de funcao?? ou de controller??
 Route::get('/event/{id}', 'EventController@show')->name('event');
+Route::get('/tags/{id}/events', 'TagController@show')->name('tags.events');
+
 /*
 Route::get('/admin', function () {
     Route::get('/', 'EventController@show')->name('home');

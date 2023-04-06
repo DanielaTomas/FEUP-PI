@@ -24,12 +24,15 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Database seeded!');
         User::factory()->count(10)->create();
         $this->command->info('Users created!');
-        Event::factory()->count(10)->create();
-        $this->command->info('Events created!');
         OrganicUnit::factory()->count(10)->create();
         $this->command->info('Organic unit created!');
-        Tag::factory()->count(10)->create();
-        $this->command->info('Tags created!');
+        $this->call(EventTagSeeder::class);
+        $this->command->info('Events/tags with pivot table created !');
+        //Event::factory()->count(10)->create();
+        //$this->command->info('Events created!');
+        
+        //Tag::factory()->count(10)->create();
+        //$this->command->info('Tags created!');
         Question::factory()->count(10)->create();
         $this->command->info('Questions created!');
         ServiceType::factory()->count(10)->create();
