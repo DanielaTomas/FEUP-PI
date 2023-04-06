@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -27,8 +26,13 @@ class LoginController extends Controller
      *
      * @var string
      */
-    
     protected $redirectTo = '/';
+
+
+    public function username()
+    {   
+        return 'username';
+    }
 
     /**
      * Create a new controller instance.
@@ -39,16 +43,17 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
-    public function username(){
-    return 'username'; //or return the field which you want to use.
-    }
-    public function getUser(Request $request){
+   /* protected function guard()
+    {
+        return Auth::guard('guard-name');
+    }*/
+    public function getUser()
+    {
         return $request->user();
     }
 
-    public function home() {
-        //return redirect('login');
+    public function home()
+    {
         return redirect('/');
     }
 }
