@@ -28,7 +28,10 @@ Route::get('/admin', function () {
     Route::get('/', 'EventController@show')->name('home');
 });*/
 
-Route::get('/admin', 'AdminController@show')->name('admin_home');
+Route::get('/admin', 'EventController@adminDashboardEvents')->name('admin_home');
+Route::post('/requests/{id}/{action}', 'EventController@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
+
+
 
 // Authentication
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');

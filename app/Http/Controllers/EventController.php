@@ -19,4 +19,23 @@ class EventController extends Controller{
         return view('pages.event',['event' => $event]);
     }
 
+    public function adminDashboardEvents(){
+        $pendingEvents = Event::where('requeststatus', 'Pending')
+                      ->limit(10)
+                      ->get();
+        $events = Event::whereNotIn('requeststatus', ['Pending'])
+                      ->limit(10)
+                      ->get();
+        return view('pages.admin', ['events' => $events,'pendingEvents' => $pendingEvents]);
+    }
+
+    public function updateStatus($id, $status) {
+        $event = Event::find($id);
+        $event->requeststatus = $status;
+        $event->datereviewed = now()->format('Y-m-d');
+        $event->save();
+    
+        return redirect()->back()->with('success', 'Event status updated successfully.');
+    }
+
 }

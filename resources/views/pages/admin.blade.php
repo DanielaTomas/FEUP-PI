@@ -40,79 +40,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <a href =""><p class="fw-bold mb-1">Event 1</p></a>
-                            <p class="text-muted mb-0">event1@up.pt</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">xxxx-xx-xx</p>
-                    <p class="text-muted mb-0">00:00</p>
-                </td>
-                <td>
-                    <span class="badge bg-info">Edit</span>
-                </td>
-                <td>
-                    <span class="badge bg-warning">Pending Review</span>
-
-                </td>
-                <td>
-                    <button type="button" class="btn btn-success">Accept</button>
-                    <button type="button" class="btn btn-danger">Reject</button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <a href =""><p class="fw-bold mb-1">Event 2</p></a>
-                            <p class="text-muted mb-0">event2@up.pt</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">xxxx-xx-xx</p>
-                    <p class="text-muted mb-0">00:00</p>
-                </td>
-                <td>
-                    <span class="badge bg-primary">Create</span>
-                </td>
-                <td>
-                    <span class="badge bg-success">Accepted</span>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">Request Reviewd</p>
-                    <p class="text-muted mb-0">xxxx-xx-xx 00:00</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <a href =""><p class="fw-bold mb-1">Event 3</p></a>
-                            <p class="text-muted mb-0">event3@up.pt</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                <p class="fw-normal mb-1">xxxx-xx-xx</p>
-                    <p class="text-muted mb-0">00:00</p>
-                </td>
-                <td>
-                    <span class="badge bg-secondary">Archive</span>
-                </td>
-                <td>
-                    <span class="badge bg-danger">Rejected</span>          
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">Request Reviewd</p>
-                    <p class="text-muted mb-0">xxxx-xx-xx 00:00</p>
-                </td>
-            </tr>
+            @if(count($pendingEvents) > 0)<!--TODO: add "nothing is here if condition is false --> 
+                @each('partials.adminDashboardEntry', $pendingEvents, 'event')
+            @endif
         </tbody>
     </table>
   </div>
@@ -204,7 +134,24 @@
         </tbody>
     </table>
   </div>
-  <div class="tab-pane container" id="events">events table</div>
+  <div class="tab-pane container" id="events">
+    <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
+        <thead class="bg-light">
+            <tr>
+            <th>Event</th>
+            <th>Request Date</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(count($pendingEvents) > 0)<!--TODO: add "nothing is here if condition is false --> 
+                @each('partials.adminDashboardEntry', $events, 'event')
+            @endif
+        </tbody>
+    </table>
+  </div>
   <div class="tab-pane container" id="services">services table</div>
   <div class="tab-pane container" id="giUsers">gi users table</div>
 </div>
