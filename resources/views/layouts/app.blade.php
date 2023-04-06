@@ -45,7 +45,7 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit">Login</button>
+      <a href="{{ url('/login') }}"><button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit">Login</button></a>
     </form>
   </div>
 </nav>
