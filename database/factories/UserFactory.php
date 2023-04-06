@@ -20,7 +20,7 @@ class UserFactory extends Factory
             'name'=> $this->faker->name,
             'isadmin' => $this->faker->boolean,
             'email' => $this->faker->unique()->safeEmail,
-            'password' => '12345',
+            'password' => bcrypt('12345'),
             'userphoto' => $this->faker->imageUrl(200, 200, 'cats')
         ];
     }

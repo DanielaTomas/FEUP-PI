@@ -29,3 +29,11 @@ Route::get('/admin', function () {
 });*/
 
 Route::get('/admin', 'AdminController@show')->name('admin_home');
+
+// Authentication
+Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login','Auth\LoginController@login');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+//Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

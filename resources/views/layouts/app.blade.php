@@ -44,9 +44,15 @@
         <a class="nav-link disabled text-light" href="#">Contacts</a>
       </li>
     </ul>
+    @if (Auth::check())
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit">Login</button>
+      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ url('/logout') }}">Logout </a></button>
     </form>
+    @else
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ url('/login') }}">Login </a></button>
+    </form>
+    @endif
   </div>
 </nav>
 
