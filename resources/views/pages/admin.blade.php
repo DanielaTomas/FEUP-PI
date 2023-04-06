@@ -146,7 +146,7 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($pendingEvents) > 0)<!--TODO: add "nothing is here if condition is false --> 
+            @if(count($events) > 0)<!--TODO: add "nothing is here if condition is false --> 
                 @each('partials.adminDashboardEntry', $events, 'event')
             @endif
         </tbody>

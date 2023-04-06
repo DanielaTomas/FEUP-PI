@@ -2,7 +2,7 @@
     <td>
         <div class="d-flex align-items-center">
             <div class="ms-3">
-                <a href =""><p class="fw-bold mb-1">{{ $event->eventname }}</p></a>
+                <a href ="/event/{{ $event->eventid }}"><p class="fw-bold mb-1">{{ $event->eventname }}</p></a>
                 <p class="text-muted mb-0">{{ $event->email }}</p>
             </div>
         </div>
