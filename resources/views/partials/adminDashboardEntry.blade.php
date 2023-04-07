@@ -29,23 +29,21 @@
         @elseif ($event->requeststatus === 'Rejected')
             <span class="badge bg-danger">Rejected</span> 
         @endif
-        
-        
-         
 
     </td>
     <td>
         @if ($event->requeststatus === 'Pending')
-        <form action="{{ route('requests.status.update', ['id' => $event->eventid, 'action' => 'Accepted' ]) }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-success">Accept</button>
-        </form>
+        <div class="d-flex">
+            <form action="{{ route('requests.status.update', ['id' => $event->eventid, 'action' => 'Accepted' ]) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-success">Accept</button>
+            </form>
         
-        <form action="{{ route('requests.status.update', ['id' => $event->eventid, 'action' => 'Rejected' ]) }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-danger">Reject</button>
-        </form>
-        
+            <form action="{{ route('requests.status.update', ['id' => $event->eventid, 'action' => 'Rejected' ]) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger mx-2">Reject</button>
+            </form>
+        </div>
         @else
             <p class="fw-normal mb-1">Request Reviewed</p>
             <p class="text-muted mb-0">{{$event->datereviewed}} 00:00</p>
