@@ -43,6 +43,11 @@
       <li class="nav-item">
         <a class="nav-link disabled text-light" href="#">Contacts</a>
       </li>
+      @if (Auth::check())
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{{url('/create_event')}}"> Create Event Request</a>
+      </li>
+      @endif
     </ul>
     @if (Auth::check())
     <form class="form-inline my-2 my-lg-0">
