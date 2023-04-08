@@ -27,13 +27,14 @@ Route::get('/create_event', 'EventController@createEventForm')->name('create.eve
 Route::post('/create_event', 'EventController@createEvent')->name('create.event');
 Route::get('/edit_event/{id}', 'EventController@editEventForm')->name('edit.event');
 Route::post('/edit_event/{id}', 'EventController@editEvent')->name('edit.event');
-/*
-Route::get('/admin', function () {
-    Route::get('/', 'EventController@show')->name('home');
-});*/
+
 
 Route::get('/admin', 'EventController@adminDashboardEvents')->name('admin.home');
 Route::post('/requests/{id}/{action}', 'EventController@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
+
+// Tags
+Route::get('/create_tag', 'TagController@createTagForm')->name('create.tag');
+Route::post('/create_tag', 'TagController@createTag')->name('create.tag');
 
 
 
