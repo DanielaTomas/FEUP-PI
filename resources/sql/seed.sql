@@ -58,7 +58,7 @@ CREATE TABLE event(
     eventId SERIAL PRIMARY KEY,
     requestStatus RequestStatus NOT NULL,
     requestType RequestTypes NOT NULL,
-    eventName VARCHAR NOT NULL UNIQUE,
+    eventName VARCHAR NOT NULL, -- TODO: fix unique when editing
     address VARCHAR NOT NULL,
     url VARCHAR,
     email VARCHAR NOT NULL,
