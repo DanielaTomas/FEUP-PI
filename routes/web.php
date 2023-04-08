@@ -19,9 +19,12 @@ Route::get('/', 'HomeController@list')->name('home');
     return view('pages.events');
 });*/
 
+// Events
 Route::get('/events', 'EventController@list')->name('events');//TODO: mudar nome de funcao?? ou de controller??
 Route::get('/event/{id}', 'EventController@show')->name('event');
 Route::get('/tags/{id}/events', 'TagController@show')->name('tags.events');
+Route::get('/create_event', 'EventController@createEventForm');
+Route::post('/create_event', 'EventController@createEvent')->name('create_event');
 
 /*
 Route::get('/admin', function () {

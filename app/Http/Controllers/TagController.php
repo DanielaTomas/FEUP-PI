@@ -24,4 +24,9 @@ class TagController extends Controller{
                       ->get();
         return view('pages.events', ['events' => $events,'tag' => $tag->tagname]);
     }
+
+    public static function getAllTags(){
+        $tags = Tag::all();
+        return $tags;
+    }
 }
