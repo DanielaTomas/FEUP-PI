@@ -56,7 +56,7 @@ class EventController extends Controller{
       { 
             $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
             return Validator::make($data, [
-              'eventname' => 'required|string|unique:event',
+              'eventname' => 'required|string',
               'address' => 'required|string',
               'url' => 'nullable|regex:'.$regex,
               'email' => 'required|string|email|max:255',
@@ -97,5 +97,38 @@ class EventController extends Controller{
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
         return redirect('/');      
     }  
+
+    public function editEventForm($id){
+        $event=Event::find($id);
+        $tags=TagController::getAllTags();
+        return view('pages.editEventForm',['event'=>$event,'tags'=>$tags]);
+    }
+
+    public function editEvent(Request $request){
+        if (!Auth::check()) return redirect('/login');
+        $this->validator($request->all())->validate();
+        $user=UserController::getUser(Auth::user()->userid);
+        $event=Event::create([
+            'requeststatus' => 'Pending',
+            'requesttype' => 'Edit',
+            'eventname' => $request->input('eventname'),
+            'address' => $request->input('address'),
+            'url' => $request->input('url'),
+            'email' => $request->input('email'),
+            'datecreated' => date('Y-m-d'),
+            'contactperson' => $request->input('contactperson'),
+            'description' => $request->input('description'),
+            'startdate' => $request->input('startdate'),
+            'enddate' => $request->input('enddate'),
+        ]);
+        $tags = $request->input('tags');
+        $event->tags()->attach($tags);
+        $event->save();
+        $user->events()->save($event);
+
+        $events=$user->events()->get();
+        $services=$user->services()->get();
+        return redirect()->route('my.requests', ['events' => $events,'services'=>$services])->with('success', 'Event edit request sent successfully.');
+    }   
 
 }

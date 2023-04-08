@@ -6,7 +6,11 @@
 
 
 <h3>Events</h3>
-
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <div class="row">
         @each('partials.userEventRequests', $events, 'event')

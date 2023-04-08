@@ -30,7 +30,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link text-light" href="{{url('/my_requests')}}">My Requests <span class="sr-only"></span></a>
+        <a class="nav-link text-light" href="{{route('my.requests')}}">My Requests <span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-light" href="#">About Us</a>
@@ -45,17 +45,17 @@
       </li>
       @if (Auth::check())
       <li class="nav-item">
-        <a class="nav-link text-light" href="{{url('/create_event')}}"> Create Event Request</a>
+        <a class="nav-link text-light" href="{{route('create.event')}}"> Create Event Request</a>
       </li>
       @endif
     </ul>
     @if (Auth::check())
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ url('/logout') }}">Logout </a></button>
+      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ route('logout') }}">Logout </a></button>
     </form>
     @else
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ url('/login') }}">Login </a></button>
+      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ route('login') }}">Login </a></button>
     </form>
     @endif
   </div>

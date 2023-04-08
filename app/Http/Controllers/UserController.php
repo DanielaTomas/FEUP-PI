@@ -14,11 +14,15 @@ class UserController extends Controller{
         return User::find($id);
     }
 
-    public function myRequests(){
+    public static function myRequestsStatic(){
+        return UserController::showRequests();
+    }
+
+    public function showRequests(){
         if(!Auth::check()) 
             return redirect('/login');
 
-        $user =User::find(Auth::user()->userid);
+        $user =Auth::user();
         $events=$user->events()->get();
        
         $services=$user->services()->get();
