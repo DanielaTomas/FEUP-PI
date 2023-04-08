@@ -26,9 +26,10 @@ class DatabaseSeeder extends Seeder
         //$this->command->info('Users created!');
         //OrganicUnit::factory()->count(10)->create();
         //$this->command->info('Organic unit created!');
-        $this->call(UserRoleSeeder::class);
+        //$this->call(UserRoleSeeder::class);
+        //$this->command->info('Users/Organic  with pivot table created !');
+        $this->call(TesteSeeder::class);
         $this->command->info('Users/Organic  with pivot table created !');
-        $this->call(EventTagSeeder::class);
         $this->command->info('Events/tags with pivot table created !');
         //Event::factory()->count(10)->create();
         //$this->command->info('Events created!');

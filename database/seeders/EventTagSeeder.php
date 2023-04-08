@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Event;
 use App\Models\Tag;
+use Overtrue\LaravelVersionable\Version;
 
 class EventTagSeeder extends Seeder{
     /**
@@ -18,6 +19,11 @@ class EventTagSeeder extends Seeder{
 
         foreach ($events as $event) {
             $event->tags()->attach($tags->random(3));
+            Version::create([
+                'versionable_type' => get_class($event),
+                'versionable_id' => $event->eventid,
+                'data' => $event->toArray(),
+            ]);
         }
     }
 }

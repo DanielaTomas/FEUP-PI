@@ -38,7 +38,7 @@ class User extends Authenticatable
     }
 
     public function events(){
-        return $this->belongsToMany(Event::class, 'usereventrequest', 'userid', 'eventid');
+        return $this->hasMany(Event::class, 'usereventrequest', 'userid', 'eventid');
     }
 
     public function eventOrganics(){

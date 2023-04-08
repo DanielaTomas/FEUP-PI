@@ -69,6 +69,7 @@ CREATE TABLE event(
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
     eventCanceled BOOLEAN NOT NULL DEFAULT FALSE,
+    version REAL DEFAULT 1,
     CHECK(endDate >= startDate),
     CHECK(dateCreated <= dateReviewed)
 );

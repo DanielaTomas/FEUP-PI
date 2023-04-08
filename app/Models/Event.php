@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-//use Overtrue\LaravelVersionable\Versionable;
+use Overtrue\LaravelVersionable\Versionable;
 
 
 class Event extends Model
 {
     use HasFactory;
-    //use Versionable;
+    use Versionable;
 
     protected $table = 'event';
 
@@ -56,7 +56,7 @@ class Event extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class, 'usereventrequest', 'eventid', 'userid');
+        return $this->belongsTo(User::class, 'usereventrequest', 'eventid', 'userid');
     }
 
     public function organics(){
