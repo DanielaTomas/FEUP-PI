@@ -29,7 +29,7 @@ class EventFactory extends Factory{
             'description' => $this->faker->paragraph,
             'startdate' => $this->faker->dateTimeBetween('-1 week', '+1 week', 'UTC')->format('Y-m-d'),
             'enddate' => $this->faker->dateTimeBetween('+2 week', '+3 week', 'UTC')->format('Y-m-d'),
-            'eventcanceled' => $this->faker->boolean(10),
+            'eventcanceled' => $this->faker->boolean(10),// 10% chance of being true 
         ];
     }
 }
