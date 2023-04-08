@@ -183,3 +183,5 @@ CREATE TABLE eventtags(
 --------------------------------------------------------
 
 
+INSERT INTO users (username, name,isAdmin, email, password, userPhoto) VALUES ('admin','admin',TRUE,'admin@example.com','$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia','prettyphooto');
+INSERT INTO users (username, name,isAdmin,email,password,userPhoto) VALUES('bicente','O GRANDE',FALSE,'henrique@gaio.com','$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia','prettyphooto');
