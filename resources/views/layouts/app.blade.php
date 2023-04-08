@@ -38,7 +38,7 @@
         </button>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 link-secondary">My Requests</a></li>
+          <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-secondary">My Requests</a></li>
           <li><a href="#" class="nav-link px-2 link-secondary">Abouts US</a></li>
           <li><a href="#" class="nav-link px-2 link-secondary">Contacts</a></li>
           <li><a href="#" class="nav-link px-2 link-secondary">Products</a></li>
@@ -53,7 +53,7 @@
             <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-            <li><a class="dropdown-item" href="#">My Requests</a></li>
+            <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
             <li><a class="dropdown-item" href="#">My Events</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Profile</a></li>

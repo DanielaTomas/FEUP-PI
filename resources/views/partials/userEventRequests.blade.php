@@ -41,9 +41,12 @@
             <div class="row text-center op-7">
                 <div class="col px-1"> <i class="ion-connection-bars icon-1x"></i> <span class="d-block text-sm">{{$event->startdate}}</span> </div>
                 <div class="col px-1"> <i class="ion-ios-chatboxes-outline icon-1x"></i> <span class="d-block text-sm">{{$event->enddate}}</span> </div>
-                <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/event/{{ $event->eventid }}"><span class="d-block text-sm">View >></span></a></div>
+                <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/event/{{ $event->eventid }}"><span class="d-block text-sm">View request >></span></a></div>
                 @if($event->eventcanceled===FALSE)
-                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/edit_event/{{ $event->eventid }}"><span class="d-block text-sm">Edit>></span></a></div>
+                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/edit_event/{{ $event->eventid }}"><span class="d-block text-sm">Edit request>></span></a></div>
+                @endif
+                @if($event->datereviewed===NULL)
+                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/delete_event/{{ $event->eventid }}"><span class="d-block text-sm">Delete request>></span></a></div>
                 @endif
         </div>
       </div>

@@ -27,6 +27,7 @@ Route::get('/create_event', 'EventController@createEventForm')->name('create.eve
 Route::post('/create_event', 'EventController@createEvent')->name('create.event');
 Route::get('/edit_event/{id}', 'EventController@editEventForm')->name('edit.event');
 Route::post('/edit_event/{id}', 'EventController@editEvent')->name('edit.event');
+Route::get('/delete_event/{id}', 'EventController@deleteEvent')->name('delete.event');
 /*
 Route::get('/admin', function () {
     Route::get('/', 'EventController@show')->name('home');

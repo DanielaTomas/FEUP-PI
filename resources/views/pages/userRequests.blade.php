@@ -15,7 +15,10 @@
     <div class="row">
         @each('partials.userEventRequests', $events, 'event')
     </div>
+
+    
 </div>  
+<a class="nav-link text-dark" href="{{route('create.event')}}"> Create Event Request</a>
 <h3>Services</h3>
 
 
