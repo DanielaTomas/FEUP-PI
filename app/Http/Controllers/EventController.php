@@ -75,7 +75,7 @@ class EventController extends Controller{
         if (!Auth::check()) return redirect('/login');
 
         $this->validator($request->all())->validate();
-        $user=UserController::getUser(Auth::user()->userid);
+        $user=Auth::user();
         $event=Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Create',
@@ -107,7 +107,7 @@ class EventController extends Controller{
     public function editEvent(Request $request){
         if (!Auth::check()) return redirect('/login');
         $this->validator($request->all())->validate();
-        $user=UserController::getUser(Auth::user()->userid);
+        $user=Auth::user();
         $event=Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Edit',

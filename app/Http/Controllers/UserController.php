@@ -9,10 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 class UserController extends Controller{
-
-    public static function getUser($id){
-        return User::find($id);
-    }
+   
 
     public static function myRequestsStatic(){
         return UserController::showRequests();
