@@ -75,7 +75,7 @@ class EventController extends Controller{
         if (!Auth::check()) return redirect('/login');
 
         $this->validator($request->all())->validate();
-        
+        $user=UserController::getUser(Auth::user()->userid);
         $event=Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Create',
@@ -92,7 +92,8 @@ class EventController extends Controller{
 
         $tags = $request->input('tags');
         $event->tags()->attach($tags);
-
+        $event->save();
+        $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
         return redirect('/');      
     }  

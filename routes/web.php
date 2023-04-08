@@ -36,6 +36,11 @@ Route::post('/requests/{id}/{action}', 'EventController@updateStatus')->name('re
 
 
 
+// USER
+Route::get('/my_requests', 'UserController@myRequests')->name('my_requests');
+
+
+
 // Authentication
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login','Auth\LoginController@login');
