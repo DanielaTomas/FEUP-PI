@@ -2,51 +2,52 @@
 
 @section('content')
 
-    <div class="flex-column mx-auto">
-      <div class="justify-content-center align-content-center my-5"  style="width: 60em;">
-        <div class="container border border-dark bg-secondary rounded">
-          <div class="d-flex justify content-center link-light">
-            Search for an event
-          </div>
-          <div class="input-group py-5 px-5">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="28" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-              </svg></span>
-            </div>
-            <input type="text" class="form-control" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1">
-            <div class="d-flex justify-content-center align-content-center">
-              <button type="button" class="btn btn-primary btn btn-secondary" data-bs-toggle="modal" data-bs-target="#advancedSearch">
-                  <a href="#" class="link-light">Advanced search</a>
-              </button>
-            </div>
-          </div>
+<div class="flex-column">
+  <div class="p-1 mx-5 my-5 bg-secondary rounded">
+    <div class="justify content-center link-light">
+      <div class="justify content-center link-light mx-5 mt-5">
+        Search for an event:
+      </div>
+      <div class="input-group pt-3 pb-5 px-5">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="28" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg></span>
+        </div>
+        <input type="text" class="form-control rounded" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1">
+        <div class="d-flex justify-content-center align-content-center mx-1">
+          <button type="button" class="btn btn-primary btn btn-secondary" data-bs-toggle="modal" data-bs-target="#advancedSearch">
+            <a href="#" class="link-light">Advanced search</a>
+          </button>
         </div>
       </div>
-
-      <div class="d-flex flex-row bd-highlight mb-3">
-          <div>
-            <h3>Events</h3>
-            @if(count($tags) > 0)<!--TODO: add "nothing is here if condition is false --> 
-              <ul>
-              @foreach($tags as $tag)
-                <li class="mt-3"><a href="/tags/{{$tag->tagid}}/events" class="text-dark">{{$tag->tagname}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$tag->events_count}}</span></li>
-              @endforeach
-              </ul>
-            @endif
-          </div>
-          <div class="mx-auto">
-            <h3>Services</h3>
-            <ul>
-              <li class="mt-3"><a href="#" class="text-dark">item 1</a><span class="mx-2 badge bg-secondary rounded-pill">14</span></li>
-              <li class="mt-2"><a href="#" class="text-dark">item 2</a><span class="mx-2 badge bg-secondary rounded-pill">5</span></li>
-              <li class="mt-2"><a href="#" class="text-dark">item 3</a><span class="mx-2 badge bg-secondary rounded-pill">1</span></li>
-            </ul>
-          </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+    <div class="col-auto">
+      <h3>Events</h3>
+      @if(count($tags) > 0)<!--TODO: add "nothing is here if condition is false --> 
+        <ul>
+        @foreach($tags as $tag)
+          <li class="mt-3"><a href="/tags/{{$tag->tagid}}/events" class="text-dark">{{$tag->tagname}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$tag->events_count}}</span></li>
+        @endforeach
+        </ul>
+      @endif
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-auto">
+      <h3>Services</h3>
+      <ul>
+        <li class="mt-3"><a href="#" class="text-dark">item 1</a><span class="mx-2 badge bg-secondary rounded-pill">14</span></li>
+        <li class="mt-2"><a href="#" class="text-dark">item 2</a><span class="mx-2 badge bg-secondary rounded-pill">5</span></li>
+        <li class="mt-2"><a href="#" class="text-dark">item 3</a><span class="mx-2 badge bg-secondary rounded-pill">1</span></li>
+      </ul>
       </div>
-
     </div>
 </div>
+
   
 <!-- Modal -->
 <div class="modal fade" id="advancedSearch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
