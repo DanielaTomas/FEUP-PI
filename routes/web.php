@@ -50,3 +50,14 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 //Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Static pages
+Route::get("/about", function(){
+    return view("pages.about");
+ });
+ Route::get("/faq", function(){
+    return view("pages.faq");
+ });
+ Route::get("/contacts", function(){
+    return view("pages.contact");
+ });

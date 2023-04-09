@@ -179,11 +179,11 @@
     </a>
 
     <ul class="nav col-md-4 justify-content-end px-3">
-      <li class="nav-item bg-dark"><a href="#" class="nav-link px-2 text-light">Home</a></li>
+      <li class="nav-item bg-dark"><a href="{{url('/')}}" class="nav-link px-2 text-light">Home</a></li>
       <li class="nav-item bg-dark"><a href="#" class="nav-link px-2 text-light">My Requests</a></li>
-      <li class="nav-item bg-dark"><a href="#" class="nav-link px-2 text-light">About Us</a></li>
-      <li class="nav-item bg-dark"><a href="#" class="nav-link px-2 text-light">FAQs</a></li>
-      <li class="nav-item bg-dark"><a href="#" class="nav-link px-2 text-light">Contacts</a></li>
+      <li class="nav-item bg-dark"><a href="{{url('/about')}}" class="nav-link px-2 text-light">About Us</a></li>
+      <li class="nav-item bg-dark"><a href="{{url('/faq')}}" class="nav-link px-2 text-light">FAQs</a></li>
+      <li class="nav-item bg-dark"><a href="{{url('/contacts')}}" class="nav-link px-2 text-light">Contacts</a></li>
     </ul>
   </footer>
 </body>
