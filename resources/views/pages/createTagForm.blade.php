@@ -29,18 +29,17 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="tagname" class="form-label">Name<span><b class="text-danger">*</b></span></label>
-                <input id="tagname" class="form-control" placeholder="Enter tag name" type="text" name="tagname" value="{{ old('tagname') }}" required autofocus>
-                @if ($errors->has('tagname'))
-                <span class="error">
-                    {{ $errors->first('tagname') }}
-                </span>
-                @endif
+                <div class="input-group mb-3">
+                    <input id="tagname" class="form-control" placeholder="Enter tag name" type="text" name="tagname" value="{{ old('tagname') }}" required autofocus>
+                    @if ($errors->has('tagname'))
+                    <span class="error">
+                        {{ $errors->first('tagname') }}
+                    </span>
+                    @endif
+                    <button type="submit" class="btn btn-dark">Create Tag</button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-12 text-center mt-5">
-        <button type="submit" class="btn btn-dark">Create Tag</button>
     </div>
 </form>
 
