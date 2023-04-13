@@ -36,6 +36,10 @@ Route::get('/admin', function () {
 Route::get('/admin', 'EventController@adminDashboardEvents')->name('admin.home');
 Route::post('/requests/{id}/{action}', 'EventController@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
 
+// Tags
+Route::get('/create_tag', 'TagController@createTagForm')->name('create.tag');
+Route::post('/create_tag', 'TagController@createTag')->name('create.tag');
+
 
 
 // USER
