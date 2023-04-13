@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container m-auto">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -52,9 +52,9 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="d-flex justify-content-center align-items-center container my-2">
+                            
+                                <button type="submit" class="btn btn-secondary">
                                     {{ __('Login') }}
                                 </button>
 
@@ -63,9 +63,10 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                                
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -27,7 +27,11 @@ Route::get('/create_event', 'EventController@createEventForm')->name('create.eve
 Route::post('/create_event', 'EventController@createEvent')->name('create.event');
 Route::get('/edit_event/{id}', 'EventController@editEventForm')->name('edit.event');
 Route::post('/edit_event/{id}', 'EventController@editEvent')->name('edit.event');
-
+Route::get('/delete_event/{id}', 'EventController@deleteEvent')->name('delete.event');
+/*
+Route::get('/admin', function () {
+    Route::get('/', 'EventController@show')->name('home');
+});*/
 
 Route::get('/admin', 'EventController@adminDashboardEvents')->name('admin.home');
 Route::post('/requests/{id}/{action}', 'EventController@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
@@ -50,3 +54,14 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 //Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Static pages
+Route::get("/about", function(){
+    return view("pages.about");
+ });
+ Route::get("/faq", function(){
+    return view("pages.faq");
+ });
+ Route::get("/contacts", function(){
+    return view("pages.contact");
+ });

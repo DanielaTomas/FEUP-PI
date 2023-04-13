@@ -1,4 +1,3 @@
-<!-- End of post  -->
 <div class="card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded">
     <div class="row align-items-center">
       <div class="col-md-8 mb-3 mb-sm-0">
@@ -36,17 +35,19 @@
                 @elseif ($event->requesttype === 'Archive')
             <span class="badge bg-secondary">Archive</span>
             @endif
-      </div>
+        </div>
         <div class="col-md-4 op-7">
             <div class="row text-center op-7">
-                <div class="col px-1"> <i class="ion-connection-bars icon-1x"></i> <span class="d-block text-sm">{{$event->startdate}}</span> </div>
-                <div class="col px-1"> <i class="ion-ios-chatboxes-outline icon-1x"></i> <span class="d-block text-sm">{{$event->enddate}}</span> </div>
-                <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/event/{{ $event->eventid }}"><span class="d-block text-sm">View >></span></a></div>
+                <div class="col-auto px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">{{$event->startdate}}</span></div>
+                <div class="col-auto px-1"><i class="ion-ios-chatboxes-outline icon-1x"></i><span class="d-block text-sm">{{$event->enddate}}</span></div>
+                <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/event/{{ $event->eventid }}" title="View event request"><span class="d-block text-sm">View >></span></a></div>
                 @if($event->eventcanceled===FALSE)
-                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/edit_event/{{ $event->eventid }}"><span class="d-block text-sm">Edit>></span></a></div>
+                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/edit_event/{{ $event->eventid }}" title="Edit event request"><span class="d-block text-sm">Edit >></span></a></div>
+                @endif
+                @if($event->datereviewed===NULL)
+                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-danger mr-2" href="/delete_event/{{ $event->eventid }}" title="Delete event request"><span class="d-block text-sm">Delete</span></a></div>
                 @endif
         </div>
       </div>
     </div>
   </div>
-  <!-- /End of post -->

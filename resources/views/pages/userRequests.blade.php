@@ -1,22 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>GOOD LUCK FRONTENDERS</h1>
-<h1>Requests</h1>
-
-
-<h3>Events</h3>
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
 <div class="p-5 m-5 bg-secondary rounded min-height">
-    <div class="row">
-        @each('partials.userEventRequests', $events, 'event')
+    <button class="float-end btn btn-dark"><a class="nav-link text-light" href="{{route('create.event')}}"> Create Event Request</a></button>
+    <div class="d-flex justify content-center link-light">
+        <h2>Requests</h2>
     </div>
-</div>  
-<h3>Services</h3>
 
-
+<div class="my-5">
+    <h3 class="my-4">Events</h3>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(count(Auth::user()->events()->get()) > 0)
+        <div class="row">
+            @each('partials.userEventRequests', $events, 'event')
+        </div>
+    @else
+        <p>You don't have any event requests yet.</p>
+    @endif
+    <h3>Services</h3>
+    </div>
+</div>
 @endsection

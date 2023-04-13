@@ -130,4 +130,14 @@ class EventController extends Controller{
         return redirect()->route('my.requests', ['events' => $events,'services'=>$services])->with('success', 'Event edit request sent successfully.');
     }   
 
+    public function deleteEvent($id){
+        if (!Auth::check()) return redirect('/login');
+        
+        $event=Event::find($id);
+        $event->users()->detach();
+        $event->tags()->detach();
+        $event->delete();
+
+        return redirect()->back()->with('success', 'Event deleted successfully.');
+    }
 }
