@@ -16,7 +16,9 @@ class User extends Authenticatable
     protected $primaryKey = 'userid';
 
     public $timestamps = false;
+
     protected $username = 'username';
+
     protected $fillable = [
         'username',
         'isadmin',
@@ -49,6 +51,10 @@ class User extends Authenticatable
     public function serviceOrganics(){
         return $this->belongsToMany(Service::class, 'userserviceorganic', 'userid', 'serviceid')
             ->withPivot('organicunitid');
+    }
+
+    public function isAdmin(){
+        return $this->isadmin;
     }
 
 }
