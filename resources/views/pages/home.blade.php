@@ -28,12 +28,14 @@
     <div class="row justify-content-center">
     <div class="col-auto">
       <h3>Events</h3>
-      @if(count($tags) > 0)<!--TODO: add "nothing is here if condition is false --> 
+      @if(count($tags) > 0)
         <ul>
         @foreach($tags as $tag)
           <li class="mt-3"><a href="/tags/{{$tag->tagid}}/events" class="text-dark">{{$tag->tagname}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$tag->events_count}}</span></li>
         @endforeach
         </ul>
+      @else
+        <h6 class="text-center"><i>There are no events yet</h6></i>
       @endif
     </div>
     <div class="col-sm-4"></div>

@@ -7,6 +7,20 @@
         <h3>Admin Dashboard - Events</h3>
     </div>
 
+  @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
 <!-- Nav tabs -->
 <ul class="nav m-3 nav-tabs nav-fill">
   <li class="nav-item text-light bg-dark rounded-top">
@@ -23,6 +37,7 @@
 <!-- Tab panes -->
 <div class="tab-content mt-5">
   <div class="tab-pane container active" id="eventRequests">
+    @if(count($pendingEvents) > 0)
     <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
         <thead class="bg-light">
             <tr>
@@ -34,14 +49,16 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($pendingEvents) > 0) <!--TODO: add "nothing is here if condition is false -->
-              @each('partials.adminDashboardEntry', $pendingEvents, 'event')
-            @endif
+          @each('partials.adminDashboardEntry', $pendingEvents, 'event')
         </tbody>
     </table>
+    @else
+    <h6 class="text-center">There are no event requests</h6>
+    @endif
   </div>
   <div class="tab-pane container" id="events">
-  <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
+    @if(count($events) > 0)
+    <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
         <thead class="bg-light">
             <tr>
             <th>Event</th>
@@ -52,11 +69,12 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($events) > 0)<!--TODO: add "nothing is here if condition is false --> 
-                @each('partials.adminDashboardEntry', $events, 'event')
-            @endif
+              @each('partials.adminDashboardEntry', $events, 'event')
         </tbody>
     </table>
+    @else
+    <h6 class="text-center">There are no events</h6>
+    @endif
   </div>
   <div class="tab-pane container" id="tags">
   <form class="my-4" method="POST" action="{{route('create.tag')}}" enctype="multipart/form-data">
