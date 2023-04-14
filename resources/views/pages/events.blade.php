@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="row">
-      @if(count($events) < 0)
+      @if(count($events) > 0)
         @each('partials.events', $events, 'event')
       @else
       <h6 class="text-center">There are no events yet</h6>

@@ -38,8 +38,9 @@
         </button>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-secondary">My Requests</a></li>
-          <li><a href="{{url('admin')}}" class="nav-link px-2 link-secondary">Admin Dashboard</a></li>
+          <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Requests</a></li>
+          <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Events</a></li>
+          <li><a href="{{url('admin')}}" class="nav-link px-2 link-light">Admin Dashboard</a></li>
         </ul>
 
         <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -54,7 +55,6 @@
             <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
             <li><a class="dropdown-item" href="#">My Events</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{ url('/logout')}}">Sign out</a></li>
           </ul>
@@ -62,7 +62,7 @@
         @else
         <form class="form-inline my-2 my-lg-0">
           <button class="btn btn btn-secondary my-2 my-sm-0 text-light" type="submit">
-            <a class="text-decoration-none text-dark" href="{{ url('/login') }}">Login </a>
+            <a class="text-decoration-none text-dark" href="{{ url('/login') }}">Login</a>
           </button>
         </form>
         @endif
@@ -73,7 +73,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link text-light" href="{{route('my.requests')}}">My Requests <span class="sr-only"></span></a>
+        <a class="nav-link text-light" href="{{route('my.requests')}}">My Requests<span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-light" href="#">About Us</a>
@@ -88,17 +88,17 @@
       </li>
       @if (Auth::check())
       <li class="nav-item">
-        <a class="nav-link text-light" href="{{route('create.event')}}"> Create Event Request</a>
+        <a class="nav-link text-light" href="{{route('create.event')}}">Create Event Request</a>
       </li>
       @endif
     </ul>
     @if (Auth::check())
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ route('logout') }}">Logout </a></button>
+      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ route('logout') }}">Logout</a></button>
     </form>
     @else
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ route('login') }}">Login </a></button>
+      <button class="btn btn-outline-success my-2 my-sm-0 text-light" type="submit"><a href="{{ route('login') }}">Login</a></button>
     </form>
     @endif
   </div>
