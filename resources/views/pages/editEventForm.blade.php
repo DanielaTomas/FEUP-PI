@@ -128,7 +128,7 @@
     </div>
 
     <div class="form-group my-3">
-        <label for="tags">Tags</label>
+        <label for="tags">Tags<span><b class="text-danger">*</b></span></label>
         <div class="overflow-auto my-2 bg-light rounded" style="height: 200px;">
             @foreach ($tags as $tag)
                 <div class="form-check mx-2">

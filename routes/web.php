@@ -28,12 +28,28 @@ Route::post('/create_event', 'EventController@createEvent')->name('create.event'
 Route::get('/edit_event/{id}', 'EventController@editEventForm')->name('edit.event');
 Route::post('/edit_event/{id}', 'EventController@editEvent')->name('edit.event');
 Route::get('/delete_event/{id}', 'EventController@deleteEvent')->name('delete.event');
+
+// Admin
 /*
 Route::get('/admin', function () {
     Route::get('/', 'EventController@show')->name('home');
 });*/
+Route::get("/admin", function(){
+    return view("pages.admin");
+ });
+Route::get('/admin/events', 'EventController@adminDashboardEvents')->name('admin.events');
 
-Route::get('/admin', 'EventController@adminDashboardEvents')->name('admin.home');
+Route::get("/admin/services", function(){
+    return view("pages.adminServices");
+});
+Route::get("/admin/gis", function(){
+    return view("pages.adminGis");
+});
+
+/* TODO: substituir as duas routes de cima por estas
+Route::get('/admin/services', 'EventController@adminDashboardServices')->name('admin.services');
+Route::get('/admin/gis', 'EventController@adminDashboardGis')->name('admin.gis');
+*/
 Route::post('/requests/{id}/{action}', 'EventController@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
 
 // Tags

@@ -25,10 +25,6 @@ class TagController extends Controller{
             ]);
       }
 
-    public function createTagForm(){
-        return view('pages.createTagForm');
-    }
-
     public function createTag(Request $request){
         if (!Auth::check()) return redirect('/login');
 

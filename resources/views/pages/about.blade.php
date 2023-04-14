@@ -9,7 +9,7 @@
       <div class="card h-100" style="max-width: 18rem;">
         <img src="{{URL::asset('/images/amogus.webp')}}" class="card-img-top" alt="daniela">
         <div class="card-body">
-          <h5 class="card-title text-center">Daniela Tomás</h5>
+          <h5 class="card-title text-center"><a href="https://github.com/DanielaTomas" class="text-dark">Daniela Tomás</a></h5>
           <p class="card-text text-center">Frontender</p>
         </div>
       </div>
@@ -18,7 +18,7 @@
       <div class="card h-100" style="max-width: 18rem;">
         <img src="{{URL::asset('/images/amogus2.webp')}}" class="card-img-top" alt="diogo">
         <div class="card-body">
-          <h5 class="card-title text-center">Diogo Nunes</h5>
+          <h5 class="card-title text-center"><a href="https://github.com/ICWeiner" class="text-dark">Diogo Nunes</a></h5>
           <p class="card-text text-center">Backender</p>
         </div>
       </div>
@@ -27,7 +27,7 @@
       <div class="card h-100" style="max-width: 18rem;">
         <img src="{{URL::asset('/images/amogus3.webp')}}" class="card-img-top" alt="miguel">
         <div class="card-body">
-          <h5 class="card-title text-center">Miguel Tavares</h5>
+          <h5 class="card-title text-center"><a href="https://github.com/Miggs7" class="text-dark">Miguel Tavares</a></h5>
           <p class="card-text text-center">Frontender</p>
         </div>
       </div>
@@ -36,7 +36,7 @@
       <div class="card h-100" style="max-width: 18rem;">
         <img src="{{URL::asset('/images/amogus4.webp')}}" class="card-img-top" alt="pedro">
         <div class="card-body">
-          <h5 class="card-title text-center">Pedro Correia</h5>
+          <h5 class="card-title text-center"><a href="https://github.com/PedroCorreia56" class="text-dark">Pedro Correia</a></h5>
           <p class="card-text text-center">Backender</p>
         </div>
       </div>
