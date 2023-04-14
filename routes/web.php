@@ -32,8 +32,24 @@ Route::get('/delete_event/{id}', 'EventController@deleteEvent')->name('delete.ev
 Route::get('/admin', function () {
     Route::get('/', 'EventController@show')->name('home');
 });*/
+Route::get("/admin", function(){
+    return view("pages.admin");
+ });
 
-Route::get('/admin', 'EventController@adminDashboardEvents')->name('admin.home');
+Route::get('/admin/events', 'EventController@adminDashboardEvents')->name('admin.events');
+
+Route::get("/admin/services", function(){
+    return view("pages.adminServices");
+});
+Route::get("/admin/gis", function(){
+    return view("pages.adminGis");
+});
+
+/* TODO
+Route::get('/admin/events', 'EventController@')->name('admin.events');
+Route::get('/admin/services', 'EventController@')->name('admin.services');
+Route::get('/admin/gis', 'EventController@')->name('admin.gi');
+*/
 Route::post('/requests/{id}/{action}', 'EventController@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
 
 // Tags

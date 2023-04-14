@@ -32,7 +32,7 @@ class EventController extends Controller{
         $events = Event::whereNotIn('requeststatus', ['Pending'])
                         ->limit(10)
                         ->get();
-        return view('pages.admin', ['events' => $events,'pendingEvents' => $pendingEvents]);
+        return view('pages.adminEvents', ['events' => $events,'pendingEvents' => $pendingEvents]);
     }
 
     //Accepts/Rejects event

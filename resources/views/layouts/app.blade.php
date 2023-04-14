@@ -39,9 +39,7 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-secondary">My Requests</a></li>
-          <li><a href="#" class="nav-link px-2 link-secondary">Abouts US</a></li>
-          <li><a href="#" class="nav-link px-2 link-secondary">Contacts</a></li>
-          <li><a href="#" class="nav-link px-2 link-secondary">Products</a></li>
+          <li><a href="{{url('admin')}}" class="nav-link px-2 link-secondary">Admin Dashboard</a></li>
         </ul>
 
         <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
