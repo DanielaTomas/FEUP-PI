@@ -17,7 +17,7 @@ class UserRoleSeeder extends Seeder{
         $organicUnits = OrganicUnit::factory()->count(10)->create();
         $users = User::factory()->count(10)->create();
 
-        $roles = ['GI', 'Administrator',null];
+        $roles = ['GI', 'Manager',null];
 
         foreach ($users as $user) {
             $role = $roles[array_rand($roles)];

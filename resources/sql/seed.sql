@@ -30,7 +30,7 @@ CREATE TYPE RequestStatus AS ENUM ('Accepted', 'Pending', 'Rejected');
 
 CREATE TYPE RequestTypes AS ENUM ('Create', 'Edit', 'Archive');
 
-CREATE TYPE Roles AS ENUM ('GI', 'Administrator');--Retirar admin daqui? e qual a necessidade de Authenticated?
+CREATE TYPE Roles AS ENUM ('GI', 'Manager');--precisamos mesmo de 2 roles distintas?
 
 
 -----------------------------------------

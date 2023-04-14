@@ -53,6 +53,10 @@ class User extends Authenticatable
             ->withPivot('organicunitid');
     }
 
+    public function organicUnits(){
+        return $this->belongsToMany(OrganicUnit::class, 'formation', 'userId', 'organicUnitId');
+    }
+
     public function isAdmin(){
         return $this->isadmin;
     }
