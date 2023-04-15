@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+
 use Illuminate\Support\Facades\Auth;
-
-
 
 
 class AdminController extends Controller { //Controller responsible for authorization checking for admin features
@@ -28,6 +28,7 @@ class AdminController extends Controller { //Controller responsible for authoriz
         }
 
         $roles = $this->user->organicUnits;
+        
 
         return $roles->isNotEmpty();
     }
