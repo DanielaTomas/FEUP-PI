@@ -26,9 +26,13 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="White" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="White" class="bi bi-house-door-fill" viewBox="0 0 16 16" id="home">
             <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z"/>
           </svg>
+          <img src="/images/template/reindeer.png" alt="xmasIcon" width="32" height="32" id="xmas" style="display: none">
+          <img src="/images/template/easter-bunny.png" alt="easterIcon" width="32" height="32" id="easter" style="display: none">
+          <img src="/images/template/fireworks.png" alt="newYearIcon" width="32" height="32" id="newYear" style="display: none">
+          <img src="/images/template/pumpkin.png" alt="halloweenIcon" width="32" height="32" id="halloween" style="display: none">
         </a>
 
         <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color:transparent">
