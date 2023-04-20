@@ -62,17 +62,19 @@
       <div class="modal-body">
         <form>
           <div class="mb-3">
+            <div class="form-group">
             <div class="d-flex">
             <label for="exampleInputEmail1" class="form-label">Start date</label>
-              <input type="date" id="date" name="startDate">
+              <input type="date" id="date" class="form-label" name="startDate">
             <label for="exampleInputEmail1" class="form-label">to</label>
-              <input type="date" id="date" name="endDate">
+              <input type="date" id="date" class="form-label" name="endDate">
             </div>
             <div class="">(Leave blank for all dates)</div>
           </div>
-          <div class="d-flex mb-3">
+          </div>
+          <div class="form-group mb-3">
             <label for="exampleInputPassword1" class="form-label">Event Category</label>
-            <select id="textSelect" class="select" style="display: inline;">
+            <select id="textSelect" class="select" class="form-label">
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
@@ -80,9 +82,9 @@
               <option value="customOption">Other</option>
             </select>
           </div>
-          <div class="d-flex mb-3">
+          <div class="form-group mb-3">
             <label for="exampleInputPassword1" class="form-label">Event Subcategory</label>
-            <select id="textSelect" class="select" style="display: inline;">
+            <select id="textSelect" class="select" class="form-label">
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
@@ -90,9 +92,9 @@
               <option value="customOption">Other</option>
             </select>
           </div>
-          <div class="d-flex mb-3">
+          <div class="form-group mb-3">
             <label for="exampleInputPassword1" class="form-label">Search Term</label>
-            <input type="text" class="form-control" placeholder="search" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" class="form-label" placeholder="search" aria-label="Username" aria-describedby="basic-addon1">
           </div>
         </form>
       </div>
