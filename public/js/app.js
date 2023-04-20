@@ -4,6 +4,7 @@ const currentYear = new Date().getFullYear();
 const url = `https://date.nager.at/api/v3/PublicHolidays/${currentYear}/PT`;
 
 function processHolidays(holidays) {
+    /*if you want to test change today date, YYYY-MM-DD */
     const today = new Date();
     const homeIcon = document.querySelector('#home');
 
@@ -14,8 +15,8 @@ function processHolidays(holidays) {
     const easterMonth = easter.getMonth() + 1;
 
     /*holiday wont ever change so its fine, not in the API too*/
-    const spookyMonth = new Date('2023-10-31');
-    const halloween = spookyMonth.getMonth() + 1;
+    const halloween = new Date('2023-10-31');
+    const spookyMonth = halloween.getMonth() + 1;
     
     /*new Year */
     const newYear = new Date(holidays["New Year's Day"]);
@@ -44,7 +45,7 @@ function processHolidays(holidays) {
             break;
         /*check if new year, lasts one week */
         case newYearMonth:
-            if(today.getDate() >= 7) break;
+            if(today.getDate() > 7) break;
             const newYearIcon = document.querySelector('#newYear');
             newYearIcon.style.display = "block";
             homeIcon.style.display = "none";
