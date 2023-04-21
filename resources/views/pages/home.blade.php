@@ -28,15 +28,27 @@
     <div class="row justify-content-center">
     <div class="col-auto">
       <h3>Events</h3>
+      @if(count($organicUnits)>0)
+      <ul>
+        @foreach($organicUnits as $unit)
+        @if($unit->events_count > 0)
+          <li class="mt-3"><a href="/organicunits/{{$unit->organicunitid}}/events" class="text-dark">{{$unit->name}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$unit->events_count}}</span></li>
+        @endif
+        @endforeach
+        </ul>
+      @endif
       @if(count($tags) > 0)
         <ul>
         @foreach($tags as $tag)
           <li class="mt-3"><a href="/tags/{{$tag->tagid}}/events" class="text-dark">{{$tag->tagname}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$tag->events_count}}</span></li>
         @endforeach
         </ul>
-      @else
+        @else
         <h6 class="text-center"><i>There are no events yet</h6></i>
       @endif
+      <ul>
+        <li class="mt-3"><a href="/categories/events" class="text-dark">See all categories</a></li>
+      </ul>
     </div>
     <div class="col-sm-4"></div>
     <div class="col-auto">

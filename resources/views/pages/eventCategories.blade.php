@@ -5,15 +5,8 @@
 
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
-       <h3> Events 
-        @if(isset($tag))
-          - {{$tag}}
-        @endif
-        @if(isset($organicunit))
-          - {{$organicunit}}
-        @endif
+       <h3> Event Categories 
       </h3>
-
     </div>
     <div class="input-group py-5 px-5">
       <div class="input-group-prepend">
@@ -28,12 +21,24 @@
         </button>
       </div>
     </div>
+    <div class="container">
     <div class="row">
-      @if(count($events) > 0)
-        @each('partials.events', $events, 'event')
-      @else
-      <h6 class="text-center">There are no events yet</h6>
-      @endif
+    <div class="col">
+        <ul>
+            @foreach($tags as $tag)
+            <li class="mt-3"><a href="/tags/{{$tag->tagid}}/events" class="text-white">{{$tag->tagname}}</a><span class="mx-2 badge bg-dark rounded-pill">{{$tag->events_count}}</span></li>
+            @endforeach
+        </ul>
+    </div>
+    
+    <div class="col">
+        <ul>
+            @foreach($organicunits as $unit)
+            <li class="mt-3"><a href="/organicunits/{{$unit->organicunitid}}/events" class="text-white">{{$unit->name}}</a><span class="mx-2 badge bg-dark rounded-pill">{{$unit->events_count}}</span></li>
+            @endforeach
+        </ul>
+    </div>
+    </div>
     </div>
 </div>
   
@@ -91,3 +96,5 @@
   </div>
 </div>
 @endsection
+
+

@@ -27,10 +27,8 @@ class EventController extends Controller{
 
     public function adminDashboardEvents(){
         $pendingEvents = Event::where('requeststatus', 'Pending')
-                              ->limit(10)
                               ->get();
         $events = Event::whereNotIn('requeststatus', ['Pending'])
-                        ->limit(10)
                         ->get();
         return view('pages.adminEvents', ['events' => $events,'pendingEvents' => $pendingEvents]);
     }

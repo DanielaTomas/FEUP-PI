@@ -17,6 +17,7 @@
 
     <script   type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
     <script    type="text/javascript" src={{ asset('js/app.js') }} defer> </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @stack('pageJS')
 </head>
 
@@ -34,12 +35,16 @@
           <img src="/images/template/fireworks.png" alt="newYearIcon" width="32" height="32" id="newYear" style="display: none">
           <img src="/images/template/pumpkin.png" alt="halloweenIcon" width="32" height="32" id="halloween" style="display: none">
         </a>
-
+        
+        @if(Auth::check())
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Requests</a></li>
           <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Events</a></li>
+          @if(Auth::user()->isadmin==true)
           <li><a href="{{url('admin')}}" class="nav-link px-2 link-light">Admin Dashboard</a></li>
+          @endif
         </ul>
+        @endif
         <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>-->
