@@ -2,54 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\Event;
 use App\Models\Tag;
+
+
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-class EventController extends Controller{
+
+class EventController extends Controller
+{
 
     /**
      * Show the events page //TODO: check naming conventions
      */
-    public function list(){
+    public function list()
+    {
         $events = Event::where('requeststatus', 'Accepted')
-                       ->get();//TODO:Decide what to to with cancelled events
+            ->get(); //TODO:Decide what to to with cancelled events
         return view('pages.events', ['events' => $events]);
     }
 
     // Show the event page
-    public function show($eventId){   
-        $event= Event::find($eventId);
-        return view('pages.event',['event' => $event]);
+    public function show($eventId)
+    {
+        $event = Event::find($eventId);
+        return view('pages.event', ['event' => $event]);
     }
 
 
-    public function adminDashboardEvents(){
-        $pendingEvents = Event::where('requeststatus', 'Pending')
-                              ->limit(10)
-                              ->get();
-        $events = Event::whereNotIn('requeststatus', ['Pending'])
-                        ->limit(10)
-                        ->get();
-        return view('pages.adminEvents', ['events' => $events,'pendingEvents' => $pendingEvents]);
+    public function createEventForm()
+    {
+        $tags = TagController::getAllTags();
+        return view('pages.createEventForm', ['tags' => $tags]);
     }
 
-    //Accepts/Rejects event
-    public function updateStatus($id, $status) {//TODO: Change so only authorized users can make use of this
-        $event = Event::find($id);
-        $event->requeststatus = $status;
-        $event->datereviewed = now()->format('Y-m-d');
-        $event->save();
-    
-        return redirect()->back()->with('success', 'Event status updated successfully.');
-    }
-
-
-    public function createEventForm(){
-        $tags=TagController::getAllTags();
-        return view('pages.createEventForm',['tags'=>$tags]);
-    }
 
     protected function validator(array $data)
       { 
@@ -74,8 +63,8 @@ class EventController extends Controller{
         if (!Auth::check()) return redirect('/login');
 
         $this->validator($request->all())->validate();
-        $user=Auth::user();
-        $event=Event::create([
+        $user = Auth::user();
+        $event = Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Create',
             'eventname' => $request->input('eventname'),
@@ -106,20 +95,22 @@ class EventController extends Controller{
         $event->save();
         $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
-        return redirect('/');      
-    }  
-
-    public function editEventForm($id){
-        $event=Event::find($id);
-        $tags=TagController::getAllTags();
-        return view('pages.editEventForm',['event'=>$event,'tags'=>$tags]);
+        return redirect('/');
     }
 
-    public function editEvent(Request $request){
+    public function editEventForm($id)
+    {
+        $event = Event::find($id);
+        $tags = TagController::getAllTags();
+        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags]);
+    }
+
+    public function editEvent(Request $request)
+    {
         if (!Auth::check()) return redirect('/login');
         $this->validator($request->all())->validate();
-        $user=Auth::user();
-        $event=Event::create([
+        $user = Auth::user();
+        $event = Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Edit',
             'eventname' => $request->input('eventname'),
@@ -148,16 +139,17 @@ class EventController extends Controller{
         $event->save();
         $user->events()->save($event);
 
-        $events=$user->events()->get();
-        $services=$user->services()->get();
-        return redirect()->route('my.requests', ['events' => $events,'services'=>$services])->with('success', 'Event edit request sent successfully.');
-    }   
+        $events = $user->events()->get();
+        $services = $user->services()->get();
+        return redirect()->route('my.requests', ['events' => $events, 'services' => $services])->with('success', 'Event edit request sent successfully.');
+    }
 
-    public function deleteEvent($id){
+    public function deleteEvent($id)
+    {
         if (!Auth::check()) return redirect('/login');
-        
-        $event=Event::find($id);
-        $event->users()->detach();
+
+        $event = Event::find($id);
+        $event->user()->detach();
         $event->tags()->detach();
         $event->delete();
 
