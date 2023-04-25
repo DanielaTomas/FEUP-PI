@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Overtrue\LaravelVersionable\Versionable;
 
 class Service extends Model
-{   
+{
     use HasFactory;
     //use Versionable; 
     protected $table = 'service';
@@ -41,18 +41,18 @@ class Service extends Model
         'enddate',
     ];
 
-    public function serviceType(){
+    public function serviceType()
+    {
         return $this->belongsTo(ServiceType::class);
     }
 
-    public function users(){
-        return $this->belongsToMany(User::class, 'userservicerequest', 'serviceid', 'userid');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userId');
     }
 
-    public function organics(){
-        return $this->belongsToMany(OrganicUnit::class, 'userserviceorganic', 'serviceid', 'organicunitid')
-            ->withPivot('userid');
+    public function organicUnit()
+    {
+        return $this->belongsTo(OrganicUnit::class, 'organicunitid');
     }
-
-
 }

@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Event>
  */
-class EventFactory extends Factory{
+class EventFactory extends Factory
+{
 
     protected $model = Event::class;
 
-    public function definition(){
-        
+    public function definition()
+    {
+
         return [
             'requeststatus' => $this->faker->randomElement(['Accepted', 'Pending', 'Rejected']),
             'requesttype' => $this->faker->randomElement(['Create', 'Edit', 'Archive']),
@@ -29,7 +31,9 @@ class EventFactory extends Factory{
             'description' => $this->faker->paragraph,
             'startdate' => $this->faker->dateTimeBetween('-1 week', '+1 week', 'UTC')->format('Y-m-d'),
             'enddate' => $this->faker->dateTimeBetween('+2 week', '+3 week', 'UTC')->format('Y-m-d'),
-            'eventcanceled' => $this->faker->boolean(10),// 10% chance of being true 
+            'eventcanceled' => $this->faker->boolean(10), // 10% chance of being true 
+            'userid' => $this->faker->numberBetween(1, 10),
+            'organicunitid'  => $this->faker->numberBetween(1, 10),
         ];
     }
 }

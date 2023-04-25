@@ -16,7 +16,9 @@ class User extends Authenticatable
     protected $primaryKey = 'userid';
 
     public $timestamps = false;
+
     protected $username = 'username';
+
     protected $fillable = [
         'username',
         'isadmin',
@@ -33,22 +35,23 @@ class User extends Authenticatable
         'isadmin' => 'boolean'
     ];
 
-    public function services(){
-        return $this->belongsToMany(Service::class, 'userservicerequest', 'userid', 'serviceid');
+    public function services()
+    {
+        return $this->hasMany(Event::class, 'userid');
     }
 
-    public function events(){
-        return $this->belongsToMany(Event::class, 'usereventrequest', 'userid', 'eventid');
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'userid');
     }
 
-    public function eventOrganics(){
-        return $this->belongsToMany(Event::class, 'usereventorganic', 'userid', 'eventid')
-            ->withPivot('organicunitid');
+    public function organicUnits()
+    {
+        return $this->belongsToMany(OrganicUnit::class, 'formation', 'userid', 'organicunitid');
     }
 
-    public function serviceOrganics(){
-        return $this->belongsToMany(Service::class, 'userserviceorganic', 'userid', 'serviceid')
-            ->withPivot('organicunitid');
+    public function isAdmin()
+    {
+        return $this->isadmin;
     }
-
 }
