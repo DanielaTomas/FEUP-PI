@@ -17,6 +17,7 @@
 
     <script   type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
     <script    type="text/javascript" src={{ asset('js/app.js') }} defer> </script>
+    {{-- <script    type="text/javascript" src={{ asset('js/translation.js') }} defer> </script> --}}
     @stack('pageJS')
 </head>
 

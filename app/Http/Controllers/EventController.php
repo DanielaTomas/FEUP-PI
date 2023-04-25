@@ -34,8 +34,8 @@ class EventController extends Controller
     public function createEventForm()
     {
         $tags = TagController::getAllTags();
-        $organicUnits=OrganicUnit
-        return view('pages.createEventForm', ['tags' => $tags]);
+        $organicUnits=OrganicUnitController::getOrganicUnits();
+        return view('pages.createEventForm', ['tags' => $tags,'organicunits'=>$organicUnits]);
     }
 
     protected function validator(array $data)
@@ -44,7 +44,7 @@ class EventController extends Controller
         return Validator::make($data, [
             'eventnamept' => 'required|string',
             'eventnameen' => 'required|string',
-            'address' => 'required|string',
+            'address' => 'nullable|string',
             'urlportuguese' => 'nullable|regex:' . $regex,
             'urlenglish' =>'nullable|regex:' . $regex,
             'emailtechnical' => 'required|string|email|max:255',
@@ -69,15 +69,20 @@ class EventController extends Controller
         $event = Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Create',
-            'eventname' => $request->input('eventname'),
+            'eventnameportuguese' => $request->input('eventnamept'),
+            'eventnameenglish' => $request->input('eventnameen'),
             'address' => $request->input('address'),
-            'url' => $request->input('url'),
-            'email' => $request->input('email'),
+            'urlportuguese' => $request->input('urlportuguese'),
+            'urlenglish' => $request->input('urlenglish'),
+            'emailtechnical' => $request->input('emailtechnical'),
+            'emailcontact' =>$request->input('emailcontact'),
             'datecreated' => date('Y-m-d'),
             'contactperson' => $request->input('contactperson'),
             'description' => $request->input('description'),
             'startdate' => $request->input('startdate'),
             'enddate' => $request->input('enddate'),
+            'userid'=> $user->userid,
+            'organicunitid' => $request->input('organicunitid')
         ]);
 
         $tags = $request->input('tags');

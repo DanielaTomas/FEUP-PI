@@ -65,7 +65,7 @@ CREATE TABLE event(
     requestType RequestTypes NOT NULL,
     eventNamePortuguese VARCHAR NOT NULL, -- TODO: fix unique when editing
     eventNameEnglish VARCHAR NOT NULL, -- TODO: fix unique when editing
-    address VARCHAR NOT NULL,
+    address VARCHAR,
     urlPortuguese VARCHAR,
     urlEnglish VARCHAR,
     emailTechnical VARCHAR NOT NULL,

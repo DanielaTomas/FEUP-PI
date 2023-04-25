@@ -44,10 +44,14 @@ class OrganicUnitController extends Controller{
         return view('pages.events', ['events' => $events,'organicunit' => $organicUnit->name]);
     }
 
-    public static function getAllOrganicUnits(){
+    public static function getAllOrganicUnitsEvents(){
         $organicUnits = OrganicUnit::withCount(['events' => function ($query) {//TODO: Decide what to do with cancelled events
             $query->where('requeststatus', 'Accepted');
         }])->orderByDesc('events_count')->get();
         return $organicUnits;
+    }
+
+    public static function getOrganicUnits(){
+        return OrganicUnit::all();
     }
 }

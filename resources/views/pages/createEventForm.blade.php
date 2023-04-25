@@ -24,25 +24,40 @@
             <div class="form-group">
                 <h4>Name</h4>
                 <label for="eventnamept" class="form-label">Portugues<span><b class="text-danger">*</b></span></label>
-                <input id="eventnamept" class="form-control" placeholder="Enter event name" type="text" name="eventnamept" value="{{ old('eventnamept') }}" required autofocus>
+                <div class="input-group">
+                    <input id="eventnamept" class="form-control" placeholder="Enter event name" type="text" name="eventnamept" value="{{ old('eventnamept') }}" required autofocus>
+                    <button class="btn btn-outline-secondary translate-btn" data-target="eventnamept" data-lang-from="pt" data-lang-to="en" type="button">Translate to English</button>
+                </div>
                 @if ($errors->has('eventnamept'))
                 <span class="error">
                     {{ $errors->first('eventnamept') }}
                 </span>
                 @endif
                 <label for="eventnameen" class="form-label">English<span><b class="text-danger">*</b></span></label>
-                <input id="eventnameen" class="form-control" placeholder="Enter event name" type="text" name="eventnameen" value="{{ old('eventnameen') }}" required autofocus>
+                <div class="input-group">
+                    <input id="eventnameen" class="form-control" placeholder="Enter event name" type="text" name="eventnameen" value="{{ old('eventnameen') }}" required autofocus>
+                    <button class="btn btn-outline-secondary translate-btn" data-target="eventnameen" data-lang-from="en" data-lang-to="pt" type="button">Traduzir para Português</button>
+                </div>
                 @if ($errors->has('eventnameen'))
                 <span class="error">
                     {{ $errors->first('eventnameen') }}
                 </span>
                 @endif
             </div>
+        </div> 
+        <div class="form-group">
+        <label for="organicunitid">Select Organic Unit:</label> 
+        <select class="form-control" id="organicunitid" name="organicunitid" required>
+            @foreach ($organicunits as $unit)
+                <option value="{{$unit->organicunitid}}">{{ $unit->name }}</option>
+            @endforeach
+        </select>
         </div>
+
         <div class="col-md-6">
             <div class="form-group">
-                <label for="address" class="form-label">Location<span><b class="text-danger">*</b></span></label>
-                <input id="address" class="form-control" placeholder="Enter event location" type="text" name="address" value="{{ old('address') }}" required>
+                <label for="address" class="form-label">Location</label>
+                <input id="address" class="form-control" placeholder="Enter event location" type="text" name="address" value="{{ old('address') }}" >
                 @if ($errors->has('address'))
                 <span class="error">
                     {{ $errors->first('address') }}
@@ -80,7 +95,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="emailcontact" class="form-label">Contact Email (optional)</label>
-                <input id="emailcontact" class="form-control" placeholder="Enter an email" type="email" name="emailcontact" value="{{ old('emailcontact') }}" required>
+                <input id="emailcontact" class="form-control" placeholder="Enter an email" type="email" name="emailcontact" value="{{ old('emailcontact') }}">
                 @if ($errors->has('emailcontact'))
                 <span class="error">
                     {{ $errors->first('emailcontact') }}
@@ -188,14 +203,7 @@
     </div>
     @endif
 
-    <div class="form-group">
-        <label for="event_id">Select Event:</label>
-        <select class="form-control" id="event_id" name="event_id">
-            @foreach ($events as $event)
-                <option value="{{ $event->id }}">{{ $event->name }}</option>
-            @endforeach
-        </select>
-    </div>
+   
 
     <div class="col-md-12 text-center mt-5">
         <button type="submit" class="btn btn-dark">Create Event</button>
