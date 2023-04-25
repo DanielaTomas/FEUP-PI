@@ -60,7 +60,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="contactperson" class="form-label">Person to Contact (idk how to put it)<span><b class="text-danger">*</b></span></label>
+                <label for="contactperson" class="form-label">Person to Contact<span><b class="text-danger">*</b></span></label>
                 <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ old('contactperson') }}" required>
                 @if ($errors->has('contactperson'))
                 <span class="error">
@@ -123,19 +123,13 @@
     </div>
 
     <div class="form-group my-3">
-        <label for="tags">Tags</label>
-        <div class="overflow-auto my-2 bg-light rounded" style="height: 200px;">
+        <label for="tags" class="my-2">Tags</label>
+        <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags">
+        <datalist id="tags">
             @foreach ($tags as $tag)
-                <div class="form-check mx-2">
-                    <label class="form-check-label" for="tags_{{ $tag->tagid }}">{{ $tag->tagname }}</label>
-                    <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->tagid }}" 
-                    @if (is_array(old('tags')) && in_array($tag->tagid, old('tags'))) 
-                        checked 
-                    @endif
-                    >
-                </div>
+                <option value="{{ $tag->tagid }}">{{ $tag->tagname }}</option>
             @endforeach
-        </div>
+        </datalist>
     </div>
 
     <div class="col-md-12 text-center mt-5">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Event;
+use App\Models\Tag;
+
 
 
 use Illuminate\Http\Request;
@@ -37,26 +39,26 @@ class EventController extends Controller
         return view('pages.createEventForm', ['tags' => $tags]);
     }
 
+
     protected function validator(array $data)
-    {
-        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
-        return Validator::make($data, [
-            'eventname' => 'required|string',
-            'address' => 'required|string',
-            'url' => 'nullable|regex:' . $regex,
-            'email' => 'required|string|email|max:255',
-            'contactperson' => 'required|string',
-            'description' => 'required|string',
-            'startdate' => 'required|date|date_format:Y-m-d',
-            'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',
-            'tags' => 'required|array',
-            'tags.*' => 'exists:tag,tagid',
-        ]);
-    }
+      { 
+            $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
+            return Validator::make($data, [
+              'eventname' => 'required|string',
+              'address' => 'required|string',
+              'url' => 'nullable|regex:'.$regex,
+              'email' => 'required|string|email|max:255',
+              'contactperson'=>'required|string',
+              'description'=>'required|string',
+              'startdate' => 'required|date|date_format:Y-m-d',
+              'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',
+              'tags' => 'required|string',
+              //'tags' => 'required|array',
+              //'tags.*' => 'exists:tag,tagid',
+            ]);
+      }
 
-    public function createEvent(Request $request)
-    {
-
+    public function createEvent(Request $request){
 
         if (!Auth::check()) return redirect('/login');
 
@@ -77,7 +79,19 @@ class EventController extends Controller
         ]);
 
         $tags = $request->input('tags');
-        $event->tags()->attach($tags);
+        $tagNames = explode(',', $tags);
+
+        foreach ($tagNames as $tagName) {
+            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            if ($tagId) {
+                $tagIds[] = (int) $tagId;
+            }
+            else {
+                return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
+            }
+        }
+
+        $event->tags()->attach($tagIds);
         $event->save();
         $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
@@ -110,7 +124,18 @@ class EventController extends Controller
             'enddate' => $request->input('enddate'),
         ]);
         $tags = $request->input('tags');
-        $event->tags()->attach($tags);
+        $tagNames = explode(',', $tags);
+
+        foreach ($tagNames as $tagName) {
+            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            if ($tagId) {
+                $tagIds[] = (int) $tagId;
+            }
+            else {
+                return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
+            }
+        }
+        $event->tags()->attach($tagIds);
         $event->save();
         $user->events()->save($event);
 

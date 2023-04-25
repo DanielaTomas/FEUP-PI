@@ -128,19 +128,13 @@
     </div>
 
     <div class="form-group my-3">
-        <label for="tags">Tags<span><b class="text-danger">*</b></span></label>
-        <div class="overflow-auto my-2 bg-light rounded" style="height: 200px;">
+        <label for="tags" class="my-2">Tags</label>
+        <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags" value="{{ $event->tags->value('tagname') }}">
+        <datalist id="tags">
             @foreach ($tags as $tag)
-                <div class="form-check mx-2">
-                    <label class="form-check-label" for="tags_{{ $tag->tagid }}">{{ $tag->tagname }}</label>
-                    <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->tagid }}" 
-                    @if (is_array(old('tags')) && in_array($tag->tagid, old('tags')) || $event->tags->contains($tag->tagid)) 
-                        checked 
-                    @endif
-                    >
-                </div>
+                <option value="{{ $tag->tagid }}">{{ $tag->tagname }}</option>
             @endforeach
-        </div>
+        </datalist>
     </div>
 
     <div class="col-md-12 text-center mt-5">

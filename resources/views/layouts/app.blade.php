@@ -17,6 +17,10 @@
 
     <script   type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
     <script    type="text/javascript" src={{ asset('js/app.js') }} defer> </script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.3.0/jquery.flexdatalist.min.js" integrity="sha512-JEX6Es4Dhu4vQWWA+vVBNJzwejdpqeGeii0sfiWJbBlAfFzkeAy6WOxPYA4HEVeCHwAPa+8pDZQt8rLKDDGHgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.3.0/jquery.flexdatalist.css" integrity="sha512-mVj7k7kIC4+FkO7xQ04Di4Q4vSg8BP3HA7Pzss2ib+EqufKS5GuJW1mGtVo70i9hHTgEv6UmxcPb6tddRdk89A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     @stack('pageJS')
 </head>
 
@@ -176,9 +180,9 @@
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-dark mt-auto">
     <p class="col-md-4 mb-0 text-light p-3">© 2023 Company, Inc ඞ</p>
 
-    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+    <!--<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-    </a>
+    </a>-->
 
     <ul class="nav col-md-4 justify-content-end px-3">
       <li class="nav-item bg-dark"><a href="{{url('/')}}" class="nav-link px-2 text-light">Home</a></li>
