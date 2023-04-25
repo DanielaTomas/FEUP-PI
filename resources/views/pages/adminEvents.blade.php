@@ -72,6 +72,7 @@
               @each('partials.adminDashboardEntry', $events, 'event')
         </tbody>
     </table>
+    <div>{{$events->links()}}</div>
     @else
     <h6 class="text-center">There are no events</h6>
     @endif

@@ -30,11 +30,9 @@ class EventControllerAdmin extends AdminController
 
         if ($this->user->isAdmin()) {
             $pendingEvents = Event::where('requeststatus', 'Pending')
-                ->limit(10)
-                ->get();
+                ->paginate(5);
             $events = Event::whereNotIn('requeststatus', ['Pending'])
-                ->limit(10)
-                ->get();
+                ->paginate(5);
         } else {
             $formations = Formation::where('userid', $this->user->userid)->get();
             if ($formations->isNotEmpty()) {
@@ -44,12 +42,11 @@ class EventControllerAdmin extends AdminController
 
             $pendingEvents = Event::where('requeststatus', 'Pending')
                 ->whereIn('organicunitid', $organicUnitIds)
-                ->limit(10)
-                ->get();
+                ->paginate(5);
+              
             $events = Event::whereNotIn('requeststatus', ['Pending'])
                 ->whereIn('organicunitid', $organicUnitIds)
-                ->limit(10)
-                ->get();
+                ->paginate(5);
         }
         return view('pages.adminEvents', ['events' => $events, 'pendingEvents' => $pendingEvents]);
     }
