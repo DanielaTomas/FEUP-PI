@@ -3,6 +3,15 @@
 return [
     'roles' => [
         'GI',
-        'Manager',
+    ],
+    'requeststatus' => [
+        'Accepted',
+        'Pending',
+        'Rejected',
+    ],
+    'RequestTypes' => [
+        'Create',
+        'Edit',
+        'Archive',
     ],
 ];

@@ -30,7 +30,7 @@ CREATE TYPE RequestStatus AS ENUM ('Accepted', 'Pending', 'Rejected');
 
 CREATE TYPE RequestTypes AS ENUM ('Create', 'Edit', 'Archive');
 
-CREATE TYPE Roles AS ENUM ('GI', 'Manager');--precisamos mesmo de 2 roles distintas?
+CREATE TYPE Roles AS ENUM ('GI');
 
 
 -----------------------------------------
@@ -53,6 +53,10 @@ CREATE TABLE tag(
     tagName VARCHAR NOT NULL UNIQUE
 );
 
+CREATE TABLE organicunit(
+    organicUnitId SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL UNIQUE
+);
 
 CREATE TABLE event(
     eventId SERIAL PRIMARY KEY,
@@ -69,6 +73,8 @@ CREATE TABLE event(
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
     eventCanceled BOOLEAN NOT NULL DEFAULT FALSE,
+    userId INTEGER REFERENCES users(userId),
+    organicUnitId INTEGER REFERENCES organicunit(organicUnitId)
     CHECK(endDate >= startDate),
     CHECK(dateCreated <= dateReviewed)
 );
@@ -82,10 +88,7 @@ CREATE TABLE eventversion(
 );
 */
 
-CREATE TABLE organicunit(
-    organicUnitId SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL UNIQUE
-);
+
 
 CREATE TABLE formation(
     roleId SERIAL PRIMARY KEY,
@@ -138,9 +141,12 @@ CREATE TABLE service(
     version INTEGER DEFAULT 1,
     startDate DATE,--NOT NULL?
     endDate DATE,--NOT NULL?
-    serviceTypeId INTEGER REFERENCES servicetype(serviceTypeId)
+    serviceTypeId INTEGER REFERENCES servicetype(serviceTypeId),
+    userId INTEGER REFERENCES users(userId),
+    organicUnitId INTEGER REFERENCES organicunit(organicUnitId)
 );
 
+/*
 CREATE TABLE userservicerequest(
     serviceId INTEGER NOT NULL REFERENCES service(serviceId) ON DELETE CASCADE,
     userId INTEGER NOT NULL REFERENCES users(userId) ON DELETE CASCADE
@@ -149,7 +155,7 @@ CREATE TABLE userservicerequest(
 CREATE TABLE usereventrequest(
     eventId INTEGER NOT NULL REFERENCES event(eventId) ON DELETE CASCADE,
     userId INTEGER NOT NULL REFERENCES users(userId) ON DELETE CASCADE
-);
+);*/
 
 
 CREATE TABLE  usereventorganic(

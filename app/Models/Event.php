@@ -17,7 +17,7 @@ class Event extends Model
     protected $primaryKey = 'eventid';
 
     public $timestamps = false;
-    
+
     protected $fillable = [
         'requeststatus',
         'requesttype',
@@ -32,6 +32,9 @@ class Event extends Model
         'startdate',
         'enddate',
         'eventcanceled',
+        'userid',
+        'organicunitid'
+
     ];
 
     protected $versionable = [
@@ -49,18 +52,20 @@ class Event extends Model
     protected $casts = [
         'eventcanceled' => 'boolean',
     ];
-    
-    
-    public function tags(){
+
+
+    public function tags()
+    {
         return $this->belongsToMany(Tag::class, 'eventtags', 'eventid', 'tagid');
     }
 
-    public function users(){
-        return $this->belongsToMany(User::class, 'usereventrequest', 'eventid', 'userid');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userId');
     }
 
-    public function organics(){
-        return $this->belongsToMany(OrganicUnit::class, 'usereventorganic', 'eventid', 'organicunitid')
-            ->withPivot('userid');
+    public function organicUnit()
+    {
+        return $this->belongsTo(OrganicUnit::class, 'organicunitid');
     }
 }
