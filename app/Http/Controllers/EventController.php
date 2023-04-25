@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
-
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 class EventController extends Controller{
@@ -63,14 +63,14 @@ class EventController extends Controller{
               'description'=>'required|string',
               'startdate' => 'required|date|date_format:Y-m-d',
               'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',
-              'tags' => 'required|array',
-              'tags.*' => 'exists:tag,tagid',
+              'tags' => 'required|string',
+              //'tags' => 'required|array',
+              //'tags.*' => 'exists:tag,tagid',
             ]);
       }
 
     public function createEvent(Request $request){
 
-        
         if (!Auth::check()) return redirect('/login');
 
         $this->validator($request->all())->validate();
@@ -90,7 +90,19 @@ class EventController extends Controller{
         ]);
 
         $tags = $request->input('tags');
-        $event->tags()->attach($tags);
+        $tagNames = explode(',', $tags);
+
+        foreach ($tagNames as $tagName) {
+            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            if ($tagId) {
+                $tagIds[] = (int) $tagId;
+            }
+            else {
+                return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
+            }
+        }
+
+        $event->tags()->attach($tagIds);
         $event->save();
         $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
@@ -121,7 +133,18 @@ class EventController extends Controller{
             'enddate' => $request->input('enddate'),
         ]);
         $tags = $request->input('tags');
-        $event->tags()->attach($tags);
+        $tagNames = explode(',', $tags);
+
+        foreach ($tagNames as $tagName) {
+            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            if ($tagId) {
+                $tagIds[] = (int) $tagId;
+            }
+            else {
+                return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
+            }
+        }
+        $event->tags()->attach($tagIds);
         $event->save();
         $user->events()->save($event);
 

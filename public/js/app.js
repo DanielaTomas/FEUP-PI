@@ -92,3 +92,11 @@ editeventform.addEventListener('input', () => {
     }  
     editeventformbtn.disabled = !hasChanges;
     });
+
+
+
+$('.flexdatalist').flexdatalist({
+     selectionRequired: 1,
+     minLength: 1
+});
+
