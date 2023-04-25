@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller{
 
+
+    public static function getAllTagsWithEventCount(){
+        $tags = Tag::withCount(['events' => function ($query) {//TODO: Decide what to do with cancelled events
+            $query->where('requeststatus', 'Accepted');
+        }])->orderByDesc('events_count')->get();
+        return $tags;
+    }
+
+    public static function getOrganicUnits(){
+        return OrganicUnit::all();
+    }
+
     public function getTopTagsByEventCount(){
         $tags = Tag::withCount(['events' => function ($query) {//TODO: Decide what to do with cancelled events
                                     $query->where('requeststatus', 'Accepted');

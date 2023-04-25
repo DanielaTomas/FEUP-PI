@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<?php $language = app()->getLocale();?>
 <div class="flex-column">
   <div class="p-1 mx-5 my-5 bg-secondary rounded">
     <div class="justify content-center link-light">
@@ -40,7 +40,11 @@
       @if(count($tags) > 0)
         <ul>
         @foreach($tags as $tag)
-          <li class="mt-3"><a href="/tags/{{$tag->tagid}}/events" class="text-dark">{{$tag->tagname}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$tag->events_count}}</span></li>
+          @if($language=="pt")
+          <li class="mt-3"><a href="/tags/{{$tag->tagid}}/events" class="text-dark">{{$tag->tagnameportuguese}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$tag->events_count}}</span></li>
+          @else
+          <li class="mt-3"><a href="/tags/{{$tag->tagid}}/events" class="text-dark">{{$tag->tagnameenglish}}</a><span class="mx-2 badge bg-secondary rounded-pill">{{$tag->events_count}}</span></li>
+          @endif
         @endforeach
         </ul>
         @else
