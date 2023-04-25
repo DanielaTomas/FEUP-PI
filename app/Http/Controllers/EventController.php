@@ -34,6 +34,7 @@ class EventController extends Controller
     public function createEventForm()
     {
         $tags = TagController::getAllTags();
+        $organicUnits=OrganicUnit
         return view('pages.createEventForm', ['tags' => $tags]);
     }
 
@@ -41,11 +42,14 @@ class EventController extends Controller
     {
         $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         return Validator::make($data, [
-            'eventname' => 'required|string',
+            'eventnamept' => 'required|string',
+            'eventnameen' => 'required|string',
             'address' => 'required|string',
-            'url' => 'nullable|regex:' . $regex,
-            'email' => 'required|string|email|max:255',
-            'contactperson' => 'required|string',
+            'urlportuguese' => 'nullable|regex:' . $regex,
+            'urlenglish' =>'nullable|regex:' . $regex,
+            'emailtechnical' => 'required|string|email|max:255',
+            'contactperson' => 'nullable|string',
+            'emailcontact' => 'nullable|string|email|max:255',
             'description' => 'required|string',
             'startdate' => 'required|date|date_format:Y-m-d',
             'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',

@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content') 
-
+<?php $language = app()->getLocale();?>
 @if (Auth::check())
-
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
         <h3>Event Information:</h3>
@@ -23,11 +22,19 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="eventname" class="form-label">Name<span><b class="text-danger">*</b></span></label>
-                <input id="eventname" class="form-control" placeholder="Enter event name" type="text" name="eventname" value="{{ old('eventname') }}" required autofocus>
-                @if ($errors->has('eventname'))
+                <h4>Name</h4>
+                <label for="eventnamept" class="form-label">Portugues<span><b class="text-danger">*</b></span></label>
+                <input id="eventnamept" class="form-control" placeholder="Enter event name" type="text" name="eventnamept" value="{{ old('eventnamept') }}" required autofocus>
+                @if ($errors->has('eventnamept'))
                 <span class="error">
-                    {{ $errors->first('eventname') }}
+                    {{ $errors->first('eventnamept') }}
+                </span>
+                @endif
+                <label for="eventnameen" class="form-label">English<span><b class="text-danger">*</b></span></label>
+                <input id="eventnameen" class="form-control" placeholder="Enter event name" type="text" name="eventnameen" value="{{ old('eventnameen') }}" required autofocus>
+                @if ($errors->has('eventnameen'))
+                <span class="error">
+                    {{ $errors->first('eventnameen') }}
                 </span>
                 @endif
             </div>
@@ -60,8 +67,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="contactperson" class="form-label">Person to Contact (idk how to put it)<span><b class="text-danger">*</b></span></label>
-                <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ old('contactperson') }}" required>
+                <label for="contactperson" class="form-label">Person to Contact (optional)</label>
+                <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ old('contactperson') }}" >
                 @if ($errors->has('contactperson'))
                 <span class="error">
                     {{ $errors->first('contactperson') }}
@@ -72,11 +79,23 @@
         
         <div class="col-md-6">
             <div class="form-group">
-                <label for="email" class="form-label">Email<span><b class="text-danger">*</b></span></label>
-                <input id="email" class="form-control" placeholder="Enter an email" type="email" name="email" value="{{ old('email') }}" required>
-                @if ($errors->has('email'))
+                <label for="emailcontact" class="form-label">Contact Email (optional)</label>
+                <input id="emailcontact" class="form-control" placeholder="Enter an email" type="email" name="emailcontact" value="{{ old('emailcontact') }}" required>
+                @if ($errors->has('emailcontact'))
                 <span class="error">
-                    {{ $errors->first('email') }}
+                    {{ $errors->first('emailcontact') }}
+                </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="emailtechnical" class="form-label">Technical Email<span><b class="text-danger">*</b></span></label>
+                <input id="emailtechnical" class="form-control" placeholder="Enter an email" type="email" name="emailtechnical" value="{{old('emailtechnical', auth()->user()->email)}}" required>
+                @if ($errors->has('emailtechnical'))
+                <span class="error">
+                    {{ $errors->first('emailtechnical') }}
                 </span>
                 @endif
             </div>
@@ -113,21 +132,35 @@
     </div> 
 
     <div class="form-group my-3">
-        <label for="url" class="form-label">Url (<i>optional</i>)</label>
-        <input id="url" class="form-control" placeholder="Enter event url" type="text" name="url" value="{{ old('url') }}">
-        @if ($errors->has('url'))
+        <h5>URL  (MUDEM ISTO DEPOIS)</h5>
+
+        <label for="urlportuguese" class="form-label">Portugues </label>
+        <input id="urlportuguese" class="form-control" placeholder="Url do evento para Portugues(???)" type="text" name="urlportuguese" value="{{ old('urlportuguese') }}">
+        @if ($errors->has('urlportuguese'))
         <span class="error">
-            {{ $errors->first('url') }}
+            {{ $errors->first('urlportuguese') }}
+        </span>
+        @endif
+
+        <label for="urlenglish" class="form-label">English </label>
+        <input id="urlenglish" class="form-control" placeholder="English URL" type="text" name="urlenglish" value="{{ old('urlenglish') }}">
+        @if ($errors->has('urlenglish'))
+        <span class="error">
+            {{ $errors->first('urlenglish') }}
         </span>
         @endif
     </div>
-
+    
+    
+   
+    
+    @if($language=="pt")
     <div class="form-group my-3">
         <label for="tags">Tags</label>
         <div class="overflow-auto my-2 bg-light rounded" style="height: 200px;">
             @foreach ($tags as $tag)
                 <div class="form-check mx-2">
-                    <label class="form-check-label" for="tags_{{ $tag->tagid }}">{{ $tag->tagname }}</label>
+                    <label class="form-check-label" for="tags_{{ $tag->tagid }}">{{ $tag->tagnameportuguese }}</label>
                     <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->tagid }}" 
                     @if (is_array(old('tags')) && in_array($tag->tagid, old('tags'))) 
                         checked 
@@ -136,6 +169,32 @@
                 </div>
             @endforeach
         </div>
+    </div>
+    @else
+    <div class="form-group my-3">
+        <label for="tags">Tags</label>
+        <div class="overflow-auto my-2 bg-light rounded" style="height: 200px;">
+            @foreach ($tags as $tag)
+                <div class="form-check mx-2">
+                    <label class="form-check-label" for="tags_{{ $tag->tagid }}">{{ $tag->tagnameenglish }}</label>
+                    <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->tagid }}" 
+                    @if (is_array(old('tags')) && in_array($tag->tagid, old('tags'))) 
+                        checked 
+                    @endif
+                    >
+                </div>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
+    <div class="form-group">
+        <label for="event_id">Select Event:</label>
+        <select class="form-control" id="event_id" name="event_id">
+            @foreach ($events as $event)
+                <option value="{{ $event->id }}">{{ $event->name }}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="col-md-12 text-center mt-5">

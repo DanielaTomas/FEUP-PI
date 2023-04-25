@@ -72,7 +72,7 @@ function getHolidays(callback) {
 
 getHolidays(processHolidays);
 
-
+/*
 const editeventform=document.querySelector('#editeventform');
 const editeventformbtn=document.querySelector('#editeventbutton');
 
@@ -92,3 +92,4 @@ editeventform.addEventListener('input', () => {
     }  
     editeventformbtn.disabled = !hasChanges;
     });
+    */
