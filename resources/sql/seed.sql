@@ -50,7 +50,8 @@ CREATE TABLE users(
 
 CREATE TABLE tag(
     tagId SERIAL PRIMARY KEY,
-    tagName VARCHAR NOT NULL UNIQUE
+    tagNamePortuguese VARCHAR NOT NULL UNIQUE,
+    tagNameEnglish VARCHAR NOT NULL UNIQUE
 );
 
 CREATE TABLE organicunit(
@@ -62,13 +63,16 @@ CREATE TABLE event(
     eventId SERIAL PRIMARY KEY,
     requestStatus RequestStatus NOT NULL,
     requestType RequestTypes NOT NULL,
-    eventName VARCHAR NOT NULL, -- TODO: fix unique when editing
+    eventNamePortuguese VARCHAR NOT NULL, -- TODO: fix unique when editing
+    eventNameEnglish VARCHAR NOT NULL, -- TODO: fix unique when editing
     address VARCHAR NOT NULL,
-    url VARCHAR,
-    email VARCHAR NOT NULL,
+    urlPortuguese VARCHAR,
+    urlEnglish VARCHAR,
+    emailTechnical VARCHAR NOT NULL,
+    emailContact VARCHAR,
     dateCreated DATE NOT NULL,
     dateReviewed DATE,
-    contactPerson VARCHAR NOT NULL,  
+    contactPerson VARCHAR,  
     description VARCHAR NOT NULL,
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
@@ -191,3 +195,193 @@ CREATE TABLE eventtags(
 
 INSERT INTO users (username, name,isAdmin, email, password, userPhoto) VALUES ('admin','admin',TRUE,'admin@example.com','$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia','prettyphooto');
 INSERT INTO users (username, name,isAdmin,email,password,userPhoto) VALUES('bicente','O GRANDE',FALSE,'henrique@gaio.com','$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia','prettyphooto');
+
+
+-- USERS
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up202006188', 'Rita Mendes', FALSE, 'up202006188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/john_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201206188', 'João  Carvalho', FALSE, 'up201206188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/jane_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201006188', 'Eduardo Aragão', FALSE, 'up201006188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/john_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201506188', 'Vitor Ferreira', FALSE, 'up201506188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/jane_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up202106188', 'Ana Clara Pinto', FALSE, 'up202106188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/john_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201801188', 'Lucas Moura', FALSE, 'up201801188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/jane_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up202008188', 'Bruna Almeida', FALSE, 'up202008188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/john_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201207188', 'Gabriel Farias', FALSE, 'up201207188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/jane_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up202005188', 'Daniel Campos', FALSE, 'up202005188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/john_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201503188', 'Rebeca Cunha', FALSE, 'up201503188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/jane_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up202106118', 'João Pedro Pinto', FALSE, 'up202106118@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/john_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201106198', 'Natália Mendes', FALSE, 'up201106198@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/jane_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up202005555', 'Pedro Correia', FALSE, 'up202005555@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/john_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201606188', 'Diogo Nunes', FALSE, 'up201606188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/jane_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up202001958', 'Daniela Tomas', FALSE, 'up202001958@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/john_doe.jpg');
+INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES ('up201706188', 'Miguel Tavares', FALSE, 'up201706188@up.pt', '$2y$10$X3VIs.iFuFuPoNBUn3yMW.FJ40dlZ/U11b14J0EZ/R3VdD1M81Fia', 'https://www.example.com/user_photos/jane_doe.jpg');
+
+
+
+
+-- TAGS 
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('music','musica');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('art','arte');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('tecnology','tecnologia');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('sports','desporto');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('science','ciencia');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('literature','literatura');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('education','educacao');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('studentlife','vidadeestudate');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('nanotechnology','nanotecnologia');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('ecotourism','eco-turismo');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('cinematography','cinematografia');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('marketing','marketing');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('i3S','i3s');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('sustainability','sustentabilidade');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('finance','finanças');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('networking','networking');
+
+
+--ORGANIC UNIT
+INSERT INTO organicunit (name) VALUES ('FMDUP');
+INSERT INTO organicunit (name) VALUES ('FMUP');
+INSERT INTO organicunit (name) VALUES ('FPCE');
+INSERT INTO organicunit (name) VALUES ('FAUP');
+INSERT INTO organicunit (name) VALUES ('FCNAUP');
+INSERT INTO organicunit (name) VALUES ('FCUP');
+INSERT INTO organicunit (name) VALUES ('FEP');
+INSERT INTO organicunit (name) VALUES ('FEUP');
+INSERT INTO organicunit (name) VALUES ('FLUP');
+INSERT INTO organicunit (name) VALUES ('ICBAS');
+INSERT INTO organicunit (name) VALUES ('REITORIA');
+INSERT INTO organicunit (name) VALUES ('SIPREITORIA');
+INSERT INTO organicunit (name) VALUES ('UPDIGITAL');
+INSERT INTO organicunit (name) VALUES ('ISPUP');
+INSERT INTO organicunit (name) VALUES ('ALUMNI');
+INSERT INTO organicunit (name) VALUES ('CULTURA');
+
+-- EVENT
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact, 
+dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId )VALUES 
+('Accepted', 'Create', 'Semana Internacional da FEP','FEP International Week', 'R. Dr. Roberto Frias, 4200-464 Porto', 
+'https://sigarra.up.pt/fep/pt/web_base.gera_pagina?p_pagina=1031336','https://sigarra.up.pt/fep/pt/web_base.gera_pagina?p_pagina=1031336',
+'up202006199@up.pt','rogerio@gmail.com','2022-01-01', '2022-03-10', 'Diogo Cruz', 'This initiative aims to make known the international mobility opportunities that the Faculty offers to its students.',
+ '2022-11-28', '2022-11-30', FALSE,2,7);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ ('Pending', 'Create', 'O IMPACTO DA POLUIÇÃO ATMOSFÉRICA E SONORA NA SAÚDE','THE IMPACT OF AIR AND NOISE POLLUTION ON HEALTH', 'Rua Doutor Plácido da Costa, 4200-450 Porto',
+  'https://noticias.up.pt/fmup-e-cintesis-estudam-impacto-da-poluicao-atmosferica-e-sonora-na-saude/','https://noticias.up.pt/fmup-e-cintesis-estudam-impacto-da-poluicao-atmosferica-e-sonora-na-saude/', 
+  'up202006199@up.pt','vasco@gmail.com','2023-03-15', NULL, 'João Vasco Santos', 'Know the socio-economic impact of environmental stressors in Europe.', '2023-05-01', '2023-05-31', FALSE,2,2);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ ('Accepted', 'Create','O ADN da FEUP na tecnologia para reduzir os resíduos da indústria têxtil','FEUP DNA in technology for reducing textile industry waste', 'R. Dr. Roberto Frias, 4200-465 Porto', 
+ 'https://issuu.com/feup/docs/highlights_2022_final/26', 'https://issuu.com/feup/docs/highlights_2022_final/26',
+ 'up202006199@up.pt','antonio@gmail.com', '2023-02-01', '2023-02-11', ' António Rocha', 'A company in the textile sector that reduces waste by detecting fabric imperfections at an early stage in the production chain.', '2023-04-01', '2023-04-07', FALSE,3,8);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ ('Accepted', 'Edit','O ADN da FEUP na tecnologia para reduzir os resíduos da indústria têxtil' ,'FEUP DNA in technology for reducing textile industry waste', 'R. Dr. Roberto Frias, 4200-465 Porto', 
+ 'https://issuu.com/feup/docs/highlights_2022_final/26','https://issuu.com/feup/docs/highlights_2022_final/26',
+ 'up202006199@up.pt','antonio@gmail.com', '2023-02-12', '2023-02-20', ' António Rocha', 'Alumni from U.Porto, are the founders of Smartex.ai, a company in the textile sector that reduces waste by detecting fabric imperfections at an early stage in the production chain.', '2023-04-01', '2023-04-07', FALSE,4,8);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ ('Rejected', 'Create','Semana das Profissões: Engenheiro 2023', 'Profession Week: Engineer 2023', 'R. Dr. Roberto Frias, 4200-465 Porto', 
+ 'https://paginas.fe.up.pt/~escolas/spe/inscricoesspe23/','https://paginas.fe.up.pt/~escolas/spe/inscricoesspe23/',
+ 'up202006199@up.pt','rudolfo@gmail.com', '2023-01-01', '2023-01-02', 'Rudolfo Bruno', 'Event for high school students returns to FEUP campus on March 28th, 29th and 30th.', '2023-03-28', '2023-03-30', FALSE,4,8);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ ('Accepted', 'Edit', 'Concerto de lançamento do álbum ''Something to Believe In'': Selo Porta-Jazz','Concert for the release of the album ''Something to Believe In'': Porta-Jazz Stamp', '890 Oak Street, Anytown USA', 
+ 'https://sigarra.up.pt/feup/pt/noticias_geral.ver_noticia?P_NR=147390','https://sigarra.up.pt/feup/pt/noticias_geral.ver_noticia?P_NR=147390',  
+ 'up202006199@up.pt','karen@gmail.com','2022-08-01', '2022-08-20', 'Karen Davis', 'O Comissariado Cultural da FEUP e o Porta-Jazz convidam a comunidade FEUP para o concerto de lançamento do disco "Something to Believe In", no Auditório José Marques dos Santos, a 15 de março, pelas 21h30.', '2022-11-01', '2022-11-01', FALSE,5,8);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact, 
+dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+('Rejected', 'Archive', 'Leilão anual de beneficência','Annual Charity Auction', '789 Oak Lane, Anytown USA', 
+'https://www.example.com/charity_auction','https://www.example.com/charity_auction',
+'duarte@up.pt','sarah@gmail.com','2021-10-20', '2021-11-01', 'Sarah Johnson', 'Bid on unique items to support a great cause!', '2021-11-15', '2021-11-16', FALSE,5,11);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact, 
+dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+('Pending', 'Create', 'A imunoterapia é eficaz em termos de custos no tratamento de crianças com asma alérgica aos ácaros do pó','Immunotherapy is cost-effective in treating children with dust mite allergic asthma', 'Rua das Taipas 135, 4050-600 Porto', 
+'https://ispup.up.pt/en/immunotherapy-is-cost-effective-in-treating-children-with-dust-mite-allergic-asthma/', 'https://ispup.up.pt/en/immunotherapy-is-cost-effective-in-treating-children-with-dust-mite-allergic-asthma/',
+'henrique@up.pt','emily@gmail.com', '2022-02-15', NULL, 'Emily Davis', 'An ISPUP research has concluded that immunotherapy is cost-effective in treating children with house dust mite-driven allergic asthma.', '2022-07-10', '2022-07-10', FALSE,5,14);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ ('Pending', 'Create','ISPUP implementa projecto em Matosinhos para ajudar a prevenir a perda de memória' ,'ISPUP implements a project in Matosinhos to help prevent memory loss', 'Rua das Taipas 135, 4050-600 Porto', 
+ 'https://ispup.up.pt/en/ispup-implements-a-project-in-matosinhos-to-help-prevent-memory-loss/', 'https://ispup.up.pt/en/ispup-implements-a-project-in-matosinhos-to-help-prevent-memory-loss/',
+'rudolfo@up.pt','emily@gmail.com','2023-02-15', NULL, 'Emilia David', 'The MIND-Matosinhos project aims to help prevent cognitive decline in the citizens of the municipality of Matosinhos. ', '2023-07-10', '2023-07-10', FALSE,6,14);
+INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact, 
+dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+('Pending', 'Create','Mais de 250 alunos participaram nos concursos do projecto AlergiaPT' ,'More than 250 students participated in the AlergiaPT project contests', 'Rua das Taipas 135, 4050-600 Porto', 
+'https://ispup.up.pt/en/over-250-students-participated-in-the-alergiapt-project-contests/','https://ispup.up.pt/en/over-250-students-participated-in-the-alergiapt-project-contests/',
+'jarope@up.pt','david@gmail.com','2022-02-15', NULL, 'David Emilia', 'The contests for the school community organised within the AlergiaPT project, promoted by ISPUP, counted with the participation of 253 primary, middle, and secondary school students from four districts of Portugal.', '2022-07-10', '2022-07-10', FALSE,7,14);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- FORMATION
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 2, 1);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 2, 8);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 3, 2);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 4, 3);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 5, 4);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 6, 5);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 8, 6);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 9, 7);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 10, 9);
+
+INSERT INTO formation (roleType, userId, organicUnitId) VALUES ('GI', 11, 10);
+
+
+
+--- EVENT TAGS
+INSERT INTO eventtags (eventId, tagId) VALUES (1,1);
+INSERT INTO eventtags (eventId, tagId) VALUES (1,7);
+INSERT INTO eventtags (eventId, tagId) VALUES (2,5);
+INSERT INTO eventtags (eventId, tagId) VALUES (2,6);
+INSERT INTO eventtags (eventId, tagId) VALUES (2,8);
+INSERT INTO eventtags (eventId, tagId) VALUES (2,15);
+INSERT INTO eventtags (eventId, tagId) VALUES (3,3);
+INSERT INTO eventtags (eventId, tagId) VALUES (3,5);
+INSERT INTO eventtags (eventId, tagId) VALUES (3,9);
+INSERT INTO eventtags (eventId, tagId) VALUES (4,3);
+INSERT INTO eventtags (eventId, tagId) VALUES (4,5);
+INSERT INTO eventtags (eventId, tagId) VALUES (4,9);
+INSERT INTO eventtags (eventId, tagId) VALUES (4,14);
+INSERT INTO eventtags (eventId, tagId) VALUES (5,1);
+INSERT INTO eventtags (eventId, tagId) VALUES (5,4);
+INSERT INTO eventtags (eventId, tagId) VALUES (5,8);
+INSERT INTO eventtags (eventId, tagId) VALUES (6,2);
+INSERT INTO eventtags (eventId, tagId) VALUES (6,4);
+INSERT INTO eventtags (eventId, tagId) VALUES (6,8);
+INSERT INTO eventtags (eventId, tagId) VALUES (6,13);
+INSERT INTO eventtags (eventId, tagId) VALUES (7,3);
+INSERT INTO eventtags (eventId, tagId) VALUES (7,5);
+INSERT INTO eventtags (eventId, tagId) VALUES (7,9);
+INSERT INTO eventtags (eventId, tagId) VALUES (8,2);
+INSERT INTO eventtags (eventId, tagId) VALUES (8,4);
+INSERT INTO eventtags (eventId, tagId) VALUES (8,8);
+INSERT INTO eventtags (eventId, tagId) VALUES (8,13);
+INSERT INTO eventtags (eventId, tagId) VALUES (9,7);
+INSERT INTO eventtags (eventId, tagId) VALUES (9,15);
+INSERT INTO eventtags (eventId, tagId) VALUES (10,7);
+INSERT INTO eventtags (eventId, tagId) VALUES (10,11);
+
+
+---- usereventorganic
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 1, 7);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 2, 2);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 3, 8);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 4, 8);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 5, 8);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 6, 8);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 7, 16);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 8, 14);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 9, 14);
+INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 10, 14);
+
+
+-- Sample data for the "questions" table
+INSERT INTO questions (question1, question2, question3, question4, question5, question6, question7, question8, question9, question10)
+VALUES ('What is your name?', 'What is your age?', 'What is your favorite color?', 'What is your favorite food?', 'What is your favorite movie?',
+'What is your favorite book?', 'What is your favorite sport?', 'What is your favorite hobby?', 'What is your favorite animal?', 'What is your favorite song?');
