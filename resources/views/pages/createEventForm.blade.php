@@ -47,7 +47,6 @@
 
     <div class="form-group my-3">
         <label for="description" class="form-label">Description<span><b class="text-danger">*</b></span></label>
-        <!-- <input id="description" class="form-control" placeholder="Enter event description" type="text" name="description" value="{{ old('description') }}" required> -->
         <textarea id="description" rows="4" class="form-control" name="description" required placeholder="Enter event description" value="{{ old('description') }}"></textarea>
 
         @if ($errors->has('description'))

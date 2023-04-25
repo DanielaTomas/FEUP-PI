@@ -53,8 +53,6 @@ class EventController extends Controller
               'startdate' => 'required|date|date_format:Y-m-d',
               'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',
               'tags' => 'required|string',
-              //'tags' => 'required|array',
-              //'tags.*' => 'exists:tag,tagid',
             ]);
       }
 

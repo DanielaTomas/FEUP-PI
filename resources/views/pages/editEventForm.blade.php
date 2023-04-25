@@ -47,7 +47,6 @@
 
     <div class="form-group my-3">
         <label for="description" class="form-label">Description<span><b class="text-danger">*</b></span></label>
-        <!-- <input id="description" class="form-control" placeholder="Enter event description" type="text" name="description" value="{{ old('description') }}" required> -->
         <textarea id="description" rows="4" class="form-control" name="description"  placeholder="Enter event description" value="{{$event->description}}" required>{{$event->description}}</textarea>
 
         @if ($errors->has('description'))
@@ -60,7 +59,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="contactperson" class="form-label">Person to Contact (idk how to put it)<span><b class="text-danger">*</b></span></label>
+                <label for="contactperson" class="form-label">Person to Contact<span><b class="text-danger">*</b></span></label>
                 <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ $event->contactperson }}" required>
                 @if ($errors->has('contactperson'))
                 <span class="error">
@@ -129,7 +128,7 @@
 
     <div class="form-group my-3">
         <label for="tags" class="my-2">Tags</label>
-        <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags" value="{{ $event->tags->value('tagname') }}">
+        <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags" value="{{ implode(',',($event->tags()->pluck('tagname')->toArray())) }}">
         <datalist id="tags">
             @foreach ($tags as $tag)
                 <option value="{{ $tag->tagid }}">{{ $tag->tagname }}</option>
