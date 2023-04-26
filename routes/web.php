@@ -23,7 +23,8 @@ Route::get('/', 'HomeController@list')->name('home');
 Route::get('/events', 'EventController@list')->name('events');//TODO: mudar nome de funcao?? ou de controller??
 Route::get('/event/{id}', 'EventController@show')->name('event');
 Route::get('/tags/{id}/events', 'TagController@show')->name('tags.events');
-
+Route::get('/categories/events', 'CategoryController@showEventCategories')->name('categories.events');
+Route::get('/organicunits/{id}/events', 'OrganicUnitController@show')->name('organics.events');
 
 // Admin
 ///Events
