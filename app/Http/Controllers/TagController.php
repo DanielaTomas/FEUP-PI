@@ -53,7 +53,11 @@ class TagController extends Controller{
         $events = $tag->events()
                       ->where('requeststatus', 'Accepted')
                       ->get();
-        return view('pages.events', ['events' => $events,'tag' => $tag->tagname]);
+        $language = app()->getLocale();
+        if($language == 'pt')
+            return view('pages.events', ['events' => $events,'tag' => $tag->tagnameportuguese]);
+       
+        return view('pages.events', ['events' => $events,'tag' => $tag->tagnameenglish]);
     }
 
     public static function getAllTags(){

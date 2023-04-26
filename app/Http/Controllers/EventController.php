@@ -90,7 +90,7 @@ class EventController extends Controller
         $tagNames = explode(',', $tags);
 
         foreach ($tagNames as $tagName) {
-            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            $tagId = Tag::where('tagnameportuguese',$tagName)->orWhere('tagnameenglish',$tagName)->value('tagid');
             if ($tagId) {
                 $tagIds[] = (int) $tagId;
             }
@@ -141,7 +141,7 @@ class EventController extends Controller
         $tagNames = explode(',', $tags);
 
         foreach ($tagNames as $tagName) {
-            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            $tagId = Tag::where('tagnameportuguese',$tagName)->orWhere('tagnameenglish',$tagName)->value('tagid');
             if ($tagId) {
                 $tagIds[] = (int) $tagId;
             }

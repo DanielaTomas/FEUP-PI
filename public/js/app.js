@@ -80,6 +80,7 @@ const editeventformbtn=document.querySelector('#editeventbutton');
 
 if(editeventform!=null){
     const intialFormData= new FormData(editeventform);
+    console.log(intialFormData)
     editeventform.addEventListener('input', () => {
         // Get the current form data
         const currentFormData = new FormData(editeventform);
@@ -87,17 +88,25 @@ if(editeventform!=null){
         // Compare the current data with the initial data
         let hasChanges = false;
         for (const [name, value] of currentFormData) {
+            if(name=="flexdatalist-tags" && value==""){
+                //console.log("no tags")
+                hasChanges=false;
+                break;
+            }   
             if (value !== intialFormData.get(name)) {
-                console.log(name)
-                console.log("value: "+value+" initial: "+intialFormData.get(name))
+                //console.log(name)
+                //console.log("value: "+value+" initial: "+intialFormData.get(name))
                 hasChanges = true;
-                console.log("has changes")
+                //console.log("has changes")
                 break;
             }
-             
-        }  
+            
+            
+        }
+        
+          
       
-    editeventformbtn.disabled = !hasChanges;
+        editeventformbtn.disabled = !hasChanges;
     });
 }
 
