@@ -90,14 +90,15 @@ class EventController extends Controller
         $event->save();
         $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
-        return redirect('/');
+        return redirect('/my_requests')->with('success', 'Event creation request sent successfully.');
     }
 
     public function editEventForm($id)
     {
         $event = Event::find($id);
         $tags = TagController::getAllTags();
-        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags]);
+        $organicUnits=OrganicUnitController::getOrganicUnits();
+        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags,'organicunits'=>$organicUnits]);
     }
 
     public function editEvent(Request $request)
