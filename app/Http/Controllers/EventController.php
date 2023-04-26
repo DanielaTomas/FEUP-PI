@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Event;
+use App\Models\Tag;
+
 
 
 use Illuminate\Http\Request;
@@ -38,6 +40,7 @@ class EventController extends Controller
         return view('pages.createEventForm', ['tags' => $tags,'organicunits'=>$organicUnits]);
     }
 
+
     protected function validator(array $data)
     {
         $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
@@ -53,14 +56,12 @@ class EventController extends Controller
             'description' => 'required|string',
             'startdate' => 'required|date|date_format:Y-m-d',
             'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',
-            'tags' => 'required|array',
-            'tags.*' => 'exists:tag,tagid',
+            'tags' => 'required|string',
         ]);
     }
 
-    public function createEvent(Request $request)
-    {
 
+    public function createEvent(Request $request){
 
         if (!Auth::check()) return redirect('/login');
 
@@ -86,7 +87,19 @@ class EventController extends Controller
         ]);
 
         $tags = $request->input('tags');
-        $event->tags()->attach($tags);
+        $tagNames = explode(',', $tags);
+
+        foreach ($tagNames as $tagName) {
+            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            if ($tagId) {
+                $tagIds[] = (int) $tagId;
+            }
+            else {
+                return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
+            }
+        }
+
+        $event->tags()->attach($tagIds);
         $event->save();
         $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
@@ -109,18 +122,34 @@ class EventController extends Controller
         $event = Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Edit',
-            'eventname' => $request->input('eventname'),
+            'eventnameportuguese' => $request->input('eventnamept'),
+            'eventnameenglish' => $request->input('eventnameen'),
             'address' => $request->input('address'),
-            'url' => $request->input('url'),
-            'email' => $request->input('email'),
+            'urlportuguese' => $request->input('urlportuguese'),
+            'urlenglish' => $request->input('urlenglish'),
+            'emailtechnical' => $request->input('emailtechnical'),
+            'emailcontact' =>$request->input('emailcontact'),
             'datecreated' => date('Y-m-d'),
             'contactperson' => $request->input('contactperson'),
             'description' => $request->input('description'),
             'startdate' => $request->input('startdate'),
             'enddate' => $request->input('enddate'),
+            'userid'=> $user->userid,
+            'organicunitid' => $request->input('organicunitid')
         ]);
         $tags = $request->input('tags');
-        $event->tags()->attach($tags);
+        $tagNames = explode(',', $tags);
+
+        foreach ($tagNames as $tagName) {
+            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            if ($tagId) {
+                $tagIds[] = (int) $tagId;
+            }
+            else {
+                return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
+            }
+        }
+        $event->tags()->attach($tagIds);
         $event->save();
         $user->events()->save($event);
 

@@ -88,6 +88,7 @@ if(editeventform!=null){
         let hasChanges = false;
         for (const [name, value] of currentFormData) {
             if (value !== intialFormData.get(name)) {
+                console.log(name)
                 console.log("value: "+value+" initial: "+intialFormData.get(name))
                 hasChanges = true;
                 console.log("has changes")
@@ -95,6 +96,15 @@ if(editeventform!=null){
             }
              
         }  
-        editeventformbtn.disabled = !hasChanges;
-        });
+      
+    editeventformbtn.disabled = !hasChanges;
+    });
 }
+
+
+
+$('.flexdatalist').flexdatalist({
+     selectionRequired: 1,
+     minLength: 1
+});
+
