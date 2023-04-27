@@ -1,3 +1,6 @@
+/*
+TODO: adicionar CSS com o AJAX nos elementos da tabela
+ */
 function getPaginatedData(page) {
     $.ajax({
         url: '/admin/eventsCurrent?page=' + page,
@@ -6,7 +9,6 @@ function getPaginatedData(page) {
         success: function(response) {
             let data = response.data;
             let tbody = $('#CurrEventTable');
-            //let pagination = $('#pageCurr');
 
             //Clear tbody 
             tbody.empty();
@@ -29,14 +31,16 @@ function getPaginatedData(page) {
             }
             
             // modify the "Previous" link
-            $("#pageCurr .previous a").attr("href", response.prev_page_url);
-            $("#pageCurr .previous a").attr("class", "page-link");
-            $("#pageCurr .previous a").html("Previous");
+            let prev = $('#pageCurr .previous a');
+            prev.attr("href", response.prev_page_url);
+            prev.attr("class", "page-link");
+            prev.html("Previous");
 
             // modify the "Next" link
-            $("#pageCurr .next a").attr("href", response.next_page_url);
-            $("#pageCurr .next a").attr("class", "page-link");
-            $("#pageCurr .next a").html("Next");
+            let next = $("#pageCurr .next a");
+            next.attr("href", response.next_page_url);
+            next.attr("class", "page-link");
+            next.html("Next");
 
 
         },
@@ -63,29 +67,71 @@ function getPaginatedDataPend(page) {
             console.log(response);
 
             for (let i = 0; i < data.length ; i++) {
+                let eventId = data[i].eventid;
                 let tr = $('<tr></tr>');
                 let eventNameTd = $('<td></td>').html(data[i].eventnameenglish);
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>').html(data[i].requesttype);
                 let requestStatusTd = $('<td></td>').html(data[i].requeststatus);
 
+                // create the form element
+                // create the button element
+                let buttonGreen = $('<button/>', {
+                    class: 'btn btn-success',
+                    text: 'Accept'
+                });
+                
+                // create the form element and append the button to it
+                /**
+                 TODO: Backenders AJAX nisto
+                 */
+                let formAccept = $('<form/>', {
+                    action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Accepted',
+                    method: 'POST'
+                }).append(buttonGreen);
+
+                let buttonRed = $('<button/>', {
+                    class: 'btn btn-danger',
+                    text: 'Reject'
+                });
+                
+                // create the form element and append the button to it
+                /**
+                 TODO: Backenders AJAX nisto
+                 */
+                let formReject = $('<form/>', {
+                    action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Rejected',
+                    method: 'POST'
+                }).append(buttonRed);
+                
+                // create the td element and append the form to it
+                var td = $('<td></td>');
+                td.attr("class", "d-flex");
+                formAccept.attr("class","mx-1");
+                td.append(formAccept);
+                td.append(formReject);
+                console.log(td);
+                
                 tr.append(eventNameTd);
                 tr.append(dateCreatedTd);
                 tr.append(requestTypeTd);
                 tr.append(requestStatusTd);
+                tr.append(td);
                
                 tbody.append(tr);
             }
             
             // modify the "Previous" link
-            $("#pagePend .previous a").attr("href", response.prev_page_url);
-            $("#pagePend .previous a").attr("class", "page-link");
-            $("#pagePend .previous a").html("Previous");
+            let prev = $('#pagePend .previous a');
+            prev.attr("href", response.prev_page_url);
+            prev.attr("class", "page-link");
+            prev.html("Previous");
 
             // modify the "Next" link
-            $("#pagePend .next a").attr("href", response.next_page_url);
-            $("#pagePend .next a").attr("class", "page-link");
-            $("#pagePend .next a").html("Next");
+            let next = $("#pagePend .next a");
+            next.attr("href", response.next_page_url);
+            next.attr("class", "page-link");
+            next.html("Next");
 
         },
         error: function(xhr) {
