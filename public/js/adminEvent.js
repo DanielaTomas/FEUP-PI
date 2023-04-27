@@ -110,7 +110,7 @@ $(document).ready(function() {
         getPaginatedData(page);
     });
 
-    $(document).on('click', '#pageCurr li a', function(e) {
+    $(document).on('click', '#pagePend li a', function(e) {
         e.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         getPaginatedDataPend(page);
