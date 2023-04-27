@@ -29,7 +29,13 @@ function getPaginatedData(page) {
                
                 tbody.append(tr);
             }
+            const prev = $('<a>')
+            prev.attr('href',response.prev_page_url)
+            const next = $('<a>')
+            next.attr('href',response.next_page_url)
 
+            $('.pagination').append(prev);
+            $('.pagination').append(next);
               
 
         },
