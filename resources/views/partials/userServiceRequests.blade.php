@@ -1,6 +1,6 @@
 <!-- End of post  -->
 <div class="card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded">
-    <div class="row align-items-center">
+  <div class="row align-items-center">
       <div class="col-md-8 mb-3 mb-sm-0">
         <h5>
           <a href="{{ $service->serviceid }}" class="text-primary">{{$service->servicename}}</a>
@@ -10,7 +10,7 @@
             <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
           </svg></a>
         </h5>
-        <p class="text-sm">{{$service->description}}</p>
+        <p class="text-sm">{{$service->purpose}}</p>
         <div class="text-sm op-5"> 
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
@@ -40,4 +40,5 @@
       </div>
     </div>
   </div>
+</div>
   <!-- /End of post -->
