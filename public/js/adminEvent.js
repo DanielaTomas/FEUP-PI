@@ -13,7 +13,7 @@ function getPaginatedData(page) {
 
             for (let i = 0; i < data.length ; i++) {
                 let tr = $('<tr></tr>');
-                let eventNameTd = $('<td></td>').html(data[i].eventname);
+                let eventNameTd = $('<td></td>').html(data[i].eventnameenglish);
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>').html(data[i].requesttype);
                 let requestStatusTd = $('<td></td>').html(data[i].requeststatus);
@@ -66,7 +66,7 @@ function getPaginatedDataPend(page) {
 
             for (let i = 0; i < data.length ; i++) {
                 let tr = $('<tr></tr>');
-                let eventNameTd = $('<td></td>').html(data[i].eventname);
+                let eventNameTd = $('<td></td>').html(data[i].eventnameenglish);
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>').html(data[i].requesttype);
                 let requestStatusTd = $('<td></td>').html(data[i].requeststatus);
