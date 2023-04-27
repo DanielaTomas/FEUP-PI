@@ -29,16 +29,14 @@ function getPaginatedData(page) {
             }
             
             // modify the "Previous" link
-            let prev = $("#pageCurr .previous a")
-            prev.attr("href", response.prev_page_url);
-            prev.attr("class", "page-link");
-            prev.html("Previous");
+            $("#pageCurr .previous a").attr("href", response.prev_page_url);
+            $("#pageCurr .previous a").attr("class", "page-link");
+            $("#pageCurr .previous a").html("Previous");
 
             // modify the "Next" link
-            let next = $("#pagePend .next a")
-            next.attr("href", response.next_page_url);
-            next.attr("class", "page-link");
-            next.html("Next");
+            $("#pageCurr .next a").attr("href", response.next_page_url);
+            $("#pageCurr .next a").attr("class", "page-link");
+            $("#pageCurr .next a").html("Next");
 
 
         },
@@ -80,16 +78,14 @@ function getPaginatedDataPend(page) {
             }
             
             // modify the "Previous" link
-            let prev = $($("#pagePend .previous a"))
-            prev.attr("href", response.prev_page_url);
-            prev.attr("class", "page-link");
-            prev.html("Previous");
+            $("#pagePend .previous a").attr("href", response.prev_page_url);
+            $("#pagePend .previous a").attr("class", "page-link");
+            $("#pagePend .previous a").html("Previous");
 
             // modify the "Next" link
-            let next = $("#pagePend .next a")
-            next.attr("href", response.next_page_url);
-            next.attr("class", "page-link");
-            next.html("Next");
+            $("#pagePend .next a").attr("href", response.next_page_url);
+            $("#pagePend .next a").attr("class", "page-link");
+            $("#pagePend .next a").html("Next");
 
         },
         error: function(xhr) {
@@ -110,7 +106,7 @@ $(document).ready(function() {
         getPaginatedData(page);
     });
 
-    $(document).on('click', '#pagePend li a', function(e) {
+    $(document).on('click', '#pageCurr li a', function(e) {
         e.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         getPaginatedDataPend(page);
