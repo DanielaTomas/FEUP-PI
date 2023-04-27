@@ -55,6 +55,10 @@
           {{--@each('partials.adminDashboardEntry', $pendingEvents, 'event')--}}
         </tbody>
     </table>
+    <div id="pagePend" class="pagination justify-content-center">
+      <li class="previous"><a class="page-link" href="page=1">Previous</a></li>
+      <li class="next"><a class="page-link" href="page=2">Next</a></li>
+  </div>
     {{--<div>{{$pendingEvents->links()}}</div>--}}
   </div>
   <div class="tab-pane container" id="events">
@@ -72,16 +76,16 @@
              
         </tbody>
     </table>
-    <div class="pagination">
-      <a href="page=1">Previous</a>
-      <a href="page=2">Next</a>
+    <div id="pageCurr" class="pagination justify-content-center">
+      <li class="previous"><a class="page-link" href="page=1">Previous</a></li>
+      <li class="next"><a class="page-link" href="page=2">Next</a></li>
   </div>
     {{--{{$events->links()}}--}}
   </div>
   <div class="tab-pane container" id="tags">
   <form class="my-4" method="POST" action="{{route('create.tag')}}" enctype="multipart/form-data">
     {{ csrf_field() }}
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="tagname" class="form-label">Name<span><b class="text-danger">*</b></span></label>
@@ -101,12 +105,5 @@
   </div>
 </div>
 </div>
-
-<div id="user-list"></div>
-
-<div class="pagination">
-  {{--$events->links()--}}
-</div>
-
 
 @endsection
