@@ -35,12 +35,12 @@ class DatabaseSeeder extends Seeder
         
         //Tag::factory()->count(10)->create();
         //$this->command->info('Tags created!');
-        Question::factory()->count(10)->create();
-        $this->command->info('Questions created!');
-        ServiceType::factory()->count(10)->create();
-        $this->command->info('ServiceType created!');
-        Service::factory()->count(10)->create();
-        $this->command->info('Service created!');
+        //Question::factory()->count(10)->create();
+        //$this->command->info('Questions created!');
+        //ServiceType::factory()->count(10)->create();
+        //$this->command->info('ServiceType created!');
+        //Service::factory()->count(10)->create();
+        //$this->command->info('Service created!');
         
         
     }

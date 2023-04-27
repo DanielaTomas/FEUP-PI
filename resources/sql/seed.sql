@@ -105,6 +105,7 @@ CREATE TABLE formation(
 
 CREATE TABLE questions(
     questionsId SERIAL PRIMARY KEY,
+    serviceName VARCHAR NOT NULL,
     question1 VARCHAR NOT NULL, 
     question2 VARCHAR,
     question3 VARCHAR,
@@ -119,7 +120,6 @@ CREATE TABLE questions(
 
 CREATE TABLE servicetype(
     serviceTypeId SERIAL PRIMARY KEY,
-    serviceTypeName VARCHAR NOT NULL,
     atribute1 VARCHAR NOT NULL,
     atribute2 VARCHAR,
     atribute3 VARCHAR,
@@ -142,9 +142,11 @@ CREATE TABLE service(
     email VARCHAR,
     contactPerson VARCHAR,
     url VARCHAR,
-    version INTEGER DEFAULT 1,
+    --version INTEGER DEFAULT 1,
+    dateCreated  DATE NOT NULL,
     startDate DATE,--NOT NULL?
     endDate DATE,--NOT NULL?
+    dateReviewed DATE,
     serviceTypeId INTEGER REFERENCES servicetype(serviceTypeId),
     userId INTEGER REFERENCES users(userId),
     organicUnitId INTEGER REFERENCES organicunit(organicUnitId)
@@ -382,6 +384,27 @@ INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 10, 14);
 
 
 -- Sample data for the "questions" table
-INSERT INTO questions (question1, question2, question3, question4, question5, question6, question7, question8, question9, question10)
-VALUES ('What is your name?', 'What is your age?', 'What is your favorite color?', 'What is your favorite food?', 'What is your favorite movie?',
+INSERT INTO questions (serviceName,question1)
+VALUES ('Virtual Machine Request','Whats the version?');
+
+INSERT INTO questions (serviceName,question1, question2, question3, question4, question5, question6, question7, question8, question9, question10)
+VALUES ('Introduction','What is your name?', 'What is your age?', 'What is your favorite color?', 'What is your favorite food?', 'What is your favorite movie?',
 'What is your favorite book?', 'What is your favorite sport?', 'What is your favorite hobby?', 'What is your favorite animal?', 'What is your favorite song?');
+
+
+
+--- SERVICE TYPE
+
+INSERT INTO servicetype (questionsId,atribute1) values (1,'5.2');
+INSERT INTO servicetype (questionsId,atribute1) values (1,'1.8');
+INSERT INTO servicetype (questionsId,atribute1) values (1,'9.7');
+
+
+-- SERVICE
+
+INSERT INTO service (serviceName,requestStatus,requestType,purpose,email,contactPerson,url,startDate,endDate,dateReviewed,serviceTypeId,userId,organicUnitId,dateCreated)
+VALUES ('Virtual Machine Request','Pending', 'Create',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,2,5,'2023-04-20');
+
+
+INSERT INTO service (serviceName,requestStatus,requestType,purpose,email,contactPerson,url,startDate,endDate,dateReviewed,serviceTypeId,userId,organicUnitId,dateCreated)
+VALUES ('Virtual Machine Request','Pending', 'Create','For the 2nd year course LCOM','henrique@gaio.com',NULL,NULL,NULL,NULL,NULL,1,2,8,'2023-04-20');

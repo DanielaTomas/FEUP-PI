@@ -58,9 +58,10 @@
     <div class="col-auto">
       <h3>Services</h3>
       <ul>
-        <li class="mt-3"><a href="#" class="text-dark">item 1</a><span class="mx-2 badge bg-secondary rounded-pill">14</span></li>
-        <li class="mt-2"><a href="#" class="text-dark">item 2</a><span class="mx-2 badge bg-secondary rounded-pill">5</span></li>
-        <li class="mt-2"><a href="#" class="text-dark">item 3</a><span class="mx-2 badge bg-secondary rounded-pill">1</span></li>
+        @foreach($servicetypes as $question)
+        <li class="mt-3"><a href="/service/{{$question->questionsid}}" class="text-dark">{{$question->servicename}}</a></li>
+        @endforeach
+        <li class="mt-3"><a href="/services" class="text-dark">See all services</a></li>
       </ul>
       </div>
     </div>

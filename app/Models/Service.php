@@ -27,7 +27,11 @@ class Service extends Model
         'version',
         'startdate',
         'enddate',
-        'servicetypeid'
+        'datecreated',
+        'datereviewed',
+        'servicetypeid',
+        'userid',
+        'organicunitid',
     ];
 
     protected $versionable = [
@@ -37,6 +41,7 @@ class Service extends Model
         'contactperson',
         'url',
         'version',
+        'datecreated',
         'startdate',
         'enddate',
     ];
