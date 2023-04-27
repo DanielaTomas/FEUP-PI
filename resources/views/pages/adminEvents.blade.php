@@ -2,6 +2,10 @@
 
 @section('content')
 
+@push('pageJS')
+<script   type="text/javascript" src={{ asset('js/adminEvent.js') }} defer> </script>
+@endpush
+
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
         <h3>Admin Dashboard - Events</h3>
@@ -37,7 +41,6 @@
 <!-- Tab panes -->
 <div class="tab-content mt-5">
   <div class="tab-pane container active" id="eventRequests">
-    @if(count($pendingEvents) > 0)
     <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
         <thead class="bg-light">
             <tr>
@@ -48,16 +51,13 @@
             <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
-          @each('partials.adminDashboardEntry', $pendingEvents, 'event')
+        <tbody id="pendingTable">
+          {{--@each('partials.adminDashboardEntry', $pendingEvents, 'event')--}}
         </tbody>
     </table>
-    @else
-    <h6 class="text-center">There are no event requests</h6>
-    @endif
+    {{--<div>{{$pendingEvents->links()}}</div>--}}
   </div>
   <div class="tab-pane container" id="events">
-    @if(count($events) > 0)
     <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
         <thead class="bg-light">
             <tr>
@@ -68,14 +68,11 @@
             <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
-              @each('partials.adminDashboardEntry', $events, 'event')
+        <tbody id="CurrEventTable">
+              {{--@each('partials.adminDashboardEntry', $events, 'event')--}}
         </tbody>
     </table>
-    <div>{{$events->links()}}</div>
-    @else
-    <h6 class="text-center">There are no events</h6>
-    @endif
+    {{--{{$events->links()}}--}}
   </div>
   <div class="tab-pane container" id="tags">
   <form class="my-4" method="POST" action="{{route('create.tag')}}" enctype="multipart/form-data">
@@ -101,7 +98,11 @@
 </div>
 </div>
 
+<div id="user-list"></div>
 
+<div class="pagination">
+  {{--$events->links()--}}
+</div>
 
 
 @endsection
