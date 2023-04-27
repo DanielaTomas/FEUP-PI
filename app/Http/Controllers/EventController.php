@@ -36,25 +36,30 @@ class EventController extends Controller
     public function createEventForm()
     {
         $tags = TagController::getAllTags();
-        return view('pages.createEventForm', ['tags' => $tags]);
+        $organicUnits=OrganicUnitController::getOrganicUnits();
+        return view('pages.createEventForm', ['tags' => $tags,'organicunits'=>$organicUnits]);
     }
 
 
     protected function validator(array $data)
-      { 
-            $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
-            return Validator::make($data, [
-              'eventname' => 'required|string',
-              'address' => 'required|string',
-              'url' => 'nullable|regex:'.$regex,
-              'email' => 'required|string|email|max:255',
-              'contactperson'=>'required|string',
-              'description'=>'required|string',
-              'startdate' => 'required|date|date_format:Y-m-d',
-              'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',
-              'tags' => 'required|string',
-            ]);
-      }
+    {
+        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
+        return Validator::make($data, [
+            'eventnamept' => 'required|string',
+            'eventnameen' => 'required|string',
+            'address' => 'nullable|string',
+            'urlportuguese' => 'nullable|regex:' . $regex,
+            'urlenglish' =>'nullable|regex:' . $regex,
+            'emailtechnical' => 'required|string|email|max:255',
+            'contactperson' => 'nullable|string',
+            'emailcontact' => 'nullable|string|email|max:255',
+            'description' => 'required|string',
+            'startdate' => 'required|date|date_format:Y-m-d',
+            'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',
+            'tags' => 'required|string',
+        ]);
+    }
+
 
     public function createEvent(Request $request){
 
@@ -65,22 +70,27 @@ class EventController extends Controller
         $event = Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Create',
-            'eventname' => $request->input('eventname'),
+            'eventnameportuguese' => $request->input('eventnamept'),
+            'eventnameenglish' => $request->input('eventnameen'),
             'address' => $request->input('address'),
-            'url' => $request->input('url'),
-            'email' => $request->input('email'),
+            'urlportuguese' => $request->input('urlportuguese'),
+            'urlenglish' => $request->input('urlenglish'),
+            'emailtechnical' => $request->input('emailtechnical'),
+            'emailcontact' =>$request->input('emailcontact'),
             'datecreated' => date('Y-m-d'),
             'contactperson' => $request->input('contactperson'),
             'description' => $request->input('description'),
             'startdate' => $request->input('startdate'),
             'enddate' => $request->input('enddate'),
+            'userid'=> $user->userid,
+            'organicunitid' => $request->input('organicunitid')
         ]);
 
         $tags = $request->input('tags');
         $tagNames = explode(',', $tags);
 
         foreach ($tagNames as $tagName) {
-            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            $tagId = Tag::where('tagnameportuguese',$tagName)->orWhere('tagnameenglish',$tagName)->value('tagid');
             if ($tagId) {
                 $tagIds[] = (int) $tagId;
             }
@@ -93,14 +103,15 @@ class EventController extends Controller
         $event->save();
         $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
-        return redirect('/');
+        return redirect('/my_requests')->with('success', 'Event creation request sent successfully.');
     }
 
     public function editEventForm($id)
     {
         $event = Event::find($id);
         $tags = TagController::getAllTags();
-        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags]);
+        $organicUnits=OrganicUnitController::getOrganicUnits();
+        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags,'organicunits'=>$organicUnits]);
     }
 
     public function editEvent(Request $request)
@@ -111,21 +122,26 @@ class EventController extends Controller
         $event = Event::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Edit',
-            'eventname' => $request->input('eventname'),
+            'eventnameportuguese' => $request->input('eventnamept'),
+            'eventnameenglish' => $request->input('eventnameen'),
             'address' => $request->input('address'),
-            'url' => $request->input('url'),
-            'email' => $request->input('email'),
+            'urlportuguese' => $request->input('urlportuguese'),
+            'urlenglish' => $request->input('urlenglish'),
+            'emailtechnical' => $request->input('emailtechnical'),
+            'emailcontact' =>$request->input('emailcontact'),
             'datecreated' => date('Y-m-d'),
             'contactperson' => $request->input('contactperson'),
             'description' => $request->input('description'),
             'startdate' => $request->input('startdate'),
             'enddate' => $request->input('enddate'),
+            'userid'=> $user->userid,
+            'organicunitid' => $request->input('organicunitid')
         ]);
         $tags = $request->input('tags');
         $tagNames = explode(',', $tags);
 
         foreach ($tagNames as $tagName) {
-            $tagId = Tag::where('tagname',$tagName)->value('tagid');
+            $tagId = Tag::where('tagnameportuguese',$tagName)->orWhere('tagnameenglish',$tagName)->value('tagid');
             if ($tagId) {
                 $tagIds[] = (int) $tagId;
             }

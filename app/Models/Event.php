@@ -21,10 +21,13 @@ class Event extends Model
     protected $fillable = [
         'requeststatus',
         'requesttype',
-        'eventname',
+        'eventnameportuguese',
+        'eventnameenglish',
         'address',
-        'url',
-        'email',
+        'urlportuguese',
+        'urlenglish',
+        'emailtechnical',
+        'emailcontact',
         'datecreated',
         'datereviewed',
         'contactperson',
@@ -38,15 +41,19 @@ class Event extends Model
     ];
 
     protected $versionable = [
-        'eventname',
+        'eventnameportuguese',
+        'eventnameenglish',
         'address',
-        'url',
-        'email',
+        'urlportuguese',
+        'urlenglish',
+        'emailtechnical',
+        'emailcontact',
         'contactperson',
         'description',
         'startdate',
         'enddate',
         'eventcanceled',
+        'organicunitid'
     ];
 
     protected $casts = [

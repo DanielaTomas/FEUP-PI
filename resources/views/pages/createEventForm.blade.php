@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content') 
-
+<?php $language = app()->getLocale();?>
 @if (Auth::check())
-
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
         <h3>Event Information:</h3>
@@ -23,19 +22,42 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="eventname" class="form-label">Name<span><b class="text-danger">*</b></span></label>
-                <input id="eventname" class="form-control" placeholder="Enter event name" type="text" name="eventname" value="{{ old('eventname') }}" required autofocus>
-                @if ($errors->has('eventname'))
+                <h4>Name</h4>
+                <label for="eventnamept" class="form-label">Portugues<span><b class="text-danger">*</b></span></label>
+                <div class="input-group">
+                    <input id="eventnamept" class="form-control" placeholder="Enter event name" type="text" name="eventnamept" value="{{ old('eventnamept') }}" required autofocus>
+                    <button class="btn btn-outline-secondary translate-btn" data-target="eventnamept" data-lang-from="pt" data-lang-to="en" type="button">Translate to English</button>
+                </div>
+                @if ($errors->has('eventnamept'))
                 <span class="error">
-                    {{ $errors->first('eventname') }}
+                    {{ $errors->first('eventnamept') }}
+                </span>
+                @endif
+                <label for="eventnameen" class="form-label">English<span><b class="text-danger">*</b></span></label>
+                <div class="input-group">
+                    <input id="eventnameen" class="form-control" placeholder="Enter event name" type="text" name="eventnameen" value="{{ old('eventnameen') }}" required autofocus>
+                    <button class="btn btn-outline-secondary translate-btn" data-target="eventnameen" data-lang-from="en" data-lang-to="pt" type="button">Traduzir para Português</button>
+                </div>
+                @if ($errors->has('eventnameen'))
+                <span class="error">
+                    {{ $errors->first('eventnameen') }}
                 </span>
                 @endif
             </div>
+        </div> 
+        <div class="form-group">
+        <label for="organicunitid">Select Organic Unit:</label> 
+        <select class="form-control" id="organicunitid" name="organicunitid" required>
+            @foreach ($organicunits as $unit)
+                <option value="{{$unit->organicunitid}}">{{ $unit->name }}</option>
+            @endforeach
+        </select>
         </div>
+
         <div class="col-md-6">
             <div class="form-group">
-                <label for="address" class="form-label">Location<span><b class="text-danger">*</b></span></label>
-                <input id="address" class="form-control" placeholder="Enter event location" type="text" name="address" value="{{ old('address') }}" required>
+                <label for="address" class="form-label">Location</label>
+                <input id="address" class="form-control" placeholder="Enter event location" type="text" name="address" value="{{ old('address') }}" >
                 @if ($errors->has('address'))
                 <span class="error">
                     {{ $errors->first('address') }}
@@ -59,8 +81,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="contactperson" class="form-label">Person to Contact<span><b class="text-danger">*</b></span></label>
-                <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ old('contactperson') }}" required>
+                <label for="contactperson" class="form-label">Person to Contact (optional)</label>
+                <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ old('contactperson') }}" >
                 @if ($errors->has('contactperson'))
                 <span class="error">
                     {{ $errors->first('contactperson') }}
@@ -71,11 +93,23 @@
         
         <div class="col-md-6">
             <div class="form-group">
-                <label for="email" class="form-label">Email<span><b class="text-danger">*</b></span></label>
-                <input id="email" class="form-control" placeholder="Enter an email" type="email" name="email" value="{{ old('email') }}" required>
-                @if ($errors->has('email'))
+                <label for="emailcontact" class="form-label">Contact Email (optional)</label>
+                <input id="emailcontact" class="form-control" placeholder="Enter an email" type="email" name="emailcontact" value="{{ old('emailcontact') }}">
+                @if ($errors->has('emailcontact'))
                 <span class="error">
-                    {{ $errors->first('email') }}
+                    {{ $errors->first('emailcontact') }}
+                </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="emailtechnical" class="form-label">Technical Email<span><b class="text-danger">*</b></span></label>
+                <input id="emailtechnical" class="form-control" placeholder="Enter an email" type="email" name="emailtechnical" value="{{old('emailtechnical', auth()->user()->email)}}" required>
+                @if ($errors->has('emailtechnical'))
+                <span class="error">
+                    {{ $errors->first('emailtechnical') }}
                 </span>
                 @endif
             </div>
@@ -112,24 +146,51 @@
     </div> 
 
     <div class="form-group my-3">
-        <label for="url" class="form-label">Url (<i>optional</i>)</label>
-        <input id="url" class="form-control" placeholder="Enter event url" type="text" name="url" value="{{ old('url') }}">
-        @if ($errors->has('url'))
+        <h5>URL  (MUDEM ISTO DEPOIS)</h5>
+
+        <label for="urlportuguese" class="form-label">Portugues </label>
+        <input id="urlportuguese" class="form-control" placeholder="Url do evento para Portugues(???)" type="text" name="urlportuguese" value="{{ old('urlportuguese') }}">
+        @if ($errors->has('urlportuguese'))
         <span class="error">
-            {{ $errors->first('url') }}
+            {{ $errors->first('urlportuguese') }}
+        </span>
+        @endif
+
+        <label for="urlenglish" class="form-label">English </label>
+        <input id="urlenglish" class="form-control" placeholder="English URL" type="text" name="urlenglish" value="{{ old('urlenglish') }}">
+        @if ($errors->has('urlenglish'))
+        <span class="error">
+            {{ $errors->first('urlenglish') }}
         </span>
         @endif
     </div>
-
+    
+    
+   
+    
+    @if($language=="pt")
     <div class="form-group my-3">
         <label for="tags" class="my-2">Tags</label>
-        <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags">
+        <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags" value="">
         <datalist id="tags">
             @foreach ($tags as $tag)
-                <option value="{{ $tag->tagid }}">{{ $tag->tagname }}</option>
+                <option value="{{ $tag->tagid }}">{{ $tag->tagnameportuguese }}</option>
             @endforeach
         </datalist>
     </div>
+    @else
+    <div class="form-group my-3">
+        <label for="tags">Tags</label>
+        <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags" value="">
+        <datalist id="tags">
+            @foreach ($tags as $tag)
+                <option value="{{ $tag->tagid }}">{{ $tag->tagnameenglish}}</option>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
+   
 
     <div class="col-md-12 text-center mt-5">
         <button type="submit" class="btn btn-dark">Create Event</button>
