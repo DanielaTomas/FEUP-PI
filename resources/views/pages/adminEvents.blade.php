@@ -69,9 +69,13 @@
             </tr>
         </thead>
         <tbody id="CurrEventTable">
-              {{--@each('partials.adminDashboardEntry', $events, 'event')--}}
+             
         </tbody>
     </table>
+    <div class="pagination">
+      <a href="page=1">Previous</a>
+      <a href="page=2">Next</a>
+  </div>
     {{--{{$events->links()}}--}}
   </div>
   <div class="tab-pane container" id="tags">
