@@ -16,7 +16,7 @@ class ServiceType extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'servicetypename',
+        //'servicetypename',
         'atribute1',
         'atribute2',
         'atribute3',

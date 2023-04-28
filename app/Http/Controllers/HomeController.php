@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\OrganicUnitController;
+use App\Http\Controllers\ServiceController;
 class HomeController extends Controller{
 
     /**
@@ -15,7 +16,10 @@ class HomeController extends Controller{
 
         $organicUnitController= new OrganicUnitController();
         $organicUnits = $organicUnitController->getTopOrganicUnitsByEventCount();
-        return view('pages.home',['tags' => $tags,'organicUnits' => $organicUnits]);
+
+        $serviceTypes=ServiceController::getServiceTypes();
+
+        return view('pages.home',['tags' => $tags,'organicUnits' => $organicUnits,'servicetypes'=>$serviceTypes]);
     }
 
 }
