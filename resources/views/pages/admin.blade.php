@@ -9,7 +9,7 @@
 
   <ul>
     <li class="mt-3">
-      <a class="text-dark" href="{{route('admin.events')}}">Events</a>
+      <a class="text-dark" href="{{url('/admin/events')}}">Events</a>
     </li>
     <li class="mt-3">
       <a class="text-dark" href="{{url('/admin/services')}}">Services</a>

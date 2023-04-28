@@ -40,7 +40,11 @@ Route::get('/admin', function () {
     Route::get('/', 'EventController@show')->name('home');
 });*/
 Route::get("/admin", 'AdminController@show');
-Route::get('/admin/events', 'EventControllerAdmin@show')->name('admin.events');
+Route::get('/admin/events',function(){
+    return view("pages.adminEvents");
+});
+Route::get('/admin/eventsCurrent','EventControllerAdmin@showCurrent');
+Route::get('/admin/eventsPending','EventControllerAdmin@showPending');
 Route::post('/requests/{id}/{action}', 'EventControllerAdmin@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
 //TODO: adicionar permission checks as routes por baixo
 Route::get('/create_event', 'EventController@createEventForm')->name('create.event');
