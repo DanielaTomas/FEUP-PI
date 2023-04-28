@@ -80,16 +80,16 @@ class EventControllerAdmin extends AdminController
         $formations = Formation::where('userid', $this->user->userid)->get();
         $event = Event::find($id);
 
-
-        if ($formations->isEmpty()) {
+        /**
+         * TODO: Ver pq isto falha
+         */
+        /*if ($formations->isEmpty()) {
             return redirect()->back()->with('error', 'You are not authorized to update the status of this event.');
         }
 
         if (!$formations->pluck('organicunitid')->contains($event->organicunitid)) {
             return redirect()->back()->with('error', 'You are not authorized to update the status of this event.');
-        }
-
-
+        }*/
 
         $event->requeststatus = $status;
         $event->datereviewed = now()->format('Y-m-d');

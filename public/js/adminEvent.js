@@ -15,11 +15,19 @@ function getPaginatedData(page) {
 
             for (let i = 0; i < data.length ; i++) {
                 let tr = $('<tr></tr>');
-                let eventNameTd = $('<td></td>').html(data[i].eventnameenglish);
+                let eventNameTd = $('<td></td>');
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>').html(data[i].requesttype);
                 let requestStatusTd = $('<td></td>').html(data[i].requeststatus);
                 let requestActions = $('<td></td>').html(data[i].datereviewed);
+
+                let eventLink = $('<a></a>').html(data[i].eventnameenglish);;
+                eventLink.attr("href",data[i].urlenglish);
+                eventNameTd.append(eventLink);
+
+                let eventEmail = $('<p></p>').html(data[i].emailcontact);
+                eventEmail.attr("class","text-muted");
+                eventNameTd.append(eventEmail);
 
                 tr.append(eventNameTd);
                 tr.append(dateCreatedTd);
@@ -87,13 +95,26 @@ function getPaginatedDataPend(page) {
                  */
                 let formAccept = $('<form/>', {
                     action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Accepted',
-                    method: 'POST'
+                    method: 'POST',
+                    data:{"_token": "{{ csrf_token() }}"}
                 }).append(buttonGreen);
 
                 let buttonRed = $('<button/>', {
                     class: 'btn btn-danger',
                     text: 'Reject'
                 });
+
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                // create the hidden input element for the CSRF token
+                var csrfInput = $('<input/>', {
+                type: 'hidden',
+                name: '_token',
+                value: csrfToken
+                });
+
+                // append the CSRF token input element to the form
+                formAccept.append(csrfInput);
                 
                 // create the form element and append the button to it
                 /**
@@ -101,8 +122,20 @@ function getPaginatedDataPend(page) {
                  */
                 let formReject = $('<form/>', {
                     action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Rejected',
-                    method: 'POST'
+                    method: 'POST',
                 }).append(buttonRed);
+
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                // create the hidden input element for the CSRF token
+                var csrfInput = $('<input/>', {
+                type: 'hidden',
+                name: '_token',
+                value: csrfToken
+                });
+
+                // append the CSRF token input element to the form
+                formReject.append(csrfInput);
                 
                 // create the td element and append the form to it
                 var td = $('<td></td>');
