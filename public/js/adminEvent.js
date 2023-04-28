@@ -1,7 +1,48 @@
+let pageEvent = 1;
+let pagePend = 1;
+
 /*
 TODO: adicionar CSS com o AJAX nos elementos da tabela
  */
+
+function attrRequestType(elem,requestTypeTd){
+    if(elem.requesttype === "Create"){
+        let span = $('<span></span>');
+        requestTypeTd.append(span);
+        span.html(elem.requesttype);
+        span.attr("class","badge bg-primary");
+    }
+    else if(elem.requesttype === "Edit"){
+        let span = $('<span></span>');
+        requestTypeTd.append(span);
+        span.html(elem.requesttype);
+        span.attr("class","badge bg-info");
+    }
+    else{
+        let span = $('<span></span>');
+        requestTypeTd.append(span);
+        span.html(elem.requesttype);
+        span.attr("class","badge bg-warning text-white");
+    }
+}
+
+function attrRequestStatus(elem,requestStatusTd){
+    if(elem.requeststatus === "Accepted"){
+        let span = $('<span></span>');
+        requestStatusTd.append(span);
+        span.html(elem.requeststatus);
+        span.attr("class","badge bg-success text-white");
+    }
+    else{
+        let span = $('<span></span>');
+        requestStatusTd.append(span);
+        span.html(elem.requeststatus);
+        span.attr("class","badge bg-danger text-white");
+    }
+}
+
 function getPaginatedData(page) {
+    pageEvent = page;
     $.ajax({
         url: '/admin/eventsCurrent?page=' + page,
         type: 'GET',
@@ -17,12 +58,19 @@ function getPaginatedData(page) {
                 let tr = $('<tr></tr>');
                 let eventNameTd = $('<td></td>');
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
-                let requestTypeTd = $('<td></td>').html(data[i].requesttype);
-                let requestStatusTd = $('<td></td>').html(data[i].requeststatus);
+                let requestTypeTd = $('<td></td>');
+                let requestStatusTd = $('<td></td>');
                 let requestActions = $('<td></td>').html(data[i].datereviewed);
 
+                /*Bootstrap*/
+                attrRequestStatus(data[i],requestStatusTd);
+
+                /*Bootstrap Request Type*/
+                attrRequestType(data[i],requestTypeTd);
+
+
                 let eventLink = $('<a></a>').html(data[i].eventnameenglish);;
-                eventLink.attr("href",data[i].urlenglish);
+                eventLink.attr("href","../event/"+ data[i].eventid);
                 eventNameTd.append(eventLink);
 
                 let eventEmail = $('<p></p>').html(data[i].emailcontact);
@@ -50,7 +98,6 @@ function getPaginatedData(page) {
             next.attr("class", "page-link");
             next.html("Next");
 
-
         },
         error: function(xhr) {
             alert('Error retrieving data.');
@@ -59,6 +106,7 @@ function getPaginatedData(page) {
 }
 
 function getPaginatedDataPend(page) {
+    pagePend = page;
     $.ajax({
         url: '/admin/eventsPending?page=' + page,
         type: 'GET',
@@ -66,21 +114,23 @@ function getPaginatedDataPend(page) {
         success: function(response) {
             let data = response.data;
             let tbody = $('#pendingTable');
-            //let pagination = $('#pageCurr');
 
             //Clear tbody 
             tbody.empty();
-           
-
-            console.log(response);
 
             for (let i = 0; i < data.length ; i++) {
                 let eventId = data[i].eventid;
                 let tr = $('<tr></tr>');
                 let eventNameTd = $('<td></td>').html(data[i].eventnameenglish);
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
-                let requestTypeTd = $('<td></td>').html(data[i].requesttype);
-                let requestStatusTd = $('<td></td>').html(data[i].requeststatus);
+                let requestTypeTd = $('<td></td>');
+                let requestStatusTd = $('<td></td>');
+
+                /*Bootstrap Request Type*/
+                attrRequestType(data[i],requestTypeTd);
+
+                /*Bootstrap Request Type*/
+                attrRequestStatus(data[i],requestStatusTd);
 
                 // create the form element
                 // create the button element
@@ -90,9 +140,6 @@ function getPaginatedDataPend(page) {
                 });
                 
                 // create the form element and append the button to it
-                /**
-                 TODO: Backenders AJAX nisto
-                 */
                 let formAccept = $('<form/>', {
                     id: "formAccept",
                     //action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Accepted',
@@ -125,9 +172,6 @@ function getPaginatedDataPend(page) {
                 formAccept.append(idInput);
                 
                 // create the form element and append the button to it
-                /**
-                 TODO: Backenders AJAX nisto
-                 */
                 let formReject = $('<form/>', {
                     id: "formReject",
                     //action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Rejected',
@@ -159,7 +203,6 @@ function getPaginatedDataPend(page) {
                 formAccept.attr("class","mx-1");
                 td.append(formAccept);
                 td.append(formReject);
-                console.log(td);
                 
                 tr.append(eventNameTd);
                 tr.append(dateCreatedTd);
@@ -190,7 +233,6 @@ function getPaginatedDataPend(page) {
 }
 
 function pendingFormHandler(action,id,token){
-    /*token&id=x, this is why you split*/
     $.ajax({
         url: '/requests/' + id + '/' + action,
         type: 'post',
@@ -199,7 +241,8 @@ function pendingFormHandler(action,id,token){
             'X-CSRF-Token': token
         },
         success: function(response) {
-            console.log(response);
+            getPaginatedData(pageEvent);
+            getPaginatedDataPend(pagePend);
     },
 });
 }
@@ -216,7 +259,7 @@ $(document).ready(function() {
         getPaginatedData(page);
     });
 
-    $(document).on('click', '#pageCurr li a', function(e) {
+    $(document).on('click', '#pagePend li a', function(e) {
         e.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         getPaginatedDataPend(page);
@@ -230,14 +273,13 @@ $(document).ready(function() {
         var id = form.find('input[name="id"]').val(); 
       
         pendingFormHandler("Accepted",id,token);
-        //getPaginatedDataPend(page);
       });
       
-      
-
-    $(document).on('submit', '#formReject button', function(e) {
+    $(document).on('submit', '#formReject', function(e) {
         e.preventDefault();
-        //pendingFormHandler(Rejected);
-        //getPaginatedDataPend(page);
+        var form = $(this);
+        var token = form.find('input[name="_token"]').val(); 
+        var id = form.find('input[name="id"]').val(); 
+        pendingFormHandler("Rejected",id,token);
     });
 });

@@ -69,7 +69,7 @@
             <th>Request Date</th>
             <th>Type</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th>Confirmed</th>
             </tr>
         </thead>
         <tbody id="CurrEventTable">
