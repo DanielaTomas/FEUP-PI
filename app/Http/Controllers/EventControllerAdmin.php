@@ -95,6 +95,6 @@ class EventControllerAdmin extends AdminController
         $event->datereviewed = now()->format('Y-m-d');
         $event->save();
 
-        return redirect()->back()->with('success', 'Event status updated successfully.');
+        return response()->json($event);
     }
 }

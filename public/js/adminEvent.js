@@ -94,8 +94,9 @@ function getPaginatedDataPend(page) {
                  TODO: Backenders AJAX nisto
                  */
                 let formAccept = $('<form/>', {
-                    action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Accepted',
-                    method: 'POST',
+                    id: "formAccept",
+                    //action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Accepted',
+                    //method: 'POST',
                     data:{"_token": "{{ csrf_token() }}"}
                 }).append(buttonGreen);
 
@@ -113,16 +114,24 @@ function getPaginatedDataPend(page) {
                 value: csrfToken
                 });
 
+                var idInput = $('<input/>', {
+                    type: 'hidden',
+                    name: 'id',
+                    value: eventId
+                    });
+
                 // append the CSRF token input element to the form
                 formAccept.append(csrfInput);
+                formAccept.append(idInput);
                 
                 // create the form element and append the button to it
                 /**
                  TODO: Backenders AJAX nisto
                  */
                 let formReject = $('<form/>', {
-                    action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Rejected',
-                    method: 'POST',
+                    id: "formReject",
+                    //action: 'http://127.0.0.1:8000/requests/' + eventId+ '/Rejected',
+                    //method: 'POST',
                 }).append(buttonRed);
 
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -134,8 +143,15 @@ function getPaginatedDataPend(page) {
                 value: csrfToken
                 });
 
+                var idInput = $('<input/>', {
+                    type: 'hidden',
+                    name: 'id',
+                    value: eventId
+                    });
+
                 // append the CSRF token input element to the form
                 formReject.append(csrfInput);
+                formReject.append(idInput);
                 
                 // create the td element and append the form to it
                 var td = $('<td></td>');
@@ -173,6 +189,21 @@ function getPaginatedDataPend(page) {
     });
 }
 
+function pendingFormHandler(action,id,token){
+    /*token&id=x, this is why you split*/
+    $.ajax({
+        url: '/requests/' + id + '/' + action,
+        type: 'post',
+        dataType: 'json',
+        headers:{
+            'X-CSRF-Token': token
+        },
+        success: function(response) {
+            console.log(response);
+    },
+});
+}
+
 $(document).ready(function() {
     // Initialize pagination with the first page
     getPaginatedData(1);
@@ -189,5 +220,24 @@ $(document).ready(function() {
         e.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         getPaginatedDataPend(page);
+    });
+
+    $(document).on('submit', '#formAccept', function(e) {
+        e.preventDefault(); // prevent the default form submission behavior
+        var form = $(this);
+
+        var token = form.find('input[name="_token"]').val(); 
+        var id = form.find('input[name="id"]').val(); 
+      
+        pendingFormHandler("Accepted",id,token);
+        //getPaginatedDataPend(page);
+      });
+      
+      
+
+    $(document).on('submit', '#formReject button', function(e) {
+        e.preventDefault();
+        //pendingFormHandler(Rejected);
+        //getPaginatedDataPend(page);
     });
 });
