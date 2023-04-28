@@ -26,6 +26,13 @@ Route::get('/tags/{id}/events', 'TagController@show')->name('tags.events');
 Route::get('/categories/events', 'CategoryController@showEventCategories')->name('categories.events');
 Route::get('/organicunits/{id}/events', 'OrganicUnitController@show')->name('organics.events');
 
+// SERVICES
+Route::get('/services','ServiceController@list')->name('services');
+Route::get('/service/{id}','ServiceController@createServiceForm')->name('create.service');
+Route::post('/create.service', 'ServiceController@createService')->name('create.service');
+
+
+
 // Admin
 ///Events
 /*
