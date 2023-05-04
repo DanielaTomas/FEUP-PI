@@ -3,33 +3,51 @@
 @section('content')
 
 <div class="p-5 m-5 bg-secondary rounded min-height">
-    <div class="d-flex justify content-center link-light">
-        <h3> {{$event->eventnameenglish}} </h3>
+    <div class="d-flex justify-content-center m-auto link-light">
+        <h3 class="text-center text-light">{{$event->eventnameenglish}}</h3>
     </div>
-
-    <div class="py-5">
-        <div class="card" style="float:left; margin-right: 5rem; margin-bottom: 2rem;">
-            <div class="card-body">
-                <p class="card-text"><b>Start Date: </b>{{$event->startdate}}</p>
-                <p class="card-text"><b>End Date: </b>{{$event->enddate}}</p>
-                <p class="card-text"><b>Address: </b>{{$event->address}}</p>
-                <p class="card-text"><b>Contact Person: </b>{{$event->contactperson}}</p>
-                <p class="card-text"><b>Email: </b>{{$event->email}}</p>
-
-                <p><b>Tags: </b>
-                @if($event->tags()->count() > 0)
-                    @foreach($event->tags()->get() as $tag)
-                    <a href="/tags/{{$tag->tagid}}/events"><span class="badge bg-secondary rounded-pill">{{$tag->tagnameenglish}}</span></a>
-                    @endforeach
-                @else
-                    N/A
-                @endif
-                </p>
+    <div class="row justify-content-center">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                        <div class="text-center m-auto">
+                                <img class="rounded" src="https://picsum.photos/150/150" width="250" height="200" alt="Card image cap">
+                        </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="card-text"><b>Start Date: </b>{{$event->startdate}}</p>
+                            <p class="card-text"><b>End Date: </b>{{$event->enddate}}</p>
+                            <p class="card-text"><b>Address: </b>{{$event->address}}</p>
+                            <p class="card-text"><b>Contact Person: </b>{{$event->contactperson}}</p>
+                            <p class="card-text"><b>Email: </b>{{$event->email}}</p>
+                            <p><b>Tags: </b>
+                            @if($event->tags()->count() > 0)
+                                @foreach($event->tags()->get() as $tag)
+                                <a href="/tags/{{$tag->tagid}}/events"><span class="badge bg-secondary rounded-pill">{{$tag->tagnameenglish}}</span></a>
+                                @endforeach
+                                <a href="/organicunits/{{$event->organicunit->organicunitid}}/events"><span class="badge bg-secondary rounded-pill">{{$event->organicunit->name}}</span></a>
+                            @else
+                                N/A
+                            @endif
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <h5>Description</h5>
-        <p>{{$event->description}}</p>
+        <div class="col-md-6 m-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Description</h5>
+                    <p class="card-text">{{$event->description}}</p>
+                    <p class="card-text"><b>Url English: </b>{{$event->urlenglish}}</p>
+                    <p class="card-text"><b>Url Portuguese: </b>{{$event->urlportuguese}}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 @endsection
+
+
