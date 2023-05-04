@@ -278,18 +278,18 @@ INSERT INTO organicunit (name) VALUES ('FDUP');--19
 INSERT INTO organicunit (name) VALUES ('UPORTO');--20
 
 -- SERVICE NAME
-INSERT INTO servicename (serviceNameEnglish,serviceNamePortuguese,description) VALUES ('HPC and Grid Computing','HPC e Grid Computing','HPC e Grid Computing é um serviço que trata da gestão da infraestrutura de computação de elevado desempenho. O acesso ao serviço está restrito a determinados departamentos da FEUP, FCUP e INEGI, sendo necessária uma autorização do responsável.');--FEUP, FCUP e INEGI
-INSERT INTO servicename (serviceNameEnglish,serviceNamePortuguese,description) VALUES ('Virtual Machine','Máquina Virtual','Atualmente este recurso está disponível apenas para a Faculdade de Engenharia.
+INSERT INTO servicename (serviceNameEnglish,serviceNamePortuguese,description) VALUES ('HPC and Grid Computing','HPC e Grid Computing','HPC and Grid Computing is a service that deals with the management of the high performance computing infrastructure. Access to the service is restricted to certain departments of FEUP, FCUP and INEGI, requiring an authorization from the person in charge.');--FEUP, FCUP e INEGI
+INSERT INTO servicename (serviceNameEnglish,serviceNamePortuguese,description) VALUES ('Virtual Machine','Máquina Virtual','Currently this resource is only available to the Faculty of Engineering.
 
-A criação de máquinas virtuais depende da existência de recursos de hardware. O serviço não se destina a computação de elevado desempenho.
+The creation of virtual machines depends on the existence of hardware resources. The service is not intended for high performance computing.
 
-É necessário ter em conta que:
+It should be noted that:
 
-As máquinas para apoio ao ensino têm validade de um semestre ou de um ano letivo;
-As máquinas para apoio a projetos estão ativas até ao término do projeto;
-A gestão da máquina e a realização de cópias de segurança é da responsabilidade do utilizador;
-Só pode ser instalado software open source ou licenciado;
-O acesso às máquinas Linux é por chave SSH.');--
+Machines for teaching support are valid for one semester or one academic year;
+The machines for project support are active until the end of the project;
+Machine management and backup copies are the users responsibility;
+Only open source or licensed software can be installed;
+Access to Linux machines is by SSH key.');--
 --INSERT INTO servicename (serviceNameEnglish,serviceNamePortuguese) VALUES ('HPC and Grid Computing','HPC e Grid Computing');
 
 

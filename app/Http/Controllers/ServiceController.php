@@ -18,9 +18,9 @@ class ServiceController extends Controller
 {
 
     public static function getServiceTypes(){
-        $questions=Question::all();
+        $services=ServiceName::all();
 
-        return $questions;
+        return $services;
     }
 
 
@@ -34,10 +34,10 @@ class ServiceController extends Controller
     }
 
     // Show the event page
-    public function show($eventId)
+    public function show($servicenameId)
     {
-        $event = Event::find($eventId);
-        return view('pages.event', ['event' => $event]);
+        $service = ServiceName::find($servicenameId);
+        return view('pages.service', ['service' => $service]);
     }
 
 

@@ -17,9 +17,9 @@ class HomeController extends Controller{
         $organicUnitController= new OrganicUnitController();
         $organicUnits = $organicUnitController->getTopOrganicUnitsByEventCount();
 
-        $serviceTypes=ServiceController::getServiceTypes();
+        $servicenames=ServiceController::getServiceTypes();
 
-        return view('pages.home',['tags' => $tags,'organicUnits' => $organicUnits,'servicetypes'=>$serviceTypes]);
+        return view('pages.home',['tags' => $tags,'organicUnits' => $organicUnits,'services'=>$servicenames]);
     }
 
 }

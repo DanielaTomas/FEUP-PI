@@ -28,7 +28,9 @@ Route::get('/organicunits/{id}/events', 'OrganicUnitController@show')->name('org
 
 // SERVICES
 Route::get('/services','ServiceController@list')->name('services');
-Route::get('/service/{id}','ServiceController@createServiceForm')->name('create.service');
+//Route::get('/service/{id}','ServiceController@createServiceForm')->name('create.service');
+Route::get('/service/{id}','ServiceController@show')->name('show.service');
+Route::get('/service/{id}/create','ServiceController@createServiceForm')->name('create.service');
 Route::post('/create.service', 'ServiceController@createService')->name('create.service');
 
 
