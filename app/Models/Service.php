@@ -35,7 +35,7 @@ class Service extends Model
     ];
 
     protected $versionable = [
-        'servicename',
+        'servicenameid',
         'purpose',
         'email',
         'contactperson',

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\ServiceType;
 use App\Models\Question;
+use App\Models\ServiceName;
 
 
 
@@ -28,8 +29,8 @@ class ServiceController extends Controller
      */
     public function list()
     {
-        $questions=Question::all();
-        return view('pages.serviceList', ['services' => $questions]);
+        $servicesNames=ServiceName::all();
+        return view('pages.serviceList', ['services' => $servicesNames]);
     }
 
     // Show the event page
@@ -102,7 +103,7 @@ class ServiceController extends Controller
         $service = Service::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Create',
-            'servicename' => $request->input('servicename'),
+            'servicenameid' => $request->input('servicenameid'),
             'purpose' => $request->input('purpose'),
             'email' => $request->input('email'),
             'url' => $request->input('url'),

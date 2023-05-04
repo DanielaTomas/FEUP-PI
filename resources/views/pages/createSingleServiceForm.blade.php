@@ -7,7 +7,7 @@
 
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
-        <h3>{{$question->servicename}} Request</h3>
+        <h3>{{$question->servicename->servicenameenglish}} Request</h3>
     </div>
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -23,7 +23,7 @@
         {{ csrf_field() }}
         
         <input type="hidden" name="questionsid" value="{{$question->questionsid}}">
-        <input type="hidden" name="servicename" value="{{$question->servicename}}">
+        <input type="hidden" name="servicenameid" value="{{$question->servicename->servicenameid}}">
 
         @include('partials.servicequestions',['question' => $question])
         
@@ -37,14 +37,14 @@
             </span>
             @endif
         </div>
-
+    
 
         <div class="form-group">
         <label for="organicunitid">Select Organic Unit <span><b class="text-danger">*</b></span>:</label> 
         <select class="form-control" id="organicunitid" name="organicunitid" required>
-            @foreach ($organicunits as $unit)
+             @foreach ($question->servicename->organicunits as $unit)
                 <option value="{{$unit->organicunitid}}">{{ $unit->name }}</option>
-            @endforeach
+            @endforeach 
         </select>
         </div>
 

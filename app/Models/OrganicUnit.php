@@ -24,9 +24,15 @@ class OrganicUnit extends Model
             ->withPivot('userid');
     }
 
+    /*
     public function services(){
         return $this->belongsToMany(Service::class, 'userserviceorganic', 'organicunitid', 'serviceid')
             ->withPivot('userid');
+    }
+    */
+    public function serviceNames()
+    {
+        return $this->belongsToMany(ServiceName::class, 'organicService', 'organicUnitId', 'serviceNameId');
     }
 
     public function users(){

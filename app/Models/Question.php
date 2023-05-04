@@ -32,4 +32,10 @@ class Question extends Model
     public function serviceType(){
         return $this->hasMany(ServiceType::class);
     }
+
+    public function servicename()
+    {
+        return $this->belongsTo(ServiceName::class, 'servicenameid');
+    }
+
 }
