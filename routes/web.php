@@ -27,7 +27,7 @@ Route::get('/categories/events', 'CategoryController@showEventCategories')->name
 Route::get('/organicunits/{id}/events', 'OrganicUnitController@show')->name('organics.events');
 
 // SERVICES
-<<<<<<< routes/web.php
+
 Route::get('/services','ServiceController@list')->name('services');
 //Route::get('/service/{id}','ServiceController@createServiceForm')->name('create.service');
 Route::get('/service/{id}','ServiceController@show')->name('show.service');
@@ -45,7 +45,7 @@ Route::get('/users/search', 'UserController@search')->name('users.search');
 
 
 
->>>>>>> routes/web.php
+
 
 // Admin
 ///Events
