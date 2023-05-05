@@ -135,44 +135,45 @@ class ServiceController extends Controller
     {
         if (!Auth::check()) return redirect('/login');
         $this->validator($request->all())->validate();
+
         $user = Auth::user();
-        $event = Event::create([
+        
+        $serviceType=ServiceType::create([
+            'atribute1'=>$request->input('atribute1'),
+            'atribute2'=>$request->input('atribute2'),
+            'atribute3'=>$request->input('atribute3'),
+            'atribute4'=>$request->input('atribute4'),
+            'atribute5'=>$request->input('atribute5'),
+            'atribute6'=>$request->input('atribute6'),
+            'atribute7'=>$request->input('atribute7'),
+            'atribute8'=>$request->input('atribute8'),
+            'atribute9'=>$request->input('atribute9'),
+            'atribute10'=>$request->input('atribute10'),
+            'questionsid'=>$request->input('questionsid'),
+        ]);
+        
+        // TODO: Por isto a funcionar
+        //$question->serviceType()->save($serviceType);
+        
+        $newservice = Service::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Edit',
-            'eventnameportuguese' => $request->input('eventnamept'),
-            'eventnameenglish' => $request->input('eventnameen'),
-            'address' => $request->input('address'),
-            'urlportuguese' => $request->input('urlportuguese'),
-            'urlenglish' => $request->input('urlenglish'),
-            'emailtechnical' => $request->input('emailtechnical'),
-            'emailcontact' =>$request->input('emailcontact'),
+            'servicenameid' => $request->input('servicenameid'),
+            'purpose' => $request->input('purpose'),
+            'email' => $request->input('email'),
+            'url' => $request->input('url'),
             'datecreated' => date('Y-m-d'),
-            'contactperson' => $request->input('contactperson'),
-            'description' => $request->input('description'),
             'startdate' => $request->input('startdate'),
             'enddate' => $request->input('enddate'),
             'userid'=> $user->userid,
-            'organicunitid' => $request->input('organicunitid')
+            'organicunitid' => $request->input('organicunitid'),
+            'servicetypeid' => $serviceType->servicetypeid,
         ]);
-        $tags = $request->input('tags');
-        $tagNames = explode(',', $tags);
-
-        foreach ($tagNames as $tagName) {
-            $tagId = Tag::where('tagnameportuguese',$tagName)->orWhere('tagnameenglish',$tagName)->value('tagid');
-            if ($tagId) {
-                $tagIds[] = (int) $tagId;
-            }
-            else {
-                return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
-            }
-        }
-        $event->tags()->attach($tagIds);
-        $event->save();
-        $user->events()->save($event);
+       
 
         $events = $user->events()->get();
         $services = $user->services()->get();
-        return redirect()->route('my.requests', ['events' => $events, 'services' => $services])->with('success', 'Event edit request sent successfully.');
+        return redirect()->route('my.requests', ['events' => $events, 'services' => $services])->with('success', 'Service edit request sent successfully.');
     }
 
     public function deleteService($id)

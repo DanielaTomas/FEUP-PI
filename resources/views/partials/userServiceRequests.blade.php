@@ -48,10 +48,16 @@
                   <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-danger mr-2" href="/edit.service/{{ $service->serviceid }}" title="Edit service request"><span class="d-block text-sm">Edit</span></a></div>
                   @endif
             </div>
-            
+            @if ($service->requesttype === 'Edit')
+            <span class="badge bg-info">Edit</span>
+                @elseif ($service->requesttype === 'Create')
+            <span class="badge bg-primary">Create</span>
+                @elseif ($service->requesttype === 'Archive')
+            <span class="badge bg-secondary">Archive</span>
+            @endif
         </div>
       </div>
     </div>
   </div>
-</div>
+
   <!-- /End of post -->

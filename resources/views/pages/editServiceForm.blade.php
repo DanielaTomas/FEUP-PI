@@ -22,13 +22,14 @@
     <form class="my-4" method="POST" action="{{route('edit.service',['id' => $service->serviceid])}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         
-        
+        <input type="hidden" name="questionsid" value="{{$service->servicetype->questionsid}}">
+        <input type="hidden" name="servicenameid" value="{{$service->servicename->servicenameid}}">
         @include('partials.editservicequestions',['serviceType' => $service->servicetype])
         
 
         <div class="form-group my-3">
             <label for="purpose" class="form-label">Purpose (optional)</label>
-            <textarea id="purpose" rows="4" class="form-control" name="purpose" required placeholder="Enter the purpose the request">{{$service->purpose}}</textarea>
+            <textarea id="purpose" rows="4" class="form-control" name="purpose"  placeholder="Enter the purpose the request">{{$service->purpose}}</textarea>
             @if ($errors->has('purpose'))
             <span class="error">
                 {{ $errors->first('purpose') }}
