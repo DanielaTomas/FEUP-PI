@@ -163,7 +163,7 @@ class EventController extends Controller
         if (!Auth::check()) return redirect('/login');
 
         $event = Event::find($id);
-        $event->user()->detach();
+       // $event->user()->detach();
         $event->tags()->detach();
         $event->delete();
 

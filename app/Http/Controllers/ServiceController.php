@@ -181,18 +181,23 @@ class ServiceController extends Controller
         if (!Auth::check()) return redirect('/login');
 
         $service = Service::find($id);
-        $service->user()->detach();
-        $service->organicUnit()->detach();
+        $serviceType=ServiceType::find($service->servicetypeid);
+
         
+        /*$service->user()->detach();
+        $service->organicUnit()->detach();
+        $service->serviceType()->detach();
+        $service->serviceName()->detach();
         // Deleting entry in ServiceType
-        $serviceTypeId=$service->serviceType();
-        $serviceType=ServiceType::find($serviceTypeId);
-        $serviceType->question()->detach();
-        $serviceType->service()->detach();// PRECISO MESMO DESTE?
+      //  $serviceTypeId=$service->serviceType();
+        
+        $serviceType->question()->detach();*/
+       // $serviceType->service()->detach();// PRECISO MESMO DESTE?
+       $service->delete();
         $serviceType->delete();
 
-        $service->serviceType()->detach();  
-        $service->delete();
+        
+        
 
 
         return redirect()->back()->with('success', 'Service deleted successfully.');

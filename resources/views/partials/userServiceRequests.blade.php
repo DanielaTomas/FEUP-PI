@@ -38,10 +38,13 @@
       </div>
         <div class="col-md-4 op-7">
             <div class="row text-center op-7">
-              <div class="col px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">{{$service->datecreated}}</span></div>
-                <div class="col px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">{{$service->startdate}}</span></div>
-                <div class="col px-1"><i class="ion-ios-chatboxes-outline icon-1x"></i><span class="d-block text-sm">{{$service->enddate}}</span></div>
+              <div class="col px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">Sent: <br>{{$service->datecreated}}</span></div>
+                <div class="col px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">Start Date: <br>{{$service->startdate}}</span></div>
+                <div class="col px-1"><i class="ion-ios-chatboxes-outline icon-1x"></i><span class="d-block text-sm">End Date: <br>{{$service->enddate}}</span></div>
                 <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href=""><span class="d-block text-sm">View >></span></a>
+                  @if($service->datereviewed===NULL)
+                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-danger mr-2" href="/delete.service/{{ $service->serviceid }}" title="Delete service request"><span class="d-block text-sm">Delete</span></a></div>
+                @endif
             </div>
         </div>
       </div>
