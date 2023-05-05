@@ -11,7 +11,7 @@
         <h3>Admin Dashboard - Events</h3>
     </div>
 
-  @if(session('success'))
+    @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>

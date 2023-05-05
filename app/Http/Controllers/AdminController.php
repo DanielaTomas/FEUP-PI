@@ -20,8 +20,19 @@ class AdminController extends Controller
         });
     }
 
-    public function isAdmin()
+    private function isAuthenticated(): bool
     {
+        return $this->user !== null;
+    }
+
+
+
+    public function isAdmin(): bool
+    {
+        if (!$this->isAuthenticated()) {
+            return false;
+        }
+
         if ($this->user->isAdmin()) { //Admins have every permission
             return true;
         }
@@ -29,13 +40,14 @@ class AdminController extends Controller
         return false;
     }
 
-    public function hasRoles()
+    public function hasRoles(): bool
     {
-        if ($this->user === null) {
+
+        if (!$this->isAuthenticated()) {
             return false;
         }
 
-        if ($this->user->isAdmin()) { //Admins have every permission
+        if ($this->isAdmin()) {
             return true;
         }
 

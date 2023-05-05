@@ -13,7 +13,8 @@
         </div>
     @endif
 
-    <form method="GET" action="{{ route('users.search') }}">
+    <form method="POST" action="{{ route('users.search') }}">
+        {{ csrf_field() }}
         <input type="search" class="form-control my-5" name="q" placeholder="Search for a user..." aria-label="Search">
         <button type="submit">Search</button>
     </form>

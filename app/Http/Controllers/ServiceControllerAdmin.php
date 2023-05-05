@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Event;
+use App\Models\Service;
 use App\Models\Formation;
 
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
-class EventControllerAdmin extends AdminController
+class ServiceControllerAdmin extends AdminController
 {
 
     public function __construct()
@@ -25,20 +25,21 @@ class EventControllerAdmin extends AdminController
             return redirect()->back()->with('error', 'You are not authorized to view this admin area.');
         }
 
-        return view("pages.adminEvents");
+        return view("pages.adminServices");
     }
 
+
     /**
-     * Show the admin dashboard for events 
+     * Show the admin dashboard for services 
      */
     public function showCurrent(Request $request)
     {
-        if (!$this->hasRoles()) {
+        /*if (!$this->hasRoles()) {
             return redirect()->back()->with('error', 'You are not authorized to view this admin area.');
         }
 
         if ($this->user->isAdmin()) {
-            $events = Event::whereNotIn('requeststatus', ['Pending'])
+            $services = Service::whereNotIn('requeststatus', ['Pending'])
                 ->paginate(5);
         } else {
             $formations = Formation::where('userid', $this->user->userid)->get();
@@ -47,21 +48,24 @@ class EventControllerAdmin extends AdminController
                 $organicUnitIds = $formations->pluck('organicunitid')->toArray();
             }
 
-            $events = Event::whereNotIn('requeststatus', ['Pending'])
+            $services = Service::whereNotIn('requeststatus', ['Pending'])
                 ->whereIn('organicunitid', $organicUnitIds)
                 ->paginate(5);
-        }
-        return response()->json($events);
+        }*/
+        $services = Service::whereNotIn('requeststatus', ['Pending'])
+            ->paginate(5);
+        return response()->json($services);
     }
 
     public function showPending()
     {
+        /*
         if (!$this->hasRoles()) {
             return redirect()->back()->with('error', 'You are not authorized to view this admin area.');
         }
 
         if ($this->user->isAdmin()) {
-            $pendingEvents = Event::where('requeststatus', 'Pending')
+            $pendingServices = Event::where('requeststatus', 'Pending')
                 ->paginate(5);
         } else {
             $formations = Formation::where('userid', $this->user->userid)->get();
@@ -70,12 +74,14 @@ class EventControllerAdmin extends AdminController
                 $organicUnitIds = $formations->pluck('organicunitid')->toArray();
             }
 
-            $pendingEvents = Event::where('requeststatus', 'Pending')
+            $pendingServices = Event::where('requeststatus', 'Pending')
                 ->whereIn('organicunitid', $organicUnitIds)
                 ->paginate(5);
-        }
+        }*/
+        $pendingServices = Service::where('requeststatus', 'Pending')
+            ->paginate(5);
 
-        return response()->json($pendingEvents);
+        return response()->json($pendingServices);
     }
 
     //Accepts/Rejects event
@@ -86,23 +92,23 @@ class EventControllerAdmin extends AdminController
         }
 
         $formations = Formation::where('userid', $this->user->userid)->get();
-        $event = Event::find($id);
+        $service = Service::find($id);
 
         /**
          * TODO: Ver pq isto falha
          */
         /*if ($formations->isEmpty()) {
-            return redirect()->back()->with('error', 'You are not authorized to update the status of this event.');
+            return redirect()->back()->with('error', 'You are not authorized to update the status of this service.');
         }
 
-        if (!$formations->pluck('organicunitid')->contains($event->organicunitid)) {
-            return redirect()->back()->with('error', 'You are not authorized to update the status of this event.');
+        if (!$formations->pluck('organicunitid')->contains($service->organicunitid)) {
+            return redirect()->back()->with('error', 'You are not authorized to update the status of this service.');
         }*/
 
-        $event->requeststatus = $status;
-        $event->datereviewed = now()->format('Y-m-d');
-        $event->save();
+        $service->requeststatus = $status;
+        $service->datereviewed = now()->format('Y-m-d');
+        $service->save();
 
-        return response()->json($event);
+        return response()->json($service);
     }
 }
