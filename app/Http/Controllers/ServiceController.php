@@ -63,7 +63,6 @@ class ServiceController extends Controller
             'atribute8'=>'nullable|string',
             'atribute9'=>'nullable|string',
             'atribute10'=>'nullable|string',
-            'servicename'=> 'required|string',
             'purpose' => 'nullable|string',
             'email ' => 'nullable|string',
             'url' => 'nullable|regex:' . $regex,
@@ -81,6 +80,7 @@ class ServiceController extends Controller
         $this->validator($request->all())->validate();
         
         $question=Question::find($request->input('questionsid'));
+        $serviceName=ServiceName::find($question->servicenameid);
         $user = Auth::user();
         
         $serviceType=ServiceType::create([
@@ -115,10 +115,10 @@ class ServiceController extends Controller
             'servicetypeid' => $serviceType->servicetypeid,
         ]);
 
-    
+        //$serviceName->services()->save($service);
         //$serviceType->service()->save($service);
         
-        $user->services()->save($service);
+       // $user->services()->save($service);
         
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
         return redirect('/my_requests')->with('success', 'Service creation request sent successfully.');

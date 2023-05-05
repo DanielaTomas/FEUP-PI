@@ -29,4 +29,9 @@ class ServiceName extends Model
         return $this->hasOne(Question::class, 'servicenameid');
     }
 
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'servicenameid');
+    }
+
 }

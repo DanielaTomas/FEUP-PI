@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<?php $language = app()->getLocale();?>
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <button class="float-end btn btn-dark"><a class="nav-link text-light" href="{{route('create.event')}}"> Create Event Request</a></button>
     <div class="d-flex justify content-center link-light">

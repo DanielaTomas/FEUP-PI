@@ -17,7 +17,7 @@ class Service extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'servicename',
+        'servicenameid',
         'requeststatus',
         'requesttype',
         'purpose',
@@ -59,5 +59,10 @@ class Service extends Model
     public function organicUnit()
     {
         return $this->belongsTo(OrganicUnit::class, 'organicunitid');
+    }
+
+    public function serviceName()
+    {
+        return $this->belongsTo(ServiceName::class,'servicenameid');
     }
 }

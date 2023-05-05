@@ -16,7 +16,7 @@ class Question extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'servicename',
+        'servicenameid',
         'question1',
         'question2',
         'question3',
