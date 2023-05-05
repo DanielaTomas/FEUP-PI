@@ -126,10 +126,9 @@ class ServiceController extends Controller
 
     public function editServiceForm($id)
     {
-        $event = Event::find($id);
-        $tags = TagController::getAllTags();
-        $organicUnits=OrganicUnitController::getOrganicUnits();
-        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags,'organicunits'=>$organicUnits]);
+        $service = Service::find($id);
+        
+        return view('pages.editServiceForm', ['service' => $service]);
     }
 
     public function editService(Request $request)
@@ -195,11 +194,14 @@ class ServiceController extends Controller
        // $serviceType->service()->detach();// PRECISO MESMO DESTE?
        $service->delete();
         $serviceType->delete();
-
-        
-        
-
-
         return redirect()->back()->with('success', 'Service deleted successfully.');
+    }
+
+    public function showServiceForm($id){
+
+        if (!Auth::check()) return redirect('/login');
+        $service = Service::find($id);
+        return view('pages.showServiceForm', ['service' => $service]);
+
     }
 }

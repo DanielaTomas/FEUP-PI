@@ -33,7 +33,9 @@ Route::get('/service/{id}','ServiceController@show')->name('show.service');
 Route::get('/service/{id}/create','ServiceController@createServiceForm')->name('create.service');
 Route::post('/create.service', 'ServiceController@createService')->name('create.service');
 Route::get('/delete.service/{id}', 'ServiceController@deleteService')->name('delete.service');
-
+Route::get('/show.service/{id}', 'ServiceController@showServiceForm')->name('show.service');
+Route::get('/edit.service/{id}', 'ServiceController@editServiceForm')->name('edit.service');
+Route::post('/edit.service/{id}', 'ServiceController@editService')->name('edit.service');
 
 // Admin
 ///Events
