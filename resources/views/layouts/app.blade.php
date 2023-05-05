@@ -49,6 +49,11 @@
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>-->
         @if(Auth::check())
+
+          @if(Session::has('orig_user'))
+            <a class="px-2 link-light" href="admin/user/switch/stop">Switch back</a>
+          @endif
+
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
@@ -56,6 +61,9 @@
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
             <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
             <li><a class="dropdown-item" href="#">My Events</a></li>
+            @if(!Session::has('orig_user'))
+              <li><a class="dropdown-item" href="admin/user/switch/start/19">Switch to User View</a></li>      
+            @endif
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{ url('/logout')}}">Sign out</a></li>
@@ -78,7 +86,20 @@
       </div>
     </div>
   </header>
-
+  @if(session('success')) <!--TODO aparece mensagem repetida no my requests -->
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
