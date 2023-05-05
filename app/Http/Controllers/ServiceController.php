@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\ServiceType;
 use App\Models\Question;
+use App\Models\ServiceName;
 
 
 
@@ -17,9 +18,9 @@ class ServiceController extends Controller
 {
 
     public static function getServiceTypes(){
-        $questions=Question::all();
+        $services=ServiceName::all();
 
-        return $questions;
+        return $services;
     }
 
 
@@ -28,15 +29,15 @@ class ServiceController extends Controller
      */
     public function list()
     {
-        $questions=Question::all();
-        return view('pages.serviceList', ['services' => $questions]);
+        $servicesNames=ServiceName::all();
+        return view('pages.serviceList', ['services' => $servicesNames]);
     }
 
     // Show the event page
-    public function show($eventId)
+    public function show($servicenameId)
     {
-        $event = Event::find($eventId);
-        return view('pages.event', ['event' => $event]);
+        $service = ServiceName::find($servicenameId);
+        return view('pages.service', ['service' => $service]);
     }
 
 
@@ -62,7 +63,6 @@ class ServiceController extends Controller
             'atribute8'=>'nullable|string',
             'atribute9'=>'nullable|string',
             'atribute10'=>'nullable|string',
-            'servicename'=> 'required|string',
             'purpose' => 'nullable|string',
             'email ' => 'nullable|string',
             'url' => 'nullable|regex:' . $regex,
@@ -80,6 +80,7 @@ class ServiceController extends Controller
         $this->validator($request->all())->validate();
         
         $question=Question::find($request->input('questionsid'));
+        $serviceName=ServiceName::find($question->servicenameid);
         $user = Auth::user();
         
         $serviceType=ServiceType::create([
@@ -102,7 +103,7 @@ class ServiceController extends Controller
         $service = Service::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Create',
-            'servicename' => $request->input('servicename'),
+            'servicenameid' => $request->input('servicenameid'),
             'purpose' => $request->input('purpose'),
             'email' => $request->input('email'),
             'url' => $request->input('url'),
@@ -114,10 +115,10 @@ class ServiceController extends Controller
             'servicetypeid' => $serviceType->servicetypeid,
         ]);
 
-    
+        //$serviceName->services()->save($service);
         //$serviceType->service()->save($service);
         
-        $user->services()->save($service);
+       // $user->services()->save($service);
         
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
         return redirect('/my_requests')->with('success', 'Service creation request sent successfully.');
@@ -125,54 +126,54 @@ class ServiceController extends Controller
 
     public function editServiceForm($id)
     {
-        $event = Event::find($id);
-        $tags = TagController::getAllTags();
-        $organicUnits=OrganicUnitController::getOrganicUnits();
-        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags,'organicunits'=>$organicUnits]);
+        $service = Service::find($id);
+        
+        return view('pages.editServiceForm', ['service' => $service]);
     }
 
     public function editService(Request $request)
     {
         if (!Auth::check()) return redirect('/login');
         $this->validator($request->all())->validate();
+
         $user = Auth::user();
-        $event = Event::create([
+        
+        $serviceType=ServiceType::create([
+            'atribute1'=>$request->input('atribute1'),
+            'atribute2'=>$request->input('atribute2'),
+            'atribute3'=>$request->input('atribute3'),
+            'atribute4'=>$request->input('atribute4'),
+            'atribute5'=>$request->input('atribute5'),
+            'atribute6'=>$request->input('atribute6'),
+            'atribute7'=>$request->input('atribute7'),
+            'atribute8'=>$request->input('atribute8'),
+            'atribute9'=>$request->input('atribute9'),
+            'atribute10'=>$request->input('atribute10'),
+            'questionsid'=>$request->input('questionsid'),
+        ]);
+        
+        // TODO: Por isto a funcionar
+        //$question->serviceType()->save($serviceType);
+        
+        $newservice = Service::create([
             'requeststatus' => 'Pending',
             'requesttype' => 'Edit',
-            'eventnameportuguese' => $request->input('eventnamept'),
-            'eventnameenglish' => $request->input('eventnameen'),
-            'address' => $request->input('address'),
-            'urlportuguese' => $request->input('urlportuguese'),
-            'urlenglish' => $request->input('urlenglish'),
-            'emailtechnical' => $request->input('emailtechnical'),
-            'emailcontact' =>$request->input('emailcontact'),
+            'servicenameid' => $request->input('servicenameid'),
+            'purpose' => $request->input('purpose'),
+            'email' => $request->input('email'),
+            'url' => $request->input('url'),
             'datecreated' => date('Y-m-d'),
-            'contactperson' => $request->input('contactperson'),
-            'description' => $request->input('description'),
             'startdate' => $request->input('startdate'),
             'enddate' => $request->input('enddate'),
             'userid'=> $user->userid,
-            'organicunitid' => $request->input('organicunitid')
+            'organicunitid' => $request->input('organicunitid'),
+            'servicetypeid' => $serviceType->servicetypeid,
         ]);
-        $tags = $request->input('tags');
-        $tagNames = explode(',', $tags);
-
-        foreach ($tagNames as $tagName) {
-            $tagId = Tag::where('tagnameportuguese',$tagName)->orWhere('tagnameenglish',$tagName)->value('tagid');
-            if ($tagId) {
-                $tagIds[] = (int) $tagId;
-            }
-            else {
-                return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
-            }
-        }
-        $event->tags()->attach($tagIds);
-        $event->save();
-        $user->events()->save($event);
+       
 
         $events = $user->events()->get();
         $services = $user->services()->get();
-        return redirect()->route('my.requests', ['events' => $events, 'services' => $services])->with('success', 'Event edit request sent successfully.');
+        return redirect()->route('my.requests', ['events' => $events, 'services' => $services])->with('success', 'Service edit request sent successfully.');
     }
 
     public function deleteService($id)
@@ -180,20 +181,28 @@ class ServiceController extends Controller
         if (!Auth::check()) return redirect('/login');
 
         $service = Service::find($id);
-        $service->user()->detach();
-        $service->organicUnit()->detach();
+        $serviceType=ServiceType::find($service->servicetypeid);
+
         
+        /*$service->user()->detach();
+        $service->organicUnit()->detach();
+        $service->serviceType()->detach();
+        $service->serviceName()->detach();
         // Deleting entry in ServiceType
-        $serviceTypeId=$service->serviceType();
-        $serviceType=ServiceType::find($serviceTypeId);
-        $serviceType->question()->detach();
-        $serviceType->service()->detach();// PRECISO MESMO DESTE?
+      //  $serviceTypeId=$service->serviceType();
+        
+        $serviceType->question()->detach();*/
+       // $serviceType->service()->detach();// PRECISO MESMO DESTE?
+       $service->delete();
         $serviceType->delete();
-
-        $service->serviceType()->detach();  
-        $service->delete();
-
-
         return redirect()->back()->with('success', 'Service deleted successfully.');
+    }
+
+    public function showServiceForm($id){
+
+        if (!Auth::check()) return redirect('/login');
+        $service = Service::find($id);
+        return view('pages.showServiceForm', ['service' => $service]);
+
     }
 }

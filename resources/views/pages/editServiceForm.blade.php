@@ -7,7 +7,7 @@
 
 <div class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
-        <h3>{{$question->servicename->servicenameenglish}} Request</h3>
+        <h3>{{$service->servicename->servicenameenglish}} Request</h3>
     </div>
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -19,18 +19,17 @@
     </div>
     @endif
 
-    <form class="my-4" method="POST" action="{{route('create.service')}}" enctype="multipart/form-data">
+    <form class="my-4" method="POST" action="{{route('edit.service',['id' => $service->serviceid])}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         
-        <input type="hidden" name="questionsid" value="{{$question->questionsid}}">
-        <input type="hidden" name="servicenameid" value="{{$question->servicename->servicenameid}}">
-
-        @include('partials.servicequestions',['question' => $question])
+        <input type="hidden" name="questionsid" value="{{$service->servicetype->questionsid}}">
+        <input type="hidden" name="servicenameid" value="{{$service->servicename->servicenameid}}">
+        @include('partials.editservicequestions',['serviceType' => $service->servicetype])
         
 
         <div class="form-group my-3">
             <label for="purpose" class="form-label">Purpose (optional)</label>
-            <textarea id="purpose" rows="4" class="form-control" name="purpose" required placeholder="Enter the purpose the request">@if( old('purpose')!==null){{ old('purpose')}}@else @endIf</textarea>
+            <textarea id="purpose" rows="4" class="form-control" name="purpose"  placeholder="Enter the purpose the request">{{$service->purpose}}</textarea>
             @if ($errors->has('purpose'))
             <span class="error">
                 {{ $errors->first('purpose') }}
@@ -42,8 +41,11 @@
         <div class="form-group">
         <label for="organicunitid">Select Organic Unit <span><b class="text-danger">*</b></span>:</label> 
         <select class="form-control" id="organicunitid" name="organicunitid" required>
-             @foreach ($question->servicename->organicunits as $unit)
-                <option value="{{$unit->organicunitid}}">{{ $unit->name }}</option>
+             @foreach ($service->servicename->organicunits as $unit)
+                <option value="{{$unit->organicunitid}}" 
+                    @if($service->organicunitid==$unit->organicunitid)
+                        selected
+                    @endif>{{ $unit->name }}</option>
             @endforeach 
         </select>
         </div>
@@ -51,7 +53,7 @@
 
         <div class="form-group">
             <label for="contactperson" class="form-label">Person to Contact (optional)</label>
-            <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ old('contactperson') }}" >
+            <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ $service->contactperson }}" >
             @if ($errors->has('contactperson'))
             <span class="error">
                 {{ $errors->first('contactperson') }}
@@ -63,7 +65,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="email" class="form-label">Contact Email (optional)</label>
-                <input id="email" class="form-control" placeholder="Enter an email" type="email" name="email" value="{{ old('email') }}">
+                <input id="email" class="form-control" placeholder="Enter an email" type="email" name="email" value="{{ $service->email }}">
                 @if ($errors->has('email'))
                 <span class="error">
                     {{ $errors->first('email') }}
@@ -77,7 +79,7 @@
                 <div class="form-group">
                     <label for="startdate" class="form-label">Start Date (optional)</label>
                     <input type="date" class="form-control" id="startdate" name="startdate"
-                    value="<?php echo date('Y-m-d'); ?>"
+                    value="{{ $service->startdate }}"
                     min="<?php echo date('Y-m-d'); ?>" >
                     @if ($errors->has('startdate'))
                     <span class="error">
@@ -90,7 +92,7 @@
                 <div class="form-group">
                     <label for="enddate" class="form-label">End Date (optional)</label>
                     <input type="date" class="form-control" id="enddate" name="enddate"
-                    value="<?php echo date('Y-m-d'); ?>"
+                    value="{{ $service->enddate }}"
                     min="<?php echo date('Y-m-d'); ?>" >
                     @if ($errors->has('enddate'))
                     <span class="error">
@@ -102,7 +104,7 @@
         </div> 
         
         <div class="col-md-12 text-center mt-5">
-            <button type="submit" class="btn btn-dark">Request Service</button>
+            <button type="submit" class="btn btn-dark">Edit Service Request</button>
         </div>
 
     </form>

@@ -58,8 +58,12 @@
     <div class="col-auto">
       <h3>Services</h3>
       <ul>
-        @foreach($servicetypes as $question)
-        <li class="mt-3"><a href="/service/{{$question->questionsid}}" class="text-dark">{{$question->servicename}}</a></li>
+        @foreach($services as $service)
+        @if($service->description != null)
+        <li class="mt-3"><a href="/service/{{$service->servicenameid}}" class="text-dark">{{$service->servicenameenglish}}</a></li>
+        @else
+        <li class="mt-3"><a href="/service/{{$service->servicenameid}}/create" class="text-dark">{{$service->servicenameenglish}}</a></li>
+        @endif
         @endforeach
         <li class="mt-3"><a href="/services" class="text-dark">See all services</a></li>
       </ul>

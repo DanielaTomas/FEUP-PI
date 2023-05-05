@@ -16,7 +16,7 @@ class Question extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'servicename',
+        'servicenameid',
         'question1',
         'question2',
         'question3',
@@ -32,4 +32,10 @@ class Question extends Model
     public function serviceType(){
         return $this->hasMany(ServiceType::class);
     }
+
+    public function servicename()
+    {
+        return $this->belongsTo(ServiceName::class, 'servicenameid');
+    }
+
 }

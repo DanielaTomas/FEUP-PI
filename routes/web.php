@@ -27,15 +27,25 @@ Route::get('/categories/events', 'CategoryController@showEventCategories')->name
 Route::get('/organicunits/{id}/events', 'OrganicUnitController@show')->name('organics.events');
 
 // SERVICES
-Route::get('/services', 'ServiceController@list')->name('services');
-Route::get('/service/{id}', 'ServiceController@createServiceForm')->name('create.service');
+<<<<<<< routes/web.php
+Route::get('/services','ServiceController@list')->name('services');
+//Route::get('/service/{id}','ServiceController@createServiceForm')->name('create.service');
+Route::get('/service/{id}','ServiceController@show')->name('show.service');
+Route::get('/service/{id}/create','ServiceController@createServiceForm')->name('create.service');
 Route::post('/create.service', 'ServiceController@createService')->name('create.service');
+Route::get('/delete.service/{id}', 'ServiceController@deleteService')->name('delete.service');
+Route::get('/show.service/{id}', 'ServiceController@showServiceForm')->name('show.service');
+Route::get('/edit.service/{id}', 'ServiceController@editServiceForm')->name('edit.service');
+Route::post('/edit.service/{id}', 'ServiceController@editService')->name('edit.service');
+
+
 
 //SEARCH
 Route::get('/users/search', 'UserController@search')->name('users.search');
 
 
 
+>>>>>>> routes/web.php
 
 // Admin
 ///Events

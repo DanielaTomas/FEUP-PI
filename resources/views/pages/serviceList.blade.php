@@ -25,8 +25,8 @@
         <div class="row">
             <div class="col">
                 <ul>
-                    @foreach($services as $question)
-                    <li class="mt-3"><a href="/service/{{$question->questionsid}}" class="text-light">{{$question->servicename}}</a></li>
+                    @foreach($services as $service)
+                    <li class="mt-3"><a href="/service/{{$service->question->questionsid}}" class="text-light">@if($language=="pt"){{$service->servicenameportuguese}}@else{{$service->servicenameenglish}} @endif</a></li>
                     @endforeach
                 </ul>
             </div>

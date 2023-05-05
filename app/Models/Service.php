@@ -17,7 +17,7 @@ class Service extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'servicename',
+        'servicenameid',
         'requeststatus',
         'requesttype',
         'purpose',
@@ -35,7 +35,7 @@ class Service extends Model
     ];
 
     protected $versionable = [
-        'servicename',
+        'servicenameid',
         'purpose',
         'email',
         'contactperson',
@@ -48,16 +48,21 @@ class Service extends Model
 
     public function serviceType()
     {
-        return $this->belongsTo(ServiceType::class);
+        return $this->belongsTo(ServiceType::class,'servicetypeid');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'userId');
+        return $this->belongsTo(User::class, 'userid');
     }
 
     public function organicUnit()
     {
         return $this->belongsTo(OrganicUnit::class, 'organicunitid');
+    }
+
+    public function serviceName()
+    {
+        return $this->belongsTo(ServiceName::class,'servicenameid');
     }
 }

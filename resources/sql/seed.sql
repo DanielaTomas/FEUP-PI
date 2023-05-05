@@ -5,6 +5,8 @@ SET search_path TO paginas_amarelas;
 ---------------------------------------
 -- Drops
 ----------------------------------------
+DROP TABLE IF EXISTS organicService CASCADE;
+DROP TABLE IF EXISTS serviceName CASCADE;
 DROP TABLE IF EXISTS eventtags CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS formation CASCADE;
@@ -59,6 +61,20 @@ CREATE TABLE organicunit(
     name VARCHAR NOT NULL UNIQUE
 );
 
+CREATE TABLE serviceName(
+    serviceNameId SERIAL PRIMARY KEY,
+    serviceNamePortuguese VARCHAR NOT NULL UNIQUE,
+    serviceNameEnglish VARCHAR NOT NULL UNIQUE,
+    description VARCHAR
+);
+
+CREATE TABLE organicService(
+    organicServiceId SERIAL PRIMARY KEY,
+    organicUnitId INTEGER REFERENCES organicunit(organicUnitId),
+    serviceNameId INTEGER REFERENCES serviceName(serviceNameId)
+);
+
+
 CREATE TABLE event(
     eventId SERIAL PRIMARY KEY,
     requestStatus RequestStatus NOT NULL,
@@ -105,7 +121,7 @@ CREATE TABLE formation(
 
 CREATE TABLE questions(
     questionsId SERIAL PRIMARY KEY,
-    serviceName VARCHAR NOT NULL,
+    serviceNameId INTEGER REFERENCES serviceName(serviceNameId),
     question1 VARCHAR NOT NULL, 
     question2 VARCHAR,
     question3 VARCHAR,
@@ -135,7 +151,7 @@ CREATE TABLE servicetype(
 
 CREATE TABLE service(
     serviceId SERIAL PRIMARY KEY,
-    serviceName VARCHAR NOT NULL,
+    serviceNameId INTEGER REFERENCES serviceName(serviceNameId),
     requestStatus RequestStatus NOT NULL,
     requestType RequestTypes NOT NULL,
     purpose VARCHAR,
@@ -240,22 +256,51 @@ INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('networking','network
 
 
 --ORGANIC UNIT
-INSERT INTO organicunit (name) VALUES ('FMDUP');
-INSERT INTO organicunit (name) VALUES ('FMUP');
-INSERT INTO organicunit (name) VALUES ('FPCE');
-INSERT INTO organicunit (name) VALUES ('FAUP');
-INSERT INTO organicunit (name) VALUES ('FCNAUP');
-INSERT INTO organicunit (name) VALUES ('FCUP');
-INSERT INTO organicunit (name) VALUES ('FEP');
-INSERT INTO organicunit (name) VALUES ('FEUP');
-INSERT INTO organicunit (name) VALUES ('FLUP');
-INSERT INTO organicunit (name) VALUES ('ICBAS');
-INSERT INTO organicunit (name) VALUES ('REITORIA');
-INSERT INTO organicunit (name) VALUES ('SIPREITORIA');
-INSERT INTO organicunit (name) VALUES ('UPDIGITAL');
-INSERT INTO organicunit (name) VALUES ('ISPUP');
-INSERT INTO organicunit (name) VALUES ('ALUMNI');
-INSERT INTO organicunit (name) VALUES ('CULTURA');
+INSERT INTO organicunit (name) VALUES ('FMDUP');--1
+INSERT INTO organicunit (name) VALUES ('FMUP');--2
+INSERT INTO organicunit (name) VALUES ('FPCE');--3
+INSERT INTO organicunit (name) VALUES ('FAUP');--4
+INSERT INTO organicunit (name) VALUES ('FCNAUP');--5
+INSERT INTO organicunit (name) VALUES ('FCUP');--6
+INSERT INTO organicunit (name) VALUES ('FEP');--7
+INSERT INTO organicunit (name) VALUES ('FEUP');--8
+INSERT INTO organicunit (name) VALUES ('FLUP');--9
+INSERT INTO organicunit (name) VALUES ('ICBAS');--10
+INSERT INTO organicunit (name) VALUES ('REITORIA');--11
+INSERT INTO organicunit (name) VALUES ('CDUP');--12
+INSERT INTO organicunit (name) VALUES ('FBAUP');--13
+INSERT INTO organicunit (name) VALUES ('SASUP');--14
+INSERT INTO organicunit (name) VALUES ('FPCEUP');--15
+INSERT INTO organicunit (name) VALUES ('UPDIGITAL');--16
+INSERT INTO organicunit (name) VALUES ('INEGI');--17
+INSERT INTO organicunit (name) VALUES ('FADEUP');--18
+INSERT INTO organicunit (name) VALUES ('FDUP');--19
+INSERT INTO organicunit (name) VALUES ('UPORTO');--20
+
+-- SERVICE NAME
+INSERT INTO servicename (serviceNameEnglish,serviceNamePortuguese,description) VALUES ('HPC and Grid Computing','HPC e Grid Computing','HPC and Grid Computing is a service that deals with the management of the high performance computing infrastructure. Access to the service is restricted to certain departments of FEUP, FCUP and INEGI, requiring an authorization from the person in charge.');--FEUP, FCUP e INEGI
+INSERT INTO servicename (serviceNameEnglish,serviceNamePortuguese,description) VALUES ('Virtual Machine','Máquina Virtual','Currently this resource is only available to the Faculty of Engineering.
+
+The creation of virtual machines depends on the existence of hardware resources. The service is not intended for high performance computing.
+
+It should be noted that:
+
+Machines for teaching support are valid for one semester or one academic year;
+The machines for project support are active until the end of the project;
+Machine management and backup copies are the users responsibility;
+Only open source or licensed software can be installed;
+Access to Linux machines is by SSH key.');--
+--INSERT INTO servicename (serviceNameEnglish,serviceNamePortuguese) VALUES ('HPC and Grid Computing','HPC e Grid Computing');
+
+
+-- organicService
+INSERT INTO organicService (serviceNameId, organicUnitId) VALUES (1, 8);
+INSERT INTO organicService (serviceNameId, organicUnitId) VALUES (1, 6);
+INSERT INTO organicService (serviceNameId, organicUnitId) VALUES (1, 17);
+
+INSERT INTO organicService (serviceNameId, organicUnitId) VALUES (2, 8);
+
+
 
 -- EVENT
 INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact, 
@@ -384,27 +429,25 @@ INSERT INTO usereventorganic (userId,eventId, organicUnitId) VALUES (1, 10, 14);
 
 
 -- Sample data for the "questions" table
-INSERT INTO questions (serviceName,question1)
-VALUES ('Virtual Machine Request','Whats the version?');
+INSERT INTO questions (serviceNameId,question1,question2)
+VALUES (1,'Department/Group','Supervisor Email:');
 
-INSERT INTO questions (serviceName,question1, question2, question3, question4, question5, question6, question7, question8, question9, question10)
-VALUES ('Introduction','What is your name?', 'What is your age?', 'What is your favorite color?', 'What is your favorite food?', 'What is your favorite movie?',
-'What is your favorite book?', 'What is your favorite sport?', 'What is your favorite hobby?', 'What is your favorite animal?', 'What is your favorite song?');
+INSERT INTO questions (serviceNameId,question1,question2, question3, question4)
+VALUES (2, 'CPU', 'RAM','Disk', 'Operating System');
 
 
 
 --- SERVICE TYPE
 
-INSERT INTO servicetype (questionsId,atribute1) values (1,'5.2');
-INSERT INTO servicetype (questionsId,atribute1) values (1,'1.8');
-INSERT INTO servicetype (questionsId,atribute1) values (1,'9.7');
+INSERT INTO servicetype (questionsId,atribute1,atribute2) values (1,'FCUP','pedro.dinis@fc.up.pt');
+INSERT INTO servicetype (questionsId,atribute1,atribute2,atribute3,atribute4) values (2,'RYZEN-5 6100','32GB','100G','Linux');
 
 
 -- SERVICE
 
-INSERT INTO service (serviceName,requestStatus,requestType,purpose,email,contactPerson,url,startDate,endDate,dateReviewed,serviceTypeId,userId,organicUnitId,dateCreated)
-VALUES ('Virtual Machine Request','Pending', 'Create',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,2,5,'2023-04-20');
+INSERT INTO service (serviceNameId,requestStatus,requestType,purpose,email,contactPerson,url,startDate,endDate,dateReviewed,serviceTypeId,userId,organicUnitId,dateCreated)
+VALUES (1,'Pending', 'Create',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,2,6,'2023-04-20');
 
 
-INSERT INTO service (serviceName,requestStatus,requestType,purpose,email,contactPerson,url,startDate,endDate,dateReviewed,serviceTypeId,userId,organicUnitId,dateCreated)
-VALUES ('Virtual Machine Request','Pending', 'Create','For the 2nd year course LCOM','henrique@gaio.com',NULL,NULL,NULL,NULL,NULL,1,2,8,'2023-04-20');
+INSERT INTO service (serviceNameId,requestStatus,requestType,purpose,email,contactPerson,url,startDate,endDate,dateReviewed,serviceTypeId,userId,organicUnitId,dateCreated)
+VALUES (2,'Pending', 'Create','For the 2nd year course LCOM','henrique@gaio.com',NULL,NULL,'2022-07-10','2023-07-10',NULL,2,2,8,'2023-04-20');
