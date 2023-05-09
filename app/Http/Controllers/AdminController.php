@@ -20,6 +20,15 @@ class AdminController extends Controller
         });
     }
 
+    public function isAdmin()
+    {
+        if ($this->user->isAdmin()) { //Admins have every permission
+            return true;
+        }
+
+        return false;
+    }
+
     public function hasRoles()
     {
         if ($this->user === null) {

@@ -3,7 +3,14 @@
   <div class="row align-items-center">
       <div class="col-md-8 mb-3 mb-sm-0">
         <h5>
-          <a href="{{ $service->serviceid }}" class="text-primary">{{$service->servicename}}</a>
+         
+    
+          <?php $language = app()->getLocale();?>
+          @if($service->servicename->description!=null)
+          <a href="/service/{{$service->servicenameid}}" class="text-primary">@if($language=="pt"){{$service->servicename->servicenameportuguese}}@else{{$service->servicename->servicenameenglish}}@endif</a>
+          @else
+          <p  class="text-primary">@if($language=="pt"){{$service->servicename->servicenameportuguese}}@else{{$service->servicename->servicenameenglish}}@endif</p>
+          @endif
           <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23fff" class="bi bi-clock-history" viewBox="0 0 16 16">
             <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
             <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
@@ -29,16 +36,28 @@
             </svg>
             
       </div>
-        <div class="col-md-4 op-7">
+        <div class="col-md-6 op-7">
             <div class="row text-center op-7">
-              <div class="col px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">{{$service->datecreated}}</span></div>
-                <div class="col px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">{{$service->startdate}}</span></div>
-                <div class="col px-1"><i class="ion-ios-chatboxes-outline icon-1x"></i><span class="d-block text-sm">{{$service->enddate}}</span></div>
-                <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href=""><span class="d-block text-sm">View >></span></a>
+              <div class="col px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">Sent: <br>{{$service->datecreated}}</span></div>
+                <div class="col px-1"><i class="ion-connection-bars icon-1x"></i><span class="d-block text-sm">Start Date: <br>{{$service->startdate}}</span></div>
+                <div class="col px-1"><i class="ion-ios-chatboxes-outline icon-1x"></i><span class="d-block text-sm">End Date: <br>{{$service->enddate}}</span></div>
+                <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/show.service/{{$service->serviceid}}"><span class="d-block text-sm">View >></span></a></div>
+                  @if($service->datereviewed!==NULL)
+                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-danger mr-2" href="/delete.service/{{ $service->serviceid }}" title="Delete service request"><span class="d-block text-sm">Delete</span></a></div>
+                  @else
+                  <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-danger mr-2" href="/edit.service/{{ $service->serviceid }}" title="Edit service request"><span class="d-block text-sm">Edit</span></a></div>
+                  @endif
             </div>
+            @if ($service->requesttype === 'Edit')
+            <span class="badge bg-info">Edit</span>
+                @elseif ($service->requesttype === 'Create')
+            <span class="badge bg-primary">Create</span>
+                @elseif ($service->requesttype === 'Archive')
+            <span class="badge bg-secondary">Archive</span>
+            @endif
         </div>
       </div>
     </div>
   </div>
-</div>
+
   <!-- /End of post -->
