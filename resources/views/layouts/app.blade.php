@@ -14,6 +14,7 @@
     <link type="text/css" href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"  >
     <!--CSS to Overide-->
     <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('css/theme.css') }}" rel="stylesheet">
 
     <script   type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
     <script    type="text/javascript" src={{ asset('js/app.js') }} defer> </script>
@@ -62,14 +63,14 @@
           </ul>
         </div>
         @else
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0"> 
           <button class="btn btn btn-secondary my-2 my-sm-0 text-light" type="submit">
             <a class="text-decoration-none text-dark" href="{{ url('/login') }}">Login</a>
           </button>
         </form>
         @endif
 
-        <button class="btn border border-grey mx-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color:transparent">
+        <button id="sideToggle" class="btn border border-grey mx-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color:transparent">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="White" class="bi bi-list" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
           </svg>

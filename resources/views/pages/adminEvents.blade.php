@@ -6,7 +6,7 @@
 <script   type="text/javascript" src={{ asset('js/adminEvent.js') }} defer> </script>
 @endpush
 
-<div class="p-5 m-5 bg-secondary rounded min-height">
+<div id="adminContainer" class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
         <h3>Admin Dashboard - Events</h3>
     </div>
@@ -40,7 +40,7 @@
 
 <!-- Tab panes -->
 <div class="tab-content mt-5">
-  <div class="tab-pane container active" id="eventRequests">
+  <div class="tab-pane container active table-responsive" id="eventRequests">
     <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
         <thead class="bg-light">
             <tr>

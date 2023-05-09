@@ -3,9 +3,22 @@
 const currentYear = new Date().getFullYear();
 const url = `https://date.nager.at/api/v3/PublicHolidays/${currentYear}/PT`;
 
+const header = document.getElementsByTagName('header')[0];
+const footer = document.getElementsByTagName('footer')[0];
+const buttons = $('button');
+const footerLinks = $('footer ul li').children();
+const sideNav = $('#offcanvasExample');
+const backContainer = $('#backContainer');
+const backEventsContainer = $('#eventsContainer')
+const eventContainer = $('#eventContainer');
+const eventTag = $('#eventTag').children();
+const adminContainer = $('#adminContainer')
+
+console.log(eventTag);
+
 function processHolidays(holidays) {
     /*if you want to test change today date, YYYY-MM-DD */
-    const today = new Date();
+    const today = new Date("2023-12-01");
     const homeIcon = document.querySelector('#home');
 
     const xmas = new Date(holidays['Christmas Day']);
@@ -26,6 +39,41 @@ function processHolidays(holidays) {
         /*check if december(12), make it last december */
         case xmasMonth:
             const xmasIcon =document.querySelector('#xmas');
+
+            header.classList.add("x-mas");
+            header.classList.remove("bg-dark");
+            footer.classList.add("x-mas");
+            footer.classList.remove("bg-dark");
+
+            footerLinks.each(function() {
+                $( this ).attr("class","nav-link px-2 text-light x-mas");
+              });
+
+              buttons.each(function() {
+                /*this stops FAQ page from being broken*/
+                if ($(this).attr("id") === "FAQbutton") {
+                    console.log("hello");
+                    return;
+                }
+                else if ($(this).attr("id") === "sideToggle"){
+                    $(this).attr("class","btn border border-grey mx-1 x-mas");   
+                }else{
+                    $(this).attr("class", "btn btn x-mas my-2 my-sm-0 text-light");
+                }
+
+            });
+
+            sideNav.attr("class","offcanvas offcanvas-start x-mas");
+            backContainer.attr("class","p-1 mx-5 my-5 x-mas rounded");
+            backEventsContainer.attr("class","p-5 m-5 x-mas rounded min-height");
+            eventContainer.attr("class","p-5 m-5 x-mas rounded min-height");
+            adminContainer.attr("class","p-5 m-5 x-mas rounded min-height");
+
+            eventTag.each(function(){
+                console.log("hello");
+                $(this).attr("class","badge x-mas rounded-pill");
+            });
+
             xmasIcon.style.display = "block";
             homeIcon.style.display = "none";
             break;
@@ -73,6 +121,15 @@ function getHolidays(callback) {
 getHolidays(processHolidays);
 
 
+
+
+
+
+
+
+/**
+ * TODO: put things from here in their specific .js file
+ */
 const editeventform=document.querySelector('#editeventform');
 const editeventformbtn=document.querySelector('#editeventbutton');
 

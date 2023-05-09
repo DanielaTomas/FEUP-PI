@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="p-5 m-5 bg-secondary rounded min-height">
+<div id="eventContainer" class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify-content-center m-auto link-light">
         <h3 class="text-center text-light">{{$event->eventnameenglish}}</h3>
     </div>
@@ -23,9 +23,9 @@
                             <p><b>Tags: </b>
                             @if($event->tags()->count() > 0)
                                 @foreach($event->tags()->get() as $tag)
-                                <a href="/tags/{{$tag->tagid}}/events"><span class="badge bg-secondary rounded-pill">{{$tag->tagnameenglish}}</span></a>
+                                <a id="eventTag" href="/tags/{{$tag->tagid}}/events"><span class="badge bg-secondary rounded-pill">{{$tag->tagnameenglish}}</span></a>
                                 @endforeach
-                                <a href="/organicunits/{{$event->organicunit->organicunitid}}/events"><span class="badge bg-secondary rounded-pill">{{$event->organicunit->name}}</span></a>
+                                <a id="eventTag" href="/organicunits/{{$event->organicunit->organicunitid}}/events"><span id="eventTag" class="badge bg-secondary rounded-pill">{{$event->organicunit->name}}</span></a>
                             @else
                                 N/A
                             @endif

@@ -1,0 +1,11 @@
+.x-mas {
+    background-color: rgb(161, 30, 30);
+}
+
+button.x-mas{
+    background-color: rgb(212, 61, 61);
+}
+
+button.x-mas:hover{
+    background-color: rgb(197, 58, 58);
+}

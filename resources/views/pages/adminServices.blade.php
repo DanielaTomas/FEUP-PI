@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="p-5 m-5 bg-secondary rounded min-height">
+<div id="adminContainer" class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
         <h3>Admin Dashboard - Services</h3>
     </div>
@@ -22,7 +22,7 @@
 
 <!-- Tab panes -->
 <div class="tab-content mt-5">
-  <div class="tab-pane container active" id="serviceRequests">
+  <div class="tab-pane container active table-responsive" id="serviceRequests">
     <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
         <thead class="bg-light">
             <tr>
@@ -86,7 +86,7 @@
         </tbody>
     </table>
   </div>
-  <div class="tab-pane container" id="services">
+  <div class="tab-pane container table-responsive" id="services">
     <table class="table rounded rounded-3 overflow-hidden align-middle bg-white">
             <thead class="bg-light">
                 <tr>
