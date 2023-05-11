@@ -2,6 +2,13 @@
 
 @section('content')
 
+@push('pageJS')
+<script   type="text/javascript" src={{ asset('js/event.js') }} defer> </script>
+@endpush
+
+<div id="organicUnitName" style="display:none">{{$organicunit}}</div>
+
+
 
 <div id="eventsContainer" class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify content-center link-light">
@@ -9,7 +16,8 @@
         @if(isset($tag))
           - {{$tag}}
         @elseif(isset($organicunit))
-          -{{$organicunit}}
+          -
+          <span>{{$organicunit}}</span>
         @endif</h3>
     </div>
     <div class="input-group py-5 px-5">

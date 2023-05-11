@@ -2,6 +2,12 @@
 
 @section('content')
 
+@push('pageJS')
+<script   type="text/javascript" src={{ asset('js/event.js') }} defer> </script>
+@endpush
+
+<div id="organicUnitName" style="display:none">{{$event->organicunit->name}}</div>
+
 <div id="eventContainer" class="p-5 m-5 bg-secondary rounded min-height">
     <div class="d-flex justify-content-center m-auto link-light">
         <h3 class="text-center text-light">{{$event->eventnameenglish}}</h3>

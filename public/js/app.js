@@ -3,22 +3,20 @@
 const currentYear = new Date().getFullYear();
 const url = `https://date.nager.at/api/v3/PublicHolidays/${currentYear}/PT`;
 
-const header = document.getElementsByTagName('header')[0];
-const footer = document.getElementsByTagName('footer')[0];
+const header = $('header');
+const footer = $('footer');
 const buttons = $('button');
 const footerLinks = $('footer ul li').children();
 const sideNav = $('#offcanvasExample');
 const backContainer = $('#backContainer');
 const backEventsContainer = $('#eventsContainer')
-const eventContainer = $('#eventContainer');
-const eventTag = $('#eventTag').children();
+//const eventContainer = $('#eventContainer');
+//const eventTag = $('#eventTag').children();
 const adminContainer = $('#adminContainer')
-
-console.log(eventTag);
 
 function processHolidays(holidays) {
     /*if you want to test change today date, YYYY-MM-DD */
-    const today = new Date("2023-12-01");
+    const today = new Date("");
     const homeIcon = document.querySelector('#home');
 
     const xmas = new Date(holidays['Christmas Day']);
@@ -38,12 +36,10 @@ function processHolidays(holidays) {
     switch(today.getMonth() + 1){
         /*check if december(12), make it last december */
         case xmasMonth:
-            const xmasIcon =document.querySelector('#xmas');
+            const xmasIcon = document.querySelector("#xmas");
 
-            header.classList.add("x-mas");
-            header.classList.remove("bg-dark");
-            footer.classList.add("x-mas");
-            footer.classList.remove("bg-dark");
+            header.removeClass("bg-dark").addClass("x-mas");
+            footer.removeClass("bg-dark").addClass("x-mas");
 
             footerLinks.each(function() {
                 $( this ).attr("class","nav-link px-2 text-light x-mas");
@@ -56,23 +52,27 @@ function processHolidays(holidays) {
                     return;
                 }
                 else if ($(this).attr("id") === "sideToggle"){
-                    $(this).attr("class","btn border border-grey mx-1 x-mas");   
+                    $(this).removeClass("bg-dark").addClass("x-mas");   
+                }
+                else if ($(this).attr("class") === "btn-close btn-close-white"){
+                    return;
                 }else{
-                    $(this).attr("class", "btn btn x-mas my-2 my-sm-0 text-light");
+                    $(this).removeClass("btn-secondary").addClass("x-mas");
+                    $(this).removeClass("btn-primary").addClass("x-mas");;
                 }
 
             });
 
-            sideNav.attr("class","offcanvas offcanvas-start x-mas");
-            backContainer.attr("class","p-1 mx-5 my-5 x-mas rounded");
-            backEventsContainer.attr("class","p-5 m-5 x-mas rounded min-height");
-            eventContainer.attr("class","p-5 m-5 x-mas rounded min-height");
-            adminContainer.attr("class","p-5 m-5 x-mas rounded min-height");
+            sideNav.removeClass("bg-dark").addClass("x-mas");
+            backContainer.removeClass("bg-secondary").addClass("x-mas");
+            backEventsContainer.removeClass("bg-secondary").addClass("x-mas");
+            //eventContainer.attr("class","p-5 m-5 x-mas rounded min-height");
+            adminContainer.removeClass("bg-secondary").addClass("x-mas");
 
-            eventTag.each(function(){
+            /*eventTag.each(function(){
                 console.log("hello");
                 $(this).attr("class","badge x-mas rounded-pill");
-            });
+            });*/
 
             xmasIcon.style.display = "block";
             homeIcon.style.display = "none";
