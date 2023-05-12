@@ -107,6 +107,10 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// RSS
+Route::get('rss', 'FeedController@rss')->name('rss');
+Route::feeds();
+
 //Static pages
 Route::get("/about", function () {
     return view("pages.about");

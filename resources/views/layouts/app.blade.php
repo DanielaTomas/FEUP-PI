@@ -44,6 +44,7 @@
           <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Requests</a></li>
           <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Events</a></li>
           <li><a href="{{url('admin')}}" class="nav-link px-2 link-light">Admin Dashboard</a></li>
+          <li><a href="{{route('rss')}}" class="nav-link px-2 link-light">RSS</a></li>
         </ul>
         <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
