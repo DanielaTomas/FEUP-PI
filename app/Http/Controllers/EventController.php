@@ -32,6 +32,12 @@ class EventController extends Controller
         return view('pages.event', ['event' => $event]);
     }
 
+    public function search(Request $request){
+        $searchTerm = 'your search term';
+
+        $results = YourModel::search($request->input('searchTerm'))->get();
+    }
+
 
     public function createEventForm()
     {
