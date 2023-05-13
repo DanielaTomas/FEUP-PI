@@ -12,8 +12,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
+
 class EventController extends Controller
 {
+        
+    public static function getFeedItems(){
+      return $events = Event::where('requeststatus', 'Accepted')->get();
+    }
 
     /**
      * Show the events page //TODO: check naming conventions
