@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Overtrue\LaravelVersionable\Versionable;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 
-class Event extends Model
+class Event extends Model implements Feedable 
 {
     use HasFactory;
     //use Versionable;
@@ -68,11 +72,26 @@ class Event extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'userId');
+        return $this->belongsTo(User::class, 'userid');
     }
 
     public function organicUnit()
     {
         return $this->belongsTo(OrganicUnit::class, 'organicunitid');
+    }
+
+
+    public function toFeedItem(): FeedItem
+    {      
+        $this->load('user');
+        $user = $this->user;
+        return FeedItem::create()
+            ->id($this->eventid)
+            ->title($this->eventnameenglish)
+            ->summary($this->description)
+            ->updated(Carbon::parse($this->datecreated))
+            ->link('/events/' . $this->eventid)
+            ->authorName($user->name)
+            ->authorEmail($this->emailtechnical);
     }
 }
