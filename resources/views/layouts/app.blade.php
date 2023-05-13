@@ -41,11 +41,9 @@
           <img src="/images/template/pumpkin.png" alt="halloweenIcon" width="32" height="32" id="halloween" style="display: none">
         </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Requests</a></li>
-          <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Events</a></li>
-          <li><a href="{{url('admin')}}" class="nav-link px-2 link-light">Admin Dashboard</a></li>
-        </ul>
+        <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          
+        </div>
         <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>-->
@@ -56,8 +54,10 @@
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
             <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
-            <li><a class="dropdown-item" href="#">My Events</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="{{route('my.requests')}}">My Events</a></li>
+            @if(Auth::check() && Auth::user()->isAdmin())
+            <li><a class="dropdown-item" href="{{url('admin')}}">Admin Dashboard</a></li>
+            @endif 
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{ url('/logout')}}">Sign out</a></li>
           </ul>
@@ -79,6 +79,7 @@
       </div>
     </div>
   </header>
+
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">

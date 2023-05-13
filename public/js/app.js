@@ -69,11 +69,6 @@ function processHolidays(holidays) {
             //eventContainer.attr("class","p-5 m-5 x-mas rounded min-height");
             adminContainer.removeClass("bg-secondary").addClass("x-mas");
 
-            /*eventTag.each(function(){
-                console.log("hello");
-                $(this).attr("class","badge x-mas rounded-pill");
-            });*/
-
             xmasIcon.style.display = "block";
             homeIcon.style.display = "none";
             break;
@@ -166,6 +161,12 @@ if(editeventform!=null){
         editeventformbtn.disabled = !hasChanges;
     });
 }
+
+const backButton = document.getElementById('backButton');
+
+backButton.addEventListener('click', function() {
+  window.history.back();
+});
 
 
 
