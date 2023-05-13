@@ -42,7 +42,9 @@
         </a>
 
         <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          
+          <li><a href="{{url('feed')}}" class="nav-link px-2 link-light"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2zm0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2zm.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+          </svg></a></li>
         </div>
         <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
@@ -55,7 +57,6 @@
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
             <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
             <li><a class="dropdown-item" href="{{route('my.requests')}}">My Events</a></li>
-            <li><a href="{{url('feed')}}" class="nav-link px-2 link-light">RSS</a></li>
             @if(Auth::check() && Auth::user()->isAdmin())
             <li><a class="dropdown-item" href="{{url('admin')}}">Admin Dashboard</a></li>
             @endif 
