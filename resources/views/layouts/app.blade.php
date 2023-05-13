@@ -14,6 +14,7 @@
     <link type="text/css" href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"  >
     <!--CSS to Overide-->
     <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('css/theme.css') }}" rel="stylesheet">
 
     <script   type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
     <script    type="text/javascript" src={{ asset('js/app.js') }} defer> </script>
@@ -40,12 +41,11 @@
           <img src="/images/template/pumpkin.png" alt="halloweenIcon" width="32" height="32" id="halloween" style="display: none">
         </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Requests</a></li>
-          <li><a href="{{route('my.requests')}}" class="nav-link px-2 link-light">My Events</a></li>
-          <li><a href="{{url('admin')}}" class="nav-link px-2 link-light">Admin Dashboard</a></li>
-          <li><a href="{{url('feed')}}" class="nav-link px-2 link-light">RSS</a></li>
-        </ul>
+        <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{{url('feed')}}" class="nav-link px-2 link-light"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2zm0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2zm.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+          </svg></a></li>
+        </div>
         <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>-->
@@ -56,21 +56,23 @@
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
             <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
-            <li><a class="dropdown-item" href="#">My Events</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="{{route('my.requests')}}">My Events</a></li>
+            @if(Auth::check() && Auth::user()->isAdmin())
+            <li><a class="dropdown-item" href="{{url('admin')}}">Admin Dashboard</a></li>
+            @endif 
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{ url('/logout')}}">Sign out</a></li>
           </ul>
         </div>
         @else
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0"> 
           <button class="btn btn btn-secondary my-2 my-sm-0 text-light" type="submit">
             <a class="text-decoration-none text-dark" href="{{ url('/login') }}">Login</a>
           </button>
         </form>
         @endif
 
-        <button class="btn border border-grey mx-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color:transparent">
+        <button id="sideToggle" class="btn border border-grey mx-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color:transparent">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="White" class="bi bi-list" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
           </svg>
@@ -79,6 +81,7 @@
       </div>
     </div>
   </header>
+
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
