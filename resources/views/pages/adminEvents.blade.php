@@ -42,6 +42,9 @@
   </li>
 </ul>
 
+<div id="eventSucess" class="alert alert-success" style="display:none">Event request successfully.</div>
+<div id="eventError" class="alert alert-danger" style="display:none">Event request rejected.</div>
+
 <!-- Tab panes -->
 <div class="tab-content mt-5">
   <div class="tab-pane container active table-responsive" id="eventRequests">
