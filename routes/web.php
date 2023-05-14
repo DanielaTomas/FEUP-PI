@@ -70,8 +70,8 @@ Route::post('/edit_event/{id}', 'EventController@editEvent')->name('edit.event')
 Route::get('/delete_event/{id}', 'EventController@deleteEvent')->name('delete.event');
 
 
-Route::get('admin/user/switch/start/{id}','UserController@user_switch_start');
-Route::get('admin/user/switch/stop','UserController@user_switch_stop');
+Route::get('/admin/user/switch/start','UserController@user_switch_start');
+Route::get('/admin/user/switch/stop','UserController@user_switch_stop');
 
 
 

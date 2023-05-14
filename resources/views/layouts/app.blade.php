@@ -51,30 +51,30 @@
         @if(Auth::check())
 
           @if(Session::has('orig_user'))
-            <a class="px-2 link-light" href="admin/user/switch/stop">Switch back</a>
+            <a class="px-2 link-light" href="/admin/user/switch/stop">Switch back</a>
           @endif
 
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
-          </a>
-          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-            <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
-            <li><a class="dropdown-item" href="#">My Events</a></li>
-            @if(!Session::has('orig_user'))
-              <li><a class="dropdown-item" href="admin/user/switch/start/19">Switch to User View</a></li>      
-            @endif
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{{ url('/logout')}}">Sign out</a></li>
-          </ul>
-        </div>
+          <div class="dropdown text-end">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
+            </a>
+            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+              <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
+              <li><a class="dropdown-item" href="#">My Events</a></li>
+              @if(!Session::has('orig_user') && Auth::user()->isadmin && !Str::startsWith(request()->path(),'admin'))
+                <li><a class="dropdown-item" href="/admin/user/switch/start">Switch to User View</a></li>      
+              @endif
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ url('/logout')}}">Sign out</a></li>
+            </ul>
+          </div>
         @else
-        <form class="form-inline my-2 my-lg-0">
-          <button class="btn btn btn-secondary my-2 my-sm-0 text-light" type="submit">
-            <a class="text-decoration-none text-dark" href="{{ url('/login') }}">Login</a>
-          </button>
-        </form>
+          <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn btn-secondary my-2 my-sm-0 text-light" type="submit">
+              <a class="text-decoration-none text-dark" href="{{ url('/login') }}">Login</a>
+            </button>
+          </form>
         @endif
 
         <button class="btn border border-grey mx-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color:transparent">
@@ -86,7 +86,7 @@
       </div>
     </div>
   </header>
-  @if(session('success')) <!--TODO aparece mensagem repetida no my requests -->
+  @if(session('success')) <!--TODO aparece mensagem repetida no my requests, ... -->
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
