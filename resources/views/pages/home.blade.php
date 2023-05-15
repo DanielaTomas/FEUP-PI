@@ -3,7 +3,7 @@
 @section('content')
 <?php $language = app()->getLocale();?>
 <div class="flex-column">
-  <div class="p-1 mx-5 my-5 bg-secondary rounded">
+  <div id="backContainer" class="p-1 mx-5 my-5 bg-secondary rounded">
     <div class="justify content-center link-light">
       <div class="justify content-center link-light mx-5 mt-5">
         Search for an event:
