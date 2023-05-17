@@ -50,26 +50,32 @@
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>-->
         @if(Auth::check())
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
-          </a>
-          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-            <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
-            <li><a class="dropdown-item" href="{{route('my.requests')}}">My Events</a></li>
-            @if(Auth::check() && Auth::user()->isAdmin())
-            <li><a class="dropdown-item" href="{{url('admin')}}">Admin Dashboard</a></li>
-            @endif 
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{{ url('/logout')}}">Sign out</a></li>
-          </ul>
-        </div>
+          @if(Session::has('orig_user'))
+              <a class="px-2 link-light" href="/admin/user/switch/stop">Switch back</a>
+          @endif
+          <div class="dropdown text-end">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
+            </a>
+            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+              <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
+              <li><a class="dropdown-item" href="{{route('my.requests')}}">My Events</a></li>
+              @if(Auth::check() && Auth::user()->isAdmin())
+              <li><a class="dropdown-item" href="{{url('admin')}}">Admin Dashboard</a></li>
+              @endif 
+              @if(!Session::has('orig_user') && Auth::user()->isadmin && !Str::startsWith(request()->path(),'admin'))
+                <li><a class="dropdown-item" href="/admin/user/switch/start">Switch to User View</a></li>      
+              @endif
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ url('/logout')}}">Sign out</a></li>
+            </ul>
+          </div>
         @else
-        <form class="form-inline my-2 my-lg-0"> 
-          <button class="btn btn btn-secondary my-2 my-sm-0 text-light" type="submit">
-            <a class="text-decoration-none text-dark" href="{{ url('/login') }}">Login</a>
-          </button>
-        </form>
+          <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn btn-secondary my-2 my-sm-0 text-light" type="submit">
+              <a class="text-decoration-none text-dark" href="{{ url('/login') }}">Login</a>
+            </button>
+          </form>
         @endif
 
         <button id="sideToggle" class="btn border border-grey mx-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color:transparent">
@@ -81,8 +87,20 @@
       </div>
     </div>
   </header>
-
-
+  @if(session('success')) <!--TODO aparece mensagem repetida no my requests, ... -->
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
