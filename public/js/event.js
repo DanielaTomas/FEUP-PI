@@ -1,7 +1,7 @@
 const eventsContainer = $('#eventsContainer');
 const eventContainer = $('#eventContainer');
+const tags = $('.badge.bg-secondary.rounded-pill');
 //const eventTag = $('event')
-
 
 window.onload = function organicUnitTheme() {
     const organicUnitName = $('#organicUnitName').html();
@@ -10,11 +10,18 @@ window.onload = function organicUnitTheme() {
         case "FEUP":
             eventContainer.removeClass("bg-secondary").addClass("FEUP");
             eventsContainer.removeClass("bg-secondary").addClass("FEUP");
+            tags.each(function() {
+                $(this).removeClass("bg-secondary").addClass("FEUP");
+                $(this).removeClass("bg-secondary").addClass("FEUP");
+            });
             break;
         case "FEP":
-            console.log("FEP");
             eventContainer.removeClass("bg-secondary").addClass("FEP");
             eventsContainer.removeClass("bg-secondary").addClass("FEP");
+            tags.each(function() {
+                $(this).removeClass("bg-secondary").addClass("FEP");
+                $(this).removeClass("bg-secondary").addClass("FEP");
+            });
             break;
         default:
             break;
