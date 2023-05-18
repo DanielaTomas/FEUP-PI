@@ -39,7 +39,9 @@ class TagController extends Controller{
 
     public function createTag(Request $request){
         if (!Auth::check()) return redirect('/login');
-
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to create tags in user view.');
+        }
         $this->validator($request->all())->validate();
         $user=Auth::user();
         $tag=Tag::create([
