@@ -27,7 +27,9 @@ class OrganicUnitController extends Controller{
 
     public function createOrganicUnit(Request $request){
         if (!Auth::check()) return redirect('/login');
-
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to create an organic unit in user view.');
+        }
         $this->validator($request->all())->validate();
         $user=Auth::user();
         $organicUnit=OrganicUnit::create([

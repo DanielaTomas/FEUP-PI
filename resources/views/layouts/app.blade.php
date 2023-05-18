@@ -60,10 +60,8 @@
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
               <li><a class="dropdown-item" href="{{route('my.requests')}}">My Requests</a></li>
               <li><a class="dropdown-item" href="{{route('my.requests')}}">My Events</a></li>
-              @if(Auth::check() && Auth::user()->isAdmin())
-              <li><a class="dropdown-item" href="{{url('admin')}}">Admin Dashboard</a></li>
-              @endif 
-              @if(!Session::has('orig_user') && Auth::user()->isadmin && !Str::startsWith(request()->path(),'admin'))
+              @if(!Session::has('orig_user') && Auth::check() && Auth::user()->isAdmin())
+                <li><a class="dropdown-item" href="{{url('admin')}}">Admin Dashboard</a></li>
                 <li><a class="dropdown-item" href="/admin/user/switch/start">Switch to User View</a></li>      
               @endif
               <li><hr class="dropdown-divider"></li>
@@ -87,7 +85,7 @@
       </div>
     </div>
   </header>
-  @if(session('success')) <!--TODO aparece mensagem repetida no my requests, ... -->
+  @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>

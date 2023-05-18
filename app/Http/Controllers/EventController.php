@@ -72,6 +72,10 @@ class EventController extends Controller
 
         if (!Auth::check()) return redirect('/login');
 
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to create an event in user view.');
+        }
+
         $this->validator($request->all())->validate();
         $user = Auth::user();
         $event = Event::create([
@@ -124,6 +128,9 @@ class EventController extends Controller
     public function editEvent(Request $request)
     {
         if (!Auth::check()) return redirect('/login');
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to edit an event in user view.');
+        }
         $this->validator($request->all())->validate();
         $user = Auth::user();
         $event = Event::create([
@@ -168,7 +175,9 @@ class EventController extends Controller
     public function deleteEvent($id)
     {
         if (!Auth::check()) return redirect('/login');
-
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to delete an event in user view.');
+        }
         $event = Event::find($id);
        // $event->user()->detach();
         $event->tags()->detach();
