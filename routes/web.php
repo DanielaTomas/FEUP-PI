@@ -25,6 +25,7 @@ Route::get('/event/{id}', 'EventController@show')->name('event');
 Route::get('/tags/{id}/events', 'TagController@show')->name('tags.events');
 Route::get('/categories/events', 'CategoryController@showEventCategories')->name('categories.events');
 Route::get('/organicunits/{id}/events', 'OrganicUnitController@show')->name('organics.events');
+Route::get('/events/seach', 'EventController@search')->name('search.events');
 
 // SERVICES
 
