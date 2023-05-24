@@ -37,6 +37,7 @@ Route::get('/delete.service/{id}', 'ServiceController@deleteService')->name('del
 Route::get('/show.service/{id}', 'ServiceController@showServiceForm')->name('show.service');
 Route::get('/edit.service/{id}', 'ServiceController@editServiceForm')->name('edit.service');
 Route::post('/edit.service/{id}', 'ServiceController@editService')->name('edit.service');
+Route::post('/new.service', 'ServiceController@createNewService')->name('new.service');
 
 
 
@@ -76,6 +77,14 @@ Route::get('/admin/servicesCurrent', 'ServiceControllerAdmin@showCurrent');
 Route::get('/admin/servicesPending', 'ServiceControllerAdmin@showPending');
 Route::post('/requests/services/{id}/{action}', 'ServiceControllerAdmin@updateStatus')->name('requests.services.status.update')->where(['action' => '(Accepted|Rejected)']);
 
+Route::get("/admin/services", function () {
+    $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();
+    return view("pages.adminServices", ['organicunits' => $organicunits]);
+});
+Route::get("/admin/gis", function () {
+    $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();
+    return view('pages.adminGis', ['organicunits' => $organicunits]);
+});
 
 /* TODO: substituir as duas routes de cima por estas
 Route::get('/admin/services', 'EventController@adminDashboardServices')->name('admin.services');

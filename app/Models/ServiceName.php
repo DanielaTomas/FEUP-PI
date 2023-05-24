@@ -16,7 +16,7 @@ class ServiceName extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'servicenameportuguese','servicenameenglish',
+        'servicenameportuguese','servicenameenglish','description',
     ];
 
     public function organicunits()

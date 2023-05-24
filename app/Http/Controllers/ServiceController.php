@@ -42,8 +42,9 @@ class ServiceController extends Controller
 
 
     public function createServiceForm($id)
-    {
-        $question=Question::find($id);
+    {      
+       
+        $question=Question::where('servicenameid',$id)->first();
         $organicUnits=OrganicUnitController::getOrganicUnits();
         return view('pages.createSingleServiceForm', ['question' => $question,'organicunits'=>$organicUnits]);
     }
@@ -214,5 +215,44 @@ class ServiceController extends Controller
         $service = Service::find($id);
         return view('pages.showServiceForm', ['service' => $service]);
 
+    }
+
+
+    public function createNewService(Request $request){
+        
+        if (!Auth::check()) return redirect('/login');
+        
+        
+        $serviceName=ServiceName::create([
+            'servicenameportuguese'=>$request->input('servicenameportuguese'),
+            'servicenameenglish'=>$request->input('servicenameenglish'),
+            'description'=>$request->input('description')
+        ]);
+
+        $selectedOrganicUnits = $request->input('organicunitid');
+        foreach ($selectedOrganicUnits as $organicUnitId) {
+            $organicUnit = OrganicUnitController::getOrganicUnit($organicUnitId);
+            $serviceName->organicUnits()->save($organicUnit);
+        }
+        $serviceid=$serviceName->servicenameid;
+
+        $question=Question::create([
+            'servicenameid'=>$serviceid,
+            'question1'=>$request->input('question1'),
+            'question2'=>$request->input('question2'),
+            'question3'=>$request->input('question3'),
+            'question4'=>$request->input('question4'),
+            'question5'=>$request->input('question5'),
+            'question6'=>$request->input('question6'),
+            'question7'=>$request->input('question7'),
+            'question8'=>$request->input('question8'),
+            'question9'=>$request->input('question9'),
+            'question10'=>$request->input('question10')
+        ]);
+
+        $serviceName->question()->save($question); 
+      //  $question->servicename()->save($serviceName);
+
+        return redirect()->back()->with('success', 'Service created successfully.');
     }
 }
