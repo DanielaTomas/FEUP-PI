@@ -28,7 +28,7 @@ Route::get('/organicunits/{id}/events', 'OrganicUnitController@show')->name('org
 
 // SERVICES
 
-Route::get('/services', 'ServiceController@list')->name('services');
+Route::get('/services','ServiceController@list')->name('services');
 //Route::get('/service/{id}','ServiceController@createServiceForm')->name('create.service');
 Route::get('/service/{id}', 'ServiceController@show')->name('show.service');
 Route::get('/service/{id}/create', 'ServiceController@createServiceForm')->name('create.service');
@@ -66,7 +66,8 @@ Route::post('/event/{id}/edit', 'EventController@editEvent')->name('edit.event')
 Route::get('/event/{id}/delete', 'EventController@deleteEvent')->name('delete.event');
 
 
-
+Route::get('/admin/user/switch/start','AdminController@user_switch_start');
+Route::get('/admin/user/switch/stop','AdminController@user_switch_stop');
 
 
 
@@ -100,6 +101,9 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 //Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// RSS
+Route::feeds();
 
 //Static pages
 Route::get("/about", function () {

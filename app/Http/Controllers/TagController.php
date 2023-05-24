@@ -6,6 +6,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class TagController extends Controller{
 
@@ -39,7 +40,9 @@ class TagController extends Controller{
 
     public function createTag(Request $request){
         if (!Auth::check()) return redirect('/login');
-
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to create tags in user view.');
+        }
         $this->validator($request->all())->validate();
         $user=Auth::user();
         $tag=Tag::create([

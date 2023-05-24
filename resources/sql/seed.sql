@@ -239,7 +239,7 @@ INSERT INTO users (username, name, isAdmin, email, password, userPhoto) VALUES (
 -- TAGS 
 INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('music','musica');
 INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('art','arte');
-INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('tecnology','tecnologia');
+INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('technology','tecnologia');
 INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('sports','desporto');
 INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('science','ciencia');
 INSERT INTO tag (tagNameEnglish,tagNamePortuguese) VALUES ('literature','literatura');

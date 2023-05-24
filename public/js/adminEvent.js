@@ -233,20 +233,41 @@ function getPaginatedDataPend(page) {
     });
 }
 
-function pendingFormHandler(action,id,token){
+function pendingFormHandler(action, id, token) {
     $.ajax({
-        url: '/requests/events/' + id + '/' + action,
-        type: 'post',
-        dataType: 'json',
-        headers:{
-            'X-CSRF-Token': token
-        },
-        success: function(response) {
-            getPaginatedData(pageEvent);
-            getPaginatedDataPend(pagePend);
-    },
-});
-}
+      url: '/requests/' + id + '/' + action,
+      type: 'post',
+      dataType: 'json',
+      headers: {
+        'X-CSRF-Token': token
+      },
+      success: function(response) {
+        console.log("action = " + action);
+        if (action === "Accepted") {
+          let eventSuccess = $('#eventSucess');
+          eventSuccess.css('display', 'block');
+          setTimeout(function (){
+            eventSuccess.css('display', 'none');
+          }, 2000);
+      
+        } else {
+          let eventError = $('#eventError');
+          eventError.css('display', 'block');
+          setTimeout(function (){
+            eventError.css('display', 'none');
+          }, 2000);
+        }
+  
+        getPaginatedData(pageEvent);
+        getPaginatedDataPend(pagePend);
+      },
+      error: function(xhr) {
+  
+      }
+    });
+  }
+  
+
 
 $(document).ready(function() {
     // Initialize pagination with the first page
