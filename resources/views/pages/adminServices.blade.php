@@ -122,7 +122,7 @@
         </ul>
     </div>
         @endif
-        <form class="my-4" method="POST" action="{{route('create.service')}}" enctype="multipart/form-data">
+        <form class="my-4" method="POST" action="{{route('new.service')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-6">
@@ -146,11 +146,17 @@
                             </span>
                             @endif
                         </div>
+                        <p>Organic Units that offer that service <span><b class="text-danger">*</b></span></p>
+                         <select class="form-select" id="organicunitid" name="organicunitid[]" multiple required>
+                            @foreach ($organicunits as $unit)
+                            <option value="{{$unit->organicunitid}}">{{$unit->name}}</option>
+                            @endforeach 
+                        </select>
 
 
                         <label for="description" class="form-label" >Description (optional)</label>
                         <div class="input-group mb-3">
-                            <textarea id="purpose" rows="4" class="form-control" name="description" required placeholder="Enter the description">@if( old('description')!==null){{ old('description')}}@else @endIf</textarea>
+                            <textarea id="purpose" rows="4" class="form-control" name="description"  placeholder="Enter the description">@if( old('description')!==null){{ old('description')}}@else @endIf</textarea>
                                 @if ($errors->has('description'))
                                     <span class="error">
                                      {{ $errors->first('description') }}

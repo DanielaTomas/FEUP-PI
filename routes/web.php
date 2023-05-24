@@ -37,6 +37,7 @@ Route::get('/delete.service/{id}', 'ServiceController@deleteService')->name('del
 Route::get('/show.service/{id}', 'ServiceController@showServiceForm')->name('show.service');
 Route::get('/edit.service/{id}', 'ServiceController@editServiceForm')->name('edit.service');
 Route::post('/edit.service/{id}', 'ServiceController@editService')->name('edit.service');
+Route::post('/new.service', 'ServiceController@createNewService')->name('new.service');
 
 
 
@@ -75,7 +76,8 @@ Route::get('/delete_event/{id}', 'EventController@deleteEvent')->name('delete.ev
 
 
 Route::get("/admin/services", function () {
-    return view("pages.adminServices");
+    $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();
+    return view("pages.adminServices", ['organicunits' => $organicunits]);
 });
 Route::get("/admin/gis", function () {
     $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();

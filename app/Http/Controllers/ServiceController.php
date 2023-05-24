@@ -42,8 +42,9 @@ class ServiceController extends Controller
 
 
     public function createServiceForm($id)
-    {
-        $question=Question::find($id);
+    {      
+       
+        $question=Question::where('servicenameid',$id)->first();
         $organicUnits=OrganicUnitController::getOrganicUnits();
         return view('pages.createSingleServiceForm', ['question' => $question,'organicunits'=>$organicUnits]);
     }
@@ -218,8 +219,15 @@ class ServiceController extends Controller
             'description'=>$request->input('description')
         ]);
 
+        $selectedOrganicUnits = $request->input('organicunitid');
+        foreach ($selectedOrganicUnits as $organicUnitId) {
+            $organicUnit = OrganicUnitController::getOrganicUnit($organicUnitId);
+            $serviceName->organicUnits()->save($organicUnit);
+        }
+        $serviceid=$serviceName->servicenameid;
+
         $question=Question::create([
-            'servicenameid'=>$serviceName->servicenameid,
+            'servicenameid'=>$serviceid,
             'question1'=>$request->input('question1'),
             'question2'=>$request->input('question2'),
             'question3'=>$request->input('question3'),
@@ -231,6 +239,9 @@ class ServiceController extends Controller
             'question9'=>$request->input('question9'),
             'question10'=>$request->input('question10')
         ]);
+
+        $serviceName->question()->save($question); 
+      //  $question->servicename()->save($serviceName);
 
         return redirect()->back()->with('success', 'Service created successfully.');
     }

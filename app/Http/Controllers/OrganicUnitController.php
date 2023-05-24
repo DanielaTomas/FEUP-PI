@@ -54,4 +54,8 @@ class OrganicUnitController extends Controller{
     public static function getOrganicUnits(){
         return OrganicUnit::all();
     }
+
+    public static function getOrganicUnit($id){
+        return OrganicUnit::findOrFail($id);
+    }
 }
