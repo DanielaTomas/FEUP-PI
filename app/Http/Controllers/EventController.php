@@ -40,12 +40,20 @@ class EventController extends Controller
         return view('pages.event', ['event' => $event]);
     }
 
+    public function search(Request $request)
+    {
+
+
+        $events = Event::search($request->input('search'))->get();
+        return view('pages.events', ['events' => $events]);
+    }
+
 
     public function createEventForm()
     {
         $tags = TagController::getAllTags();
-        $organicUnits=OrganicUnitController::getOrganicUnits();
-        return view('pages.createEventForm', ['tags' => $tags,'organicunits'=>$organicUnits]);
+        $organicUnits = OrganicUnitController::getOrganicUnits();
+        return view('pages.createEventForm', ['tags' => $tags, 'organicunits' => $organicUnits]);
     }
 
 
@@ -57,7 +65,7 @@ class EventController extends Controller
             'eventnameen' => 'required|string',
             'address' => 'nullable|string',
             'urlportuguese' => 'nullable|regex:' . $regex,
-            'urlenglish' =>'nullable|regex:' . $regex,
+            'urlenglish' => 'nullable|regex:' . $regex,
             'emailtechnical' => 'required|string|email|max:255',
             'contactperson' => 'nullable|string',
             'emailcontact' => 'nullable|string|email|max:255',
@@ -69,7 +77,8 @@ class EventController extends Controller
     }
 
 
-    public function createEvent(Request $request){
+    public function createEvent(Request $request)
+    {
 
         if (!Auth::check()) return redirect('/login');
 
@@ -88,13 +97,13 @@ class EventController extends Controller
             'urlportuguese' => $request->input('urlportuguese'),
             'urlenglish' => $request->input('urlenglish'),
             'emailtechnical' => $request->input('emailtechnical'),
-            'emailcontact' =>$request->input('emailcontact'),
+            'emailcontact' => $request->input('emailcontact'),
             'datecreated' => date('Y-m-d'),
             'contactperson' => $request->input('contactperson'),
             'description' => $request->input('description'),
             'startdate' => $request->input('startdate'),
             'enddate' => $request->input('enddate'),
-            'userid'=> $user->userid,
+            'userid' => $user->userid,
             'organicunitid' => $request->input('organicunitid')
         ]);
 
@@ -102,11 +111,10 @@ class EventController extends Controller
         $tagNames = explode(',', $tags);
 
         foreach ($tagNames as $tagName) {
-            $tagId = Tag::where('tagnameportuguese',$tagName)->orWhere('tagnameenglish',$tagName)->value('tagid');
+            $tagId = Tag::where('tagnameportuguese', $tagName)->orWhere('tagnameenglish', $tagName)->value('tagid');
             if ($tagId) {
                 $tagIds[] = (int) $tagId;
-            }
-            else {
+            } else {
                 return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
             }
         }
@@ -122,8 +130,8 @@ class EventController extends Controller
     {
         $event = Event::find($id);
         $tags = TagController::getAllTags();
-        $organicUnits=OrganicUnitController::getOrganicUnits();
-        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags,'organicunits'=>$organicUnits]);
+        $organicUnits = OrganicUnitController::getOrganicUnits();
+        return view('pages.editEventForm', ['event' => $event, 'tags' => $tags, 'organicunits' => $organicUnits]);
     }
 
     public function editEvent(Request $request)
@@ -143,24 +151,23 @@ class EventController extends Controller
             'urlportuguese' => $request->input('urlportuguese'),
             'urlenglish' => $request->input('urlenglish'),
             'emailtechnical' => $request->input('emailtechnical'),
-            'emailcontact' =>$request->input('emailcontact'),
+            'emailcontact' => $request->input('emailcontact'),
             'datecreated' => date('Y-m-d'),
             'contactperson' => $request->input('contactperson'),
             'description' => $request->input('description'),
             'startdate' => $request->input('startdate'),
             'enddate' => $request->input('enddate'),
-            'userid'=> $user->userid,
+            'userid' => $user->userid,
             'organicunitid' => $request->input('organicunitid')
         ]);
         $tags = $request->input('tags');
         $tagNames = explode(',', $tags);
 
         foreach ($tagNames as $tagName) {
-            $tagId = Tag::where('tagnameportuguese',$tagName)->orWhere('tagnameenglish',$tagName)->value('tagid');
+            $tagId = Tag::where('tagnameportuguese', $tagName)->orWhere('tagnameenglish', $tagName)->value('tagid');
             if ($tagId) {
                 $tagIds[] = (int) $tagId;
-            }
-            else {
+            } else {
                 return redirect()->back()->withErrors(['tag' => 'Tag not found, id: ' . $tagId]);
             }
         }
@@ -180,7 +187,7 @@ class EventController extends Controller
             return redirect()->to('/')->withErrors('You are not authorized to delete an event in user view.');
         }
         $event = Event::find($id);
-       // $event->user()->detach();
+        // $event->user()->detach();
         $event->tags()->detach();
         $event->delete();
 
