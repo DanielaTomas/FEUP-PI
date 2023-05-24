@@ -15,7 +15,7 @@
         <h3>Admin Dashboard - Events</h3>
     </div>
 
-  @if(session('success'))
+    @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
@@ -41,6 +41,9 @@
     <a class="nav-link" data-bs-toggle="tab" href="#tags">Create Tag</a>
   </li>
 </ul>
+
+<div id="eventSucess" class="alert alert-success" style="display:none">Event request successfully.</div>
+<div id="eventError" class="alert alert-danger" style="display:none">Event request rejected.</div>
 
 <!-- Tab panes -->
 <div class="tab-content mt-5">

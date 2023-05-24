@@ -10,12 +10,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
-class userControllerAdmin extends AdminController
+class UserControllerAdmin extends AdminController
 {
 
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function showSearch()
+    {
+        if (!$this->isAdmin()) {
+            return redirect()->back()->with('error', 'You are not authorized to view this admin area.');
+        }
+
+        $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();
+        return view('pages.adminGis', ['organicunits' => $organicunits]);
     }
 
     //Accepts/Rejects event

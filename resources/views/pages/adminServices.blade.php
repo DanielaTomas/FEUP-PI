@@ -2,15 +2,37 @@
 
 @section('content')
 
+
+@push('pageJS')
+<script   type="text/javascript" src={{ asset('js/adminService.js') }} defer> </script>
+@endpush
+
+
+
 <div id="adminContainer" class="p-5 m-5 bg-secondary rounded min-height">
     <button id="backButton" type="button" class="btn btn-secondary"><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="White" class="bi bi-arrow-left" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
       </svg></a>
       </button>
     <div class="d-flex justify-content-center link-light">
+
         <h3>Admin Dashboard - Services</h3>
     </div>
 
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
 <!-- Nav tabs -->
 <ul class="nav m-3 nav-tabs nav-fill">
   <li class="nav-item text-light bg-dark rounded-top">
@@ -21,6 +43,7 @@
   </li>
   <li class="nav-item text-light bg-dark rounded-top">
     <a class="nav-link" data-bs-toggle="tab" href="#createservices">Create Service</a>
+  </li>
 </ul>
 
 
@@ -38,58 +61,13 @@
             <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <a href =""><p class="fw-bold mb-1">Service 1</p></a>
-                            <p class="text-muted mb-0">service1@up.pt</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">xxxx-xx-xx</p>
-                    <p class="text-muted mb-0">00:00</p>
-                </td>
-                <td>
-                    <span class="badge bg-info">Edit</span>
-                </td>
-                <td>
-                    <span class="badge bg-warning">Pending Review</span>
-
-                </td>
-                <td>
-                    <button type="button" class="btn btn-success">Accept</button>
-                    <button type="button" class="btn btn-danger">Reject</button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <a href =""><p class="fw-bold mb-1">Service 2</p></a>
-                            <p class="text-muted mb-0">service2@up.pt</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">xxxx-xx-xx</p>
-                    <p class="text-muted mb-0">00:00</p>
-                </td>
-                <td>
-                    <span class="badge bg-primary">Create</span>
-                </td>
-                <td>
-                    <span class="badge bg-success">Accepted</span>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">Request Reviewd</p>
-                    <p class="text-muted mb-0">xxxx-xx-xx 00:00</p>
-                </td>
-            </tr>
+        <tbody id="pendingTable">
+           
         </tbody>
     </table>
+    <div id="pagePend" class="pagination justify-content-center">
+        <li class="previous"><a class="page-link" href="page=1">Previous</a></li>
+        <li class="next"><a class="page-link" href="page=2">Next</a></li>
     </div>
   </div>
   <div class="tab-pane container table-responsive" id="services">
@@ -104,7 +82,7 @@
                 <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="CurrServiceTable">
 
             </tbody>
         </table>

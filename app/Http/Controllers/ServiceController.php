@@ -7,7 +7,7 @@ use App\Models\Service;
 use App\Models\ServiceType;
 use App\Models\Question;
 use App\Models\ServiceName;
-
+use Illuminate\Support\Facades\Session;
 
 
 use Illuminate\Http\Request;
@@ -77,7 +77,9 @@ class ServiceController extends Controller
     public function createService(Request $request){
 
         if (!Auth::check()) return redirect('/login');
-
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to create a service in user view.');
+        }
         $this->validator($request->all())->validate();
         
         $question=Question::find($request->input('questionsid'));
@@ -135,6 +137,9 @@ class ServiceController extends Controller
     public function editService(Request $request)
     {
         if (!Auth::check()) return redirect('/login');
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to edit a service in user view.');
+        }
         $this->validator($request->all())->validate();
 
         $user = Auth::user();
@@ -180,7 +185,9 @@ class ServiceController extends Controller
     public function deleteService($id)
     {
         if (!Auth::check()) return redirect('/login');
-
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to delete a service in user view.');
+        }
         $service = Service::find($id);
         $serviceType=ServiceType::find($service->servicetypeid);
 
@@ -202,6 +209,9 @@ class ServiceController extends Controller
     public function showServiceForm($id){
 
         if (!Auth::check()) return redirect('/login');
+        if(Session::has('orig_user')) {
+            return redirect()->to('/')->withErrors('You are not authorized to view service form in user view.');
+        }
         $service = Service::find($id);
         return view('pages.showServiceForm', ['service' => $service]);
 
