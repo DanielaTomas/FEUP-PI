@@ -81,7 +81,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="contactperson" class="form-label">Person to Contact (optional)</label>
+                <label for="contactperson" class="form-label">Person to Contact (<i>optional</i>)</label>
                 <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ old('contactperson') }}" >
                 @if ($errors->has('contactperson'))
                 <span class="error">
@@ -93,7 +93,7 @@
         
         <div class="col-md-6">
             <div class="form-group">
-                <label for="emailcontact" class="form-label">Contact Email (optional)</label>
+                <label for="emailcontact" class="form-label">Contact Email (<i>optional</i>)</label>
                 <input id="emailcontact" class="form-control" placeholder="Enter an email" type="email" name="emailcontact" value="{{ old('emailcontact') }}">
                 @if ($errors->has('emailcontact'))
                 <span class="error">
