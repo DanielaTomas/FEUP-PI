@@ -30,8 +30,8 @@ Route::get('/organicunits/{id}/events', 'OrganicUnitController@show')->name('org
 
 Route::get('/services','ServiceController@list')->name('services');
 //Route::get('/service/{id}','ServiceController@createServiceForm')->name('create.service');
-Route::get('/service/{id}','ServiceController@show')->name('show.service');
-Route::get('/service/{id}/create','ServiceController@createServiceForm')->name('create.service');
+Route::get('/service/{id}', 'ServiceController@show')->name('show.service');
+Route::get('/service/{id}/create', 'ServiceController@createServiceForm')->name('create.service');
 Route::post('/create.service', 'ServiceController@createService')->name('create.service');
 Route::get('/delete.service/{id}', 'ServiceController@deleteService')->name('delete.service');
 Route::get('/show.service/{id}', 'ServiceController@showServiceForm')->name('show.service');
@@ -41,10 +41,8 @@ Route::post('/edit.service/{id}', 'ServiceController@editService')->name('edit.s
 
 
 //SEARCH
-Route::get('/users/search', 'UserController@search')->name('users.search');
-
-
-
+Route::get("/admin/gis", 'UserControllerAdmin@showSearch');
+Route::post('/admin/gis', 'UserController@search')->name('users.search');
 
 
 // Admin
@@ -54,20 +52,18 @@ Route::get('/admin', function () {
     Route::get('/', 'EventController@show')->name('home');
 });*/
 Route::get("/admin", 'AdminController@show');
-Route::get('/admin/events', function () {
-    return view("pages.adminEvents");
-});
+Route::get('/admin/events', 'EventControllerAdmin@show');
 Route::get('/admin/eventsCurrent', 'EventControllerAdmin@showCurrent');
 Route::get('/admin/eventsPending', 'EventControllerAdmin@showPending');
-Route::post('/requests/{id}/{action}', 'EventControllerAdmin@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
-Route::get("/admin/user/{id}/assign/gi", 'userControllerAdmin@assignGI')->name('users.assignRole');
+Route::post('/requests/events/{id}/{action}', 'EventControllerAdmin@updateStatus')->name('requests.status.update')->where(['action' => '(Accepted|Rejected)']);
+Route::get("/admin/user/{id}/assign/gi", 'UserControllerAdmin@assignGI')->name('users.assignRole');
 
 //TODO: adicionar permission checks as routes por baixo
-Route::get('/create_event', 'EventController@createEventForm')->name('create.event');
-Route::post('/create_event', 'EventController@createEvent')->name('create.event');
-Route::get('/edit_event/{id}', 'EventController@editEventForm')->name('edit.event');
-Route::post('/edit_event/{id}', 'EventController@editEvent')->name('edit.event');
-Route::get('/delete_event/{id}', 'EventController@deleteEvent')->name('delete.event');
+Route::get('/event/create', 'EventController@createEventForm')->name('create.event');
+Route::post('/event/create', 'EventController@createEvent')->name('create.event');
+Route::get('/event/{id}/edit', 'EventController@editEventForm')->name('edit.event');
+Route::post('/event/{id}/edit', 'EventController@editEvent')->name('edit.event');
+Route::get('/event/{id}/delete', 'EventController@deleteEvent')->name('delete.event');
 
 
 Route::get('/admin/user/switch/start','AdminController@user_switch_start');
@@ -75,13 +71,11 @@ Route::get('/admin/user/switch/stop','AdminController@user_switch_stop');
 
 
 
-Route::get("/admin/services", function () {
-    return view("pages.adminServices");
-});
-Route::get("/admin/gis", function () {
-    $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();
-    return view('pages.adminGis', ['organicunits' => $organicunits]);
-});
+Route::get("/admin/services", 'ServiceControllerAdmin@show');
+Route::get('/admin/servicesCurrent', 'ServiceControllerAdmin@showCurrent');
+Route::get('/admin/servicesPending', 'ServiceControllerAdmin@showPending');
+Route::post('/requests/services/{id}/{action}', 'ServiceControllerAdmin@updateStatus')->name('requests.services.status.update')->where(['action' => '(Accepted|Rejected)']);
+
 
 /* TODO: substituir as duas routes de cima por estas
 Route::get('/admin/services', 'EventController@adminDashboardServices')->name('admin.services');
