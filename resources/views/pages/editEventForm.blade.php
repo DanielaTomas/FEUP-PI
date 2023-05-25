@@ -28,7 +28,7 @@
                 <label for="eventnamept" class="form-label">Portugues<span><b class="text-danger">*</b></span></label>
                 <div class="input-group">
                     <input id="eventnamept" class="form-control" placeholder="Enter event name" type="text" name="eventnamept" value="{{ $event->eventnameportuguese }}" required autofocus>
-                    <button class="btn btn-outline-primary translate-btn" data-target="eventnamept" data-lang-from="pt" data-lang-to="en" type="button">Translate to English</button>
+                    {{-- <button class="btn btn-outline-primary translate-btn" data-target="eventnamept" data-lang-from="pt" data-lang-to="en" type="button">Translate to English</button> --}}
                 </div>
                 @if ($errors->has('eventnamept'))
                 <span class="error">
@@ -38,16 +38,27 @@
                 <label for="eventnameen" class="form-label">English<span><b class="text-danger">*</b></span></label>
                 <div class="input-group">
                     <input id="eventnameen" class="form-control" placeholder="Enter event name" type="text" name="eventnameen" value="{{ $event->eventnameenglish }}" required autofocus>
-                    <button class="btn btn-outline-primary translate-btn" data-target="eventnameen" data-lang-from="en" data-lang-to="pt" type="button">Traduzir para Português</button>
+                    {{-- <button class="btn btn-outline-primary translate-btn" data-target="eventnameen" data-lang-from="en" data-lang-to="pt" type="button">Traduzir para Português</button> --}}
                 </div>
                 @if ($errors->has('eventnameen'))
                 <span class="error">
                     {{ $errors->first('eventnameen') }}
                 </span>
                 @endif
-
+                
             </div>
-            
+
+            <div class="col-md-6">
+                    <div class="form-group">
+                        <p>Current Image:</p>
+                        <div class="text-center m-auto">
+                            <img class="rounded" src="{{URL::asset('/images/events/'.$event->imageurl)}}" width="250" height="200" alt="Card image cap">
+                        </div>
+
+                        <label for="image" class="form-label">New Event Image </label>
+                        <input type="file" class="form-control" name="image"> 
+                    </div>
+                </div>
             <label for="organicunitid">Select Organic Unit:</label> 
             <select class="form-control" id="organicunitid" name="organicunitid" required>
                 @foreach ($organicunits as $unit)
