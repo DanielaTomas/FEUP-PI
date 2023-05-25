@@ -19,7 +19,7 @@
     </div>
     @endif
 
-    <form class="my-4" method="POST" action="{{route('create.service')}}" enctype="multipart/form-data">
+    <form class="my-4" method="POST" action="{{route('create.service.form')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         
         <input type="hidden" name="questionsid" value="{{$question->questionsid}}">

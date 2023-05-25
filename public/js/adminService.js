@@ -54,9 +54,11 @@ function getPaginatedData(page) {
 
             //Clear tbody 
             tbody.empty();
-
+            console.log("Hello")
+            
             for (let i = 0; i < data.length ; i++) {
                 let tr = $('<tr></tr>');
+              
                 let serviceNameTd = $('<td></td>');
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>');
@@ -83,7 +85,7 @@ function getPaginatedData(page) {
                 tr.append(requestTypeTd);
                 tr.append(requestStatusTd);
                 tr.append(requestActions);
-               
+                
                 tbody.append(tr);
             }
             
@@ -119,7 +121,7 @@ function getPaginatedDataPend(page) {
 
             //Clear tbody 
             tbody.empty();
-
+            
             for (let i = 0; i < data.length ; i++) {
                 let serviceId = data[i].serviceId;
                 let tr = $('<tr></tr>');
