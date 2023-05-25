@@ -190,6 +190,8 @@
     </div>
     @endif
 
+    {{-- <input type="file" name="image"> --}}
+   
    
 
     <div class="col-md-12 text-center mt-5">

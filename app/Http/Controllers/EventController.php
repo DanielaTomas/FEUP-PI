@@ -119,8 +119,17 @@ class EventController extends Controller
             }
         }
 
+
         $event->tags()->attach($tagIds);
         $event->save();
+
+        
+        if ( $request->image !== null){
+            $imageName = time().'.'.$request->image->extension();   
+            $request->image->move(public_path('images/events'), $imageName);
+            $user->image =$imageName;
+        }
+
         $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
         return redirect('/my_requests')->with('success', 'Event creation request sent successfully.');
