@@ -2,9 +2,7 @@
 
 @section('content')
 
-@push('pageJS')
-<script   type="text/javascript" src={{ asset('js/adminEvent.js') }} defer> </script>
-@endpush
+
 
 <div id="adminContainer" class="p-5 m-5 bg-secondary rounded min-height">
     <button id="backButton" type="button" class="btn btn-secondary"><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="White" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -15,12 +13,7 @@
         <h3>Admin Dashboard - GIs</h3>
     </div>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    
+   
     <div class="text-center">
         <form method="POST" action="{{ route('users.search') }}">
             {{ csrf_field() }}
