@@ -235,7 +235,7 @@ function getPaginatedDataPend(page) {
 
 function pendingFormHandler(action, id, token) {
     $.ajax({
-      url: '/requests/' + id + '/' + action,
+      url: '/requests/events/' + id + '/' + action,
       type: 'post',
       dataType: 'json',
       headers: {
