@@ -20,6 +20,11 @@ Route::get('/', 'HomeController@list')->name('home');
 });*/
 
 // Events
+Route::get('/event/create', 'EventController@createEventForm')->name('create.event');
+Route::post('/event/create', 'EventController@createEvent')->name('create.event');
+Route::get('/event/{id}/edit', 'EventController@editEventForm')->name('edit.event');
+Route::post('/event/{id}/edit', 'EventController@editEvent')->name('edit.event');
+Route::get('/event/{id}/delete', 'EventController@deleteEvent')->name('delete.event');
 Route::get('/events', 'EventController@list')->name('events'); //TODO: mudar nome de funcao?? ou de controller??
 Route::get('/event/{id}', 'EventController@show')->name('event');
 Route::get('/tags/{id}/events', 'TagController@show')->name('tags.events');
@@ -33,7 +38,7 @@ Route::get('/services','ServiceController@list')->name('services');
 //Route::get('/service/{id}','ServiceController@createServiceForm')->name('create.service');
 Route::get('/service/{id}', 'ServiceController@show')->name('show.service');
 Route::get('/service/{id}/create', 'ServiceController@createServiceForm')->name('create.service');
-Route::post('/create.service', 'ServiceController@createService')->name('create.service');
+Route::post('/create.service', 'ServiceController@createService')->name('create.service.form');
 Route::get('/delete.service/{id}', 'ServiceController@deleteService')->name('delete.service');
 Route::get('/show.service/{id}', 'ServiceController@showServiceForm')->name('show.service');
 Route::get('/edit.service/{id}', 'ServiceController@editServiceForm')->name('edit.service');
@@ -61,11 +66,7 @@ Route::post('/requests/events/{id}/{action}', 'EventControllerAdmin@updateStatus
 Route::get("/admin/user/{id}/assign/gi", 'UserControllerAdmin@assignGI')->name('users.assignRole');
 
 //TODO: adicionar permission checks as routes por baixo
-Route::get('/event/create', 'EventController@createEventForm')->name('create.event');
-Route::post('/event/create', 'EventController@createEvent')->name('create.event');
-Route::get('/event/{id}/edit', 'EventController@editEventForm')->name('edit.event');
-Route::post('/event/{id}/edit', 'EventController@editEvent')->name('edit.event');
-Route::get('/event/{id}/delete', 'EventController@deleteEvent')->name('delete.event');
+
 
 
 Route::get('/admin/user/switch/start','AdminController@user_switch_start');
@@ -73,14 +74,15 @@ Route::get('/admin/user/switch/stop','AdminController@user_switch_stop');
 
 
 
-Route::get("/admin/services", 'ServiceControllerAdmin@show');
+//Route::get("/admin/services", 'ServiceControllerAdmin@show');
 Route::get('/admin/servicesCurrent', 'ServiceControllerAdmin@showCurrent');
 Route::get('/admin/servicesPending', 'ServiceControllerAdmin@showPending');
 Route::post('/requests/services/{id}/{action}', 'ServiceControllerAdmin@updateStatus')->name('requests.services.status.update')->where(['action' => '(Accepted|Rejected)']);
 
 Route::get("/admin/services", function () {
     $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();
-    return view("pages.adminServices", ['organicunits' => $organicunits]);
+    $serviceNames = app('App\Http\Controllers\ServiceController')->getServiceNames();
+    return view("pages.adminServices", ['organicunits' => $organicunits, 'serviceNames' => $serviceNames]);
 });
 Route::get("/admin/gis", function () {
     $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();

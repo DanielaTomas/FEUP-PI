@@ -40,7 +40,8 @@ class Event extends Model implements Feedable
         'enddate',
         'eventcanceled',
         'userid',
-        'organicunitid'
+        'organicunitid',
+        'imageurl'
 
     ];
 

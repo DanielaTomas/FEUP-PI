@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Service;
+use App\Models\ServiceName;
 use App\Models\Formation;
 
 use Illuminate\Http\Request;
@@ -34,24 +35,7 @@ class ServiceControllerAdmin extends AdminController
      */
     public function showCurrent(Request $request)
     {
-        /*if (!$this->hasRoles()) {
-            return redirect()->back()->with('error', 'You are not authorized to view this admin area.');
-        }
-
-        if ($this->user->isAdmin()) {
-            $services = Service::whereNotIn('requeststatus', ['Pending'])
-                ->paginate(5);
-        } else {
-            $formations = Formation::where('userid', $this->user->userid)->get();
-            if ($formations->isNotEmpty()) {
-                // Retrieve an array of organic unit IDs for the user's formation roles
-                $organicUnitIds = $formations->pluck('organicunitid')->toArray();
-            }
-
-            $services = Service::whereNotIn('requeststatus', ['Pending'])
-                ->whereIn('organicunitid', $organicUnitIds)
-                ->paginate(5);
-        }*/
+        
         $services = Service::whereNotIn('requeststatus', ['Pending'])
             ->paginate(5);
         return response()->json($services);

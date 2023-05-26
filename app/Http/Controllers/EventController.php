@@ -73,6 +73,7 @@ class EventController extends Controller
             'startdate' => 'required|date|date_format:Y-m-d',
             'enddate' => 'required|date|after_or_equal:startdate|date_format:Y-m-d',
             'tags' => 'required|string',
+            'image'     => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     }
 
@@ -119,8 +120,18 @@ class EventController extends Controller
             }
         }
 
+
         $event->tags()->attach($tagIds);
         $event->save();
+
+        
+        if ( $request->image !== null){
+            $imageName = time().'.'.$request->image->extension();   
+            $request->image->move(public_path('images/events'), $imageName);
+            $event->imageurl =$imageName;
+        }
+        $event->save();
+
         $user->events()->save($event);
         // TODO: CHANGE WHEN USER CAN SEE EVENTS IN PROFILE
         return redirect('/my_requests')->with('success', 'Event creation request sent successfully.');
@@ -174,6 +185,13 @@ class EventController extends Controller
         $event->tags()->attach($tagIds);
         $event->save();
         $user->events()->save($event);
+
+        if ( $request->image !== null){
+            $imageName = time().'.'.$request->image->extension();   
+            $request->image->move(public_path('images/events'), $imageName);
+            $event->imageurl =$imageName;
+        }
+        $event->save();
 
         $events = $user->events()->get();
         $services = $user->services()->get();

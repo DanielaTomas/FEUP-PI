@@ -23,6 +23,11 @@ class ServiceController extends Controller
         return $services;
     }
 
+    public static function getServiceNames(){
+        $services=ServiceName::all();
+
+        return $services;
+    }
 
     /**
      * Show the events page //TODO: check naming conventions

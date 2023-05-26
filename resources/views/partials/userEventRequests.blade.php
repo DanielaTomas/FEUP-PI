@@ -42,10 +42,10 @@
                 <div class="col-auto px-1"><i class="ion-ios-chatboxes-outline icon-1x"></i><span class="d-block text-sm">{{$event->enddate}}</span></div>
                 <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/event/{{ $event->eventid }}" title="View event request"><span class="d-block text-sm">View >></span></a></div>
                 @if($event->eventcanceled===FALSE)
-                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/edit_event/{{ $event->eventid }}" title="Edit event request"><span class="d-block text-sm">Edit >></span></a></div>
+                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-black mr-2" href="/event/{{ $event->eventid }}/edit" title="Edit event request"><span class="d-block text-sm">Edit >></span></a></div>
                 @endif
                 @if($event->datereviewed===NULL)
-                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-danger mr-2" href="/delete_event/{{ $event->eventid }}" title="Delete event request"><span class="d-block text-sm">Delete</span></a></div>
+                    <div class="col px-1"><i class="ion-ios-eye-outline icon-1x"></i><a class="text-danger mr-2" href="/event/{{ $event->eventid }}/delete" title="Delete event request"><span class="d-block text-sm">Delete</span></a></div>
                 @endif
         </div>
       </div>

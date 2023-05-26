@@ -94,7 +94,8 @@ CREATE TABLE event(
     endDate DATE NOT NULL,
     eventCanceled BOOLEAN NOT NULL DEFAULT FALSE,
     userId INTEGER REFERENCES users(userId),
-    organicUnitId INTEGER REFERENCES organicunit(organicUnitId)
+    organicUnitId INTEGER REFERENCES organicunit(organicUnitId),
+    imageurl VARCHAR DEFAULT '0.jpg',
     CHECK(endDate >= startDate),
     CHECK(dateCreated <= dateReviewed)
 );
@@ -304,36 +305,36 @@ INSERT INTO organicService (serviceNameId, organicUnitId) VALUES (2, 8);
 
 -- EVENT
 INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact, 
-dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId )VALUES 
+dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId,imageurl )VALUES 
 ('Accepted', 'Create', 'Semana Internacional da FEP','FEP International Week', 'R. Dr. Roberto Frias, 4200-464 Porto', 
 'https://sigarra.up.pt/fep/pt/web_base.gera_pagina?p_pagina=1031336','https://sigarra.up.pt/fep/pt/web_base.gera_pagina?p_pagina=1031336',
 'up202006199@up.pt','rogerio@gmail.com','2022-01-01', '2022-03-10', 'Diogo Cruz', 'This initiative aims to make known the international mobility opportunities that the Faculty offers to its students.',
- '2022-11-28', '2022-11-30', FALSE,2,7);
+ '2022-11-28', '2022-11-30', FALSE,2,7,'0.jpg');
 INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
  dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
  ('Pending', 'Create', 'O IMPACTO DA POLUIÇÃO ATMOSFÉRICA E SONORA NA SAÚDE','THE IMPACT OF AIR AND NOISE POLLUTION ON HEALTH', 'Rua Doutor Plácido da Costa, 4200-450 Porto',
   'https://noticias.up.pt/fmup-e-cintesis-estudam-impacto-da-poluicao-atmosferica-e-sonora-na-saude/','https://noticias.up.pt/fmup-e-cintesis-estudam-impacto-da-poluicao-atmosferica-e-sonora-na-saude/', 
   'up202006199@up.pt','vasco@gmail.com','2023-03-15', NULL, 'João Vasco Santos', 'Know the socio-economic impact of environmental stressors in Europe.', '2023-05-01', '2023-05-31', FALSE,2,2);
 INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
- dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId,imageurl) VALUES 
  ('Accepted', 'Create','O ADN da FEUP na tecnologia para reduzir os resíduos da indústria têxtil','FEUP DNA in technology for reducing textile industry waste', 'R. Dr. Roberto Frias, 4200-465 Porto', 
  'https://issuu.com/feup/docs/highlights_2022_final/26', 'https://issuu.com/feup/docs/highlights_2022_final/26',
- 'up202006199@up.pt','antonio@gmail.com', '2023-02-01', '2023-02-11', ' António Rocha', 'A company in the textile sector that reduces waste by detecting fabric imperfections at an early stage in the production chain.', '2023-04-01', '2023-04-07', FALSE,3,8);
+ 'up202006199@up.pt','antonio@gmail.com', '2023-02-01', '2023-02-11', ' António Rocha', 'A company in the textile sector that reduces waste by detecting fabric imperfections at an early stage in the production chain.', '2023-04-01', '2023-04-07', FALSE,3,8,'3.jpg');
 INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
- dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId,imageurl) VALUES 
  ('Accepted', 'Edit','O ADN da FEUP na tecnologia para reduzir os resíduos da indústria têxtil' ,'FEUP DNA in technology for reducing textile industry waste', 'R. Dr. Roberto Frias, 4200-465 Porto', 
  'https://issuu.com/feup/docs/highlights_2022_final/26','https://issuu.com/feup/docs/highlights_2022_final/26',
- 'up202006199@up.pt','antonio@gmail.com', '2023-02-12', '2023-02-20', ' António Rocha', 'Alumni from U.Porto, are the founders of Smartex.ai, a company in the textile sector that reduces waste by detecting fabric imperfections at an early stage in the production chain.', '2023-04-01', '2023-04-07', FALSE,4,8);
+ 'up202006199@up.pt','antonio@gmail.com', '2023-02-12', '2023-02-20', ' António Rocha', 'Alumni from U.Porto, are the founders of Smartex.ai, a company in the textile sector that reduces waste by detecting fabric imperfections at an early stage in the production chain.', '2023-04-01', '2023-04-07', FALSE,4,8,'4.jpg');
 INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
  dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
  ('Rejected', 'Create','Semana das Profissões: Engenheiro 2023', 'Profession Week: Engineer 2023', 'R. Dr. Roberto Frias, 4200-465 Porto', 
  'https://paginas.fe.up.pt/~escolas/spe/inscricoesspe23/','https://paginas.fe.up.pt/~escolas/spe/inscricoesspe23/',
  'up202006199@up.pt','rudolfo@gmail.com', '2023-01-01', '2023-01-02', 'Rudolfo Bruno', 'Event for high school students returns to FEUP campus on March 28th, 29th and 30th.', '2023-03-28', '2023-03-30', FALSE,4,8);
 INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact,
- dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
+ dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId,imageurl) VALUES 
  ('Accepted', 'Edit', 'Concerto de lançamento do álbum ''Something to Believe In'': Selo Porta-Jazz','Concert for the release of the album ''Something to Believe In'': Porta-Jazz Stamp', '890 Oak Street, Anytown USA', 
  'https://sigarra.up.pt/feup/pt/noticias_geral.ver_noticia?P_NR=147390','https://sigarra.up.pt/feup/pt/noticias_geral.ver_noticia?P_NR=147390',  
- 'up202006199@up.pt','karen@gmail.com','2022-08-01', '2022-08-20', 'Karen Davis', 'O Comissariado Cultural da FEUP e o Porta-Jazz convidam a comunidade FEUP para o concerto de lançamento do disco "Something to Believe In", no Auditório José Marques dos Santos, a 15 de março, pelas 21h30.', '2022-11-01', '2022-11-01', FALSE,5,8);
+ 'up202006199@up.pt','karen@gmail.com','2022-08-01', '2022-08-20', 'Karen Davis', 'O Comissariado Cultural da FEUP e o Porta-Jazz convidam a comunidade FEUP para o concerto de lançamento do disco "Something to Believe In", no Auditório José Marques dos Santos, a 15 de março, pelas 21h30.', '2022-11-01', '2022-11-01', FALSE,5,8,'6.jpg');
 INSERT INTO event (requestStatus, requestType, eventNamePortuguese,eventNameEnglish, address, urlPortuguese,urlEnglish, emailTechnical,emailContact, 
 dateCreated, dateReviewed, contactPerson, description, startDate, endDate, eventCanceled,userId,organicUnitId) VALUES 
 ('Rejected', 'Archive', 'Leilão anual de beneficência','Annual Charity Auction', '789 Oak Lane, Anytown USA', 

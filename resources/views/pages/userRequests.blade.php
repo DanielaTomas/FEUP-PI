@@ -10,11 +10,7 @@
 
     <div class="my-5">
         <h3 class="my-4">Events</h3>
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+        
         @if(count(Auth::user()->events()->get()) > 0)
             <div class="row">
                 @each('partials.userEventRequests', $events, 'event')
