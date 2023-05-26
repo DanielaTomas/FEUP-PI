@@ -163,10 +163,11 @@ if(editeventform!=null){
 }
 
 const backButton = document.getElementById('backButton');
-
-backButton.addEventListener('click', function() {
-  window.history.back();
-});
+if(backButton !== null) {
+    backButton.addEventListener('click', function() {
+    window.history.back();
+    });
+}
 
 
 

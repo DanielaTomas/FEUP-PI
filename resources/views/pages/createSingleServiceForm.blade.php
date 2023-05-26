@@ -29,7 +29,7 @@
         
 
         <div class="form-group my-3">
-            <label for="purpose" class="form-label">Purpose (optional)</label>
+            <label for="purpose" class="form-label">Purpose (<i>optional</i>)</label>
             <textarea id="purpose" rows="4" class="form-control" name="purpose" required placeholder="Enter the purpose the request">@if( old('purpose')!==null){{ old('purpose')}}@else @endIf</textarea>
             @if ($errors->has('purpose'))
             <span class="error">
@@ -40,7 +40,7 @@
     
 
         <div class="form-group">
-        <label for="organicunitid">Select Organic Unit <span><b class="text-danger">*</b></span>:</label> 
+        <label for="organicunitid">Select Organic Unit <span><b class="text-danger">*</b></span></label> 
         <select class="form-control" id="organicunitid" name="organicunitid" required>
              @foreach ($question->servicename->organicunits as $unit)
                 <option value="{{$unit->organicunitid}}">{{ $unit->name }}</option>
@@ -50,7 +50,7 @@
 
 
         <div class="form-group">
-            <label for="contactperson" class="form-label">Person to Contact (optional)</label>
+            <label for="contactperson" class="form-label">Person to Contact (<i>optional</i>)</label>
             <input id="contactperson" placeholder="Enter event contact person" class="form-control" type="text" name="contactperson" value="{{ old('contactperson') }}" >
             @if ($errors->has('contactperson'))
             <span class="error">
@@ -62,7 +62,7 @@
 
         <div class="col-md-6">
             <div class="form-group">
-                <label for="email" class="form-label">Contact Email (optional)</label>
+                <label for="email" class="form-label">Contact Email (<i>optional</i>)</label>
                 <input id="email" class="form-control" placeholder="Enter an email" type="email" name="email" value="{{ old('email') }}">
                 @if ($errors->has('email'))
                 <span class="error">
@@ -75,7 +75,7 @@
         <div class="row my-3">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="startdate" class="form-label">Start Date (optional)</label>
+                    <label for="startdate" class="form-label">Start Date (<i>optional</i>)</label>
                     <input type="date" class="form-control" id="startdate" name="startdate"
                     value="<?php echo date('Y-m-d'); ?>"
                     min="<?php echo date('Y-m-d'); ?>" >
@@ -88,7 +88,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="enddate" class="form-label">End Date (optional)</label>
+                    <label for="enddate" class="form-label">End Date (<i>optional</i>)</label>
                     <input type="date" class="form-control" id="enddate" name="enddate"
                     value="<?php echo date('Y-m-d'); ?>"
                     min="<?php echo date('Y-m-d'); ?>" >
