@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                         <div class="text-center m-auto">
-                                <img class="rounded" src="https://picsum.photos/150/150" width="250" height="200" alt="Card image cap">
+                                <img class="rounded" src="{{URL::asset('/images/events/'.$event->imageurl)}}" width="250" height="200" alt="Card image cap">
                         </div>
                     <div class="row">
                         <div class="col-md-8">
@@ -53,8 +53,8 @@
                 <div class="card-body">
                     <h5 class="card-title">Description</h5>
                     <p class="card-text">{{$event->description}}</p>
-                    <p class="card-text"><b>Url English: </b>{{$event->urlenglish}}</p>
-                    <p class="card-text"><b>Url Portuguese: </b>{{$event->urlportuguese}}</p>
+                    <p class="card-text"><b>Url English: </b><a href="{{$event->urlenglish}}">{{$event->urlenglish}}</a></p>
+                    <p class="card-text"><b>Url Portuguese: </b><a href="{{$event->urlportuguese}}">{{$event->urlportuguese}}</a></p>
                 </div>
             </div>
         </div>

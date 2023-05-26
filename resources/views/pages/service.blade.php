@@ -15,13 +15,12 @@
     <div class="row justify-content-center">
         <div class="col-md-6 my-5">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" >
                     <h5 class="card-title">Description</h5>
                     <p class="card-text">{{$service->description}}</p>
                 </div>
             </div>
         </div>
-        
     </div>
     <div class="text-center">
     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#advancedSearch">

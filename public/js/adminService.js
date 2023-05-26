@@ -1,4 +1,4 @@
-let pageEvent = 1;
+let pageService = 1;
 let pagePend = 1;
 
 /*
@@ -42,21 +42,25 @@ function attrRequestStatus(elem,requestStatusTd){
 }
 
 function getPaginatedData(page) {
-    pageEvent = page;
+    pageService = page;
+    var serviceNames=document.getElementById("serviceNamesList").textContent.split(",");
     $.ajax({
-        url: '/admin/eventsCurrent?page=' + page,
+        url: '/admin/servicesCurrent?page=' + page,
         type: 'GET',
         dataType: 'json',
         success: function(response) {
+            console.log(response);
             let data = response.data;
-            let tbody = $('#CurrEventTable');
+            let tbody = $('#CurrServiceTable');
 
             //Clear tbody 
             tbody.empty();
-
+            console.log("Hello")
+            
             for (let i = 0; i < data.length ; i++) {
                 let tr = $('<tr></tr>');
-                let eventNameTd = $('<td></td>');
+              
+                let serviceNameTd = $('<td></td>').html(serviceNames[data[i].servicenameid-1]);
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>');
                 let requestStatusTd = $('<td></td>');
@@ -69,20 +73,20 @@ function getPaginatedData(page) {
                 attrRequestType(data[i],requestTypeTd);
 
 
-                let eventLink = $('<a></a>').html(data[i].eventnameenglish);;
-                eventLink.attr("href","../event/"+ data[i].eventid);
-                eventNameTd.append(eventLink);
+                let serviceLink = $('<a></a>').html(data[i].servicenameenglish);
+                serviceLink.attr("href","../service/"+ data[i].serviceId);
+                serviceNameTd.append(serviceLink);
 
-                let eventEmail = $('<p></p>').html(data[i].emailcontact);
-                eventEmail.attr("class","text-muted");
-                eventNameTd.append(eventEmail);
+                let serviceEmail = $('<p></p>').html(data[i].emailcontact);
+                serviceEmail.attr("class","text-muted");
+                serviceNameTd.append(serviceEmail);
 
-                tr.append(eventNameTd);
+                tr.append(serviceNameTd);
                 tr.append(dateCreatedTd);
                 tr.append(requestTypeTd);
                 tr.append(requestStatusTd);
                 tr.append(requestActions);
-               
+                
                 tbody.append(tr);
             }
             
@@ -107,25 +111,26 @@ function getPaginatedData(page) {
 
 function getPaginatedDataPend(page) {
     pagePend = page;
+    var serviceNames=document.getElementById("serviceNamesList").textContent.split(",");
     $.ajax({
-        url: '/admin/eventsPending?page=' + page,
+        url: '/admin/servicesPending?page=' + page,
         type: 'GET',
         dataType: 'json',
         success: function(response) {
+            console.log(response);
             let data = response.data;
             let tbody = $('#pendingTable');
 
             //Clear tbody 
             tbody.empty();
-
+            
             for (let i = 0; i < data.length ; i++) {
-                let eventId = data[i].eventid;
+                let serviceId = data[i].serviceid;
                 let tr = $('<tr></tr>');
-                let eventNameTd = $('<td></td>').html(data[i].eventnameenglish);
+                let serviceNameTd = $('<td></td>').html(serviceNames[data[i].servicenameid-1]);
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>');
                 let requestStatusTd = $('<td></td>');
-
                 /*Bootstrap Request Type*/
                 attrRequestType(data[i],requestTypeTd);
 
@@ -142,7 +147,7 @@ function getPaginatedDataPend(page) {
                 // create the form element and append the button to it
                 let formAccept = $('<form/>', {
                     id: "formAccept",
-                    action: '/requests/events/' + eventId+ '/Accepted',
+                    action: '/requests/services/' + serviceId + '/Accepted',
                     method: 'POST',
                     data:{"_token": "{{ csrf_token() }}"}
                 }).append(buttonGreen);
@@ -164,7 +169,7 @@ function getPaginatedDataPend(page) {
                 var idInput = $('<input/>', {
                     type: 'hidden',
                     name: 'id',
-                    value: eventId
+                    value: serviceId
                     });
 
                 // append the CSRF token input element to the form
@@ -174,7 +179,7 @@ function getPaginatedDataPend(page) {
                 // create the form element and append the button to it
                 let formReject = $('<form/>', {
                     id: "formReject",
-                    action: '/requests/events/' + eventId+ '/Accepted',
+                    action: '/requests/services/' + serviceId+ '/Accepted',
                     method: 'POST',
                     data:{"_token": "{{ csrf_token() }}"}
                 }).append(buttonRed);
@@ -191,7 +196,7 @@ function getPaginatedDataPend(page) {
                 var idInput = $('<input/>', {
                     type: 'hidden',
                     name: 'id',
-                    value: eventId
+                    value: serviceId
                     });
 
                 // append the CSRF token input element to the form
@@ -205,7 +210,7 @@ function getPaginatedDataPend(page) {
                 td.append(formAccept);
                 td.append(formReject);
                 
-                tr.append(eventNameTd);
+                tr.append(serviceNameTd);
                 tr.append(dateCreatedTd);
                 tr.append(requestTypeTd);
                 tr.append(requestStatusTd);
@@ -233,41 +238,20 @@ function getPaginatedDataPend(page) {
     });
 }
 
-function pendingFormHandler(action, id, token) {
+function pendingFormHandler(action,id,token){
     $.ajax({
-      url: '/requests/events/' + id + '/' + action,
-      type: 'post',
-      dataType: 'json',
-      headers: {
-        'X-CSRF-Token': token
-      },
-      success: function(response) {
-        console.log("action = " + action);
-        if (action === "Accepted") {
-          let eventSuccess = $('#eventSucess');
-          eventSuccess.css('display', 'block');
-          setTimeout(function (){
-            eventSuccess.css('display', 'none');
-          }, 2000);
-      
-        } else {
-          let eventError = $('#eventError');
-          eventError.css('display', 'block');
-          setTimeout(function (){
-            eventError.css('display', 'none');
-          }, 2000);
-        }
-  
-        getPaginatedData(pageEvent);
-        getPaginatedDataPend(pagePend);
-      },
-      error: function(xhr) {
-  
-      }
-    });
-  }
-  
-
+        url: '/requests/services/' + id + '/' + action,
+        type: 'post',
+        dataType: 'json',
+        headers:{
+            'X-CSRF-Token': token
+        },
+        success: function(response) {
+            getPaginatedData(pageService);
+            getPaginatedDataPend(pagePend);
+    },
+});
+}
 
 $(document).ready(function() {
     // Initialize pagination with the first page

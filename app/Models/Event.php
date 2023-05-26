@@ -40,7 +40,8 @@ class Event extends Model implements Feedable
         'enddate',
         'eventcanceled',
         'userid',
-        'organicunitid'
+        'organicunitid',
+        'imageurl'
 
     ];
 
@@ -63,6 +64,15 @@ class Event extends Model implements Feedable
     protected $casts = [
         'eventcanceled' => 'boolean',
     ];
+
+    public function scopeSearch($query, $searchTerm)
+    {
+        return $query->where(function ($query) use ($searchTerm) {
+            $query->where('eventnameportuguese', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('eventnameenglish', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('description', 'like', '%' . $searchTerm . '%');
+        });
+    }
 
 
     public function tags()

@@ -45,6 +45,12 @@
                 @endif
             </div>
         </div> 
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="image" class="form-label">Event Image </label>
+                <input type="file" class="form-control" name="image"> 
+            </div>
+        </div>
         <div class="form-group">
         <label for="organicunitid">Select Organic Unit:</label> 
         <select class="form-control" id="organicunitid" name="organicunitid" required>
@@ -146,10 +152,10 @@
     </div> 
 
     <div class="form-group my-3">
-        <h5>URL  (MUDEM ISTO DEPOIS)</h5>
+        <h5>URL </h5>
 
         <label for="urlportuguese" class="form-label">Portugues </label>
-        <input id="urlportuguese" class="form-control" placeholder="Url do evento para Portugues(???)" type="text" name="urlportuguese" value="{{ old('urlportuguese') }}">
+        <input id="urlportuguese" class="form-control" placeholder="Url Portugues" type="text" name="urlportuguese" value="{{ old('urlportuguese') }}">
         @if ($errors->has('urlportuguese'))
         <span class="error">
             {{ $errors->first('urlportuguese') }}
@@ -170,7 +176,7 @@
     
     @if($language=="pt")
     <div class="form-group my-3">
-        <label for="tags" class="my-2">Tags</label>
+        <label for="tags" class="my-2">Tags<span><b class="text-danger">*</b></span></label>
         <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags" value="">
         <datalist id="tags">
             @foreach ($tags as $tag)
@@ -180,7 +186,7 @@
     </div>
     @else
     <div class="form-group my-3">
-        <label for="tags">Tags</label>
+        <label for="tags">Tags<span><b class="text-danger">*</b></span></label>
         <input type="text" placeholder="Tag name" class="flexdatalist form-control" data-min-length="1" multiple="" data-selection-required="1" list="tags" name="tags" value="">
         <datalist id="tags">
             @foreach ($tags as $tag)
@@ -190,6 +196,7 @@
     </div>
     @endif
 
+    
    
 
     <div class="col-md-12 text-center mt-5">
