@@ -3,6 +3,8 @@
 @section('content')
 
 
+<p id="serviceNamesList" hidden>@foreach($serviceNames as $service) {{$service->servicenameenglish}},@endforeach</p>
+
 @push('pageJS')
 <script   type="text/javascript" src={{ asset('js/adminService.js') }} defer> </script>
 @endpush

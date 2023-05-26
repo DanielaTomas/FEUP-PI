@@ -74,14 +74,15 @@ Route::get('/admin/user/switch/stop','AdminController@user_switch_stop');
 
 
 
-Route::get("/admin/services", 'ServiceControllerAdmin@show');
+//Route::get("/admin/services", 'ServiceControllerAdmin@show');
 Route::get('/admin/servicesCurrent', 'ServiceControllerAdmin@showCurrent');
 Route::get('/admin/servicesPending', 'ServiceControllerAdmin@showPending');
 Route::post('/requests/services/{id}/{action}', 'ServiceControllerAdmin@updateStatus')->name('requests.services.status.update')->where(['action' => '(Accepted|Rejected)']);
 
 Route::get("/admin/services", function () {
     $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();
-    return view("pages.adminServices", ['organicunits' => $organicunits]);
+    $serviceNames = app('App\Http\Controllers\ServiceController')->getServiceNames();
+    return view("pages.adminServices", ['organicunits' => $organicunits, 'serviceNames' => $serviceNames]);
 });
 Route::get("/admin/gis", function () {
     $organicunits = app('App\Http\Controllers\OrganicUnitController')->getOrganicUnits();

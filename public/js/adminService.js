@@ -43,6 +43,7 @@ function attrRequestStatus(elem,requestStatusTd){
 
 function getPaginatedData(page) {
     pageService = page;
+    var serviceNames=document.getElementById("serviceNamesList").textContent.split(",");
     $.ajax({
         url: '/admin/servicesCurrent?page=' + page,
         type: 'GET',
@@ -59,7 +60,7 @@ function getPaginatedData(page) {
             for (let i = 0; i < data.length ; i++) {
                 let tr = $('<tr></tr>');
               
-                let serviceNameTd = $('<td></td>');
+                let serviceNameTd = $('<td></td>').html(serviceNames[data[i].servicenameid-1]);
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>');
                 let requestStatusTd = $('<td></td>');
@@ -110,6 +111,7 @@ function getPaginatedData(page) {
 
 function getPaginatedDataPend(page) {
     pagePend = page;
+    var serviceNames=document.getElementById("serviceNamesList").textContent.split(",");
     $.ajax({
         url: '/admin/servicesPending?page=' + page,
         type: 'GET',
@@ -123,13 +125,12 @@ function getPaginatedDataPend(page) {
             tbody.empty();
             
             for (let i = 0; i < data.length ; i++) {
-                let serviceId = data[i].serviceId;
+                let serviceId = data[i].serviceid;
                 let tr = $('<tr></tr>');
-                let serviceNameTd = $('<td></td>').html(data[i].servicenameenglish);
+                let serviceNameTd = $('<td></td>').html(serviceNames[data[i].servicenameid-1]);
                 let dateCreatedTd = $('<td></td>').html(data[i].datecreated);
                 let requestTypeTd = $('<td></td>');
                 let requestStatusTd = $('<td></td>');
-
                 /*Bootstrap Request Type*/
                 attrRequestType(data[i],requestTypeTd);
 
